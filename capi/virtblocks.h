@@ -2,10 +2,20 @@ int virtblocks_util_build_file_name(char **file_name,
                                     const char *base,
                                     const char *ext);
 
-int virtblocks_devices_memballoon_new();
-void virtblocks_devices_memballoon_free(int p0);
+typedef enum {
+  VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_NONE,
+  VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO,
+  VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO_NON_TRANSITIONAL,
+  VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO_TRANSITIONAL,
+} VirtBlocksDevicesMemballoonModel;
 
-void virtblocks_devices_memballoon_set_model(int p0, int p1);
-int virtblocks_devices_memballoon_get_model(int p0);
+typedef int VirtBlocksDevicesMemballoon;
 
-char* virtblocks_devices_memballoon_to_str(int p0);
+VirtBlocksDevicesMemballoon virtblocks_devices_memballoon_new();
+void virtblocks_devices_memballoon_free(VirtBlocksDevicesMemballoon memballoon);
+
+void virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon memballoon,
+                                             VirtBlocksDevicesMemballoonModel model);
+VirtBlocksDevicesMemballoonModel virtblocks_devices_memballoon_get_model(VirtBlocksDevicesMemballoon memballoon);
+
+char* virtblocks_devices_memballoon_to_str(VirtBlocksDevicesMemballoon memballoon);
