@@ -21,7 +21,7 @@ func util_build_file_name(cFileName **C.char, cBase *C.char, cExt *C.char) C.int
     return 0
 }
 
-var memballoons []*devices.Memballoon
+var memballoons = make([]*devices.Memballoon, 1)
 
 //export devices_memballoon_new
 func devices_memballoon_new() C.int {
