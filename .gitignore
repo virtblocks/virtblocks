@@ -1,3 +1,5 @@
-target/
-capi/libvirtblocks.*
 *.swp
+capi/*.o
+capi/libvirtblocks.*
+capi/stamp
+target/
