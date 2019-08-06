@@ -7,8 +7,8 @@ import (
     "gitlab.com/virtblocks/virtblocks/util"
 )
 
-//export virtblocks_util_build_file_name
-func virtblocks_util_build_file_name(cFileName **C.char, cBase *C.char, cExt *C.char) C.int {
+//export util_build_file_name
+func util_build_file_name(cFileName **C.char, cBase *C.char, cExt *C.char) C.int {
     if cBase == nil || cExt == nil || cFileName == nil {
         return -1;
     }

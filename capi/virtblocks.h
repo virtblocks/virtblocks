@@ -1,6 +1,11 @@
 #include "libvirtblocks.h"
 
-int virtblocks_util_build_file_name(char** p0, char* p1, char* p2);
+inline int
+virtblocks_util_build_file_name(char** file_name,
+                                const char* base,
+                                const char* ext) {
+    return util_build_file_name(file_name, (char*) base, (char*) ext);
+}
 
 int virtblocks_devices_memballoon_new();
 void virtblocks_devices_memballoon_free(int p0);
