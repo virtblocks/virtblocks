@@ -12,4 +12,4 @@ clean:
 	cd capi && \
 	rm -f *.o libvirtblocks.*
 
-.PHONY: all clean build
+.PHONY: all fmt clean build
