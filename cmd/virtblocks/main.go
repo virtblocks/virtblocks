@@ -1,9 +1,9 @@
-package main
+package virtblocks
 
 import (
     "fmt"
-    "github.com/virtblocks/virtblocks/devices"
-    "github.com/virtblocks/virtblocks/util"
+    "github.com/virtblocks/virtblocks/pkg/devices"
+    "github.com/virtblocks/virtblocks/pkg/util"
 )
 
 func main() {

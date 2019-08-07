@@ -3,8 +3,8 @@ package main
 import "C"
 
 import (
-    "github.com/virtblocks/virtblocks/devices"
-    "github.com/virtblocks/virtblocks/util"
+    "github.com/virtblocks/virtblocks/pkg/devices"
+    "github.com/virtblocks/virtblocks/pkg/util"
 )
 
 //export util_build_file_name
