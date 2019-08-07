@@ -11,8 +11,8 @@ func main() {
 	fmt.Println(file_name)
 
 	var memballoon = devices.NewMemballoon()
-	fmt.Println(memballoon.ToStr())
+	fmt.Println(memballoon)
 
 	memballoon.SetModel(devices.MEMBALLOON_MODEL_VIRTIO)
-	fmt.Println(memballoon.ToStr())
+	fmt.Println(memballoon)
 }
