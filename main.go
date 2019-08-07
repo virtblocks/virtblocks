@@ -2,8 +2,8 @@ package main
 
 import (
     "fmt"
-    "gitlab.com/virtblocks/virtblocks/devices"
-    "gitlab.com/virtblocks/virtblocks/util"
+    "github.com/virtblocks/virtblocks/devices"
+    "github.com/virtblocks/virtblocks/util"
 )
 
 func main() {
