@@ -13,6 +13,6 @@ func main() {
 	var memballoon = devices.NewMemballoon()
 	fmt.Println(memballoon)
 
-	memballoon.SetModel(devices.MEMBALLOON_MODEL_VIRTIO)
+	memballoon.SetModel(devices.MemballoonModelVirtio)
 	fmt.Println(memballoon)
 }

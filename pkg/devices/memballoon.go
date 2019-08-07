@@ -3,10 +3,10 @@ package devices
 type MemballoonModel int
 
 const (
-	MEMBALLOON_MODEL_NONE                    = MemballoonModel(0)
-	MEMBALLOON_MODEL_VIRTIO                  = MemballoonModel(1)
-	MEMBALLOON_MODEL_VIRTIO_NON_TRANSITIONAL = MemballoonModel(2)
-	MEMBALLOON_MODEL_VIRTIO_TRANSITIONAL     = MemballoonModel(3)
+	MemballoonModelNone MemballoonModel = iota
+	MemballoonModelVirtio
+	MemballoonModelVirtioNonTransactional
+	MemballoonModelVirtioTransactional
 )
 
 type Memballoon struct {
@@ -17,13 +17,13 @@ func (self MemballoonModel) String() string {
 	var ret string
 
 	switch self {
-	case MEMBALLOON_MODEL_NONE:
+	case MemballoonModelNone:
 		ret = ""
-	case MEMBALLOON_MODEL_VIRTIO:
+	case MemballoonModelVirtio:
 		ret = "virtio-memballoon"
-	case MEMBALLOON_MODEL_VIRTIO_NON_TRANSITIONAL:
+	case MemballoonModelVirtioNonTransactional:
 		ret = "virtio-memballoon-non-transitional"
-	case MEMBALLOON_MODEL_VIRTIO_TRANSITIONAL:
+	case MemballoonModelVirtioTransactional:
 		ret = "virtio-memballoon-transitional"
 	}
 
@@ -31,7 +31,7 @@ func (self MemballoonModel) String() string {
 }
 
 func NewMemballoon() *Memballoon {
-	return &Memballoon{model: MEMBALLOON_MODEL_NONE}
+	return &Memballoon{model: MemballoonModelNone}
 }
 
 func (self *Memballoon) SetModel(model MemballoonModel) {
