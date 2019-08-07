@@ -1,5 +1,8 @@
 all: build
 
+fmt:
+	go fmt ./...
+
 build:
 	cd capi && \
 	go build -buildmode c-archive -o libvirtblocks.a capi.go && \
