@@ -10,6 +10,6 @@ build:
 
 clean:
 	cd capi && \
-	rm -f *.o libvirtblocks.* stamp
+	rm -f *.o libvirtblocks.*
 
 .PHONY: all clean build
