@@ -9,6 +9,7 @@ build:
 	cc -c -o capi.o capi.c
 
 clean:
+	cd capi && \
 	rm -f *.o libvirtblocks.* stamp
 
 .PHONY: all clean build
