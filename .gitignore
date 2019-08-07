@@ -3,3 +3,4 @@ capi/*.o
 capi/libvirtblocks.*
 capi/stamp
 target/
+.idea
