@@ -1,5 +1,9 @@
 *.swp
+.idea/
+capi/*.a
+capi/*.la
+capi/*.lo
 capi/*.o
-capi/libvirtblocks.*
+capi/.libs/
+capi/libvirtblocks.h
 target/
-.idea
