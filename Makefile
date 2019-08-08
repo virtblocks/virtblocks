@@ -3,6 +3,9 @@ all: build
 fmt:
 	go fmt ./...
 
+verify-fmt:
+	hack/verify-gofmt.sh
+
 vet:
 	go vet ./pkg/... ./cmd/...
 
@@ -27,4 +30,4 @@ clean:
 	cd capi && \
 	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks.h
 
-.PHONY: all fmt clean build vet
+.PHONY: all fmt clean build vet verify-fmt
