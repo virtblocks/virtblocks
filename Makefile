@@ -3,6 +3,9 @@ all: build
 fmt:
 	go fmt ./...
 
+vet:
+	go vet ./pkg/... ./cmd/...
+
 build:
 	cd capi && \
 	go build -buildmode c-archive -o libvirtblocks.a capi.go && \
@@ -24,4 +27,4 @@ clean:
 	cd capi && \
 	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks.h
 
-.PHONY: all fmt clean build
+.PHONY: all fmt clean build vet
