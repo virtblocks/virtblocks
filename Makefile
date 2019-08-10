@@ -12,7 +12,7 @@ vet:
 build:
 	cd capi && \
 	go build -buildmode c-archive -o libvirtblocks.a capi.go && \
-	libtool --mode=compile gcc -c capi.c && \
+	libtool --mode=compile --tag=CC gcc -c capi.c && \
 	mkdir -p .libs/ && \
 	ln -sf ../libvirtblocks.a .libs/libvirtblocks.a && \
 	( \
