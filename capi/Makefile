@@ -1,6 +1,12 @@
-build:
+build: libvirtblocks.la capi.lo
+
+gobuild:
 	go build -buildmode c-archive -o libvirtblocks.a capi.go
+
+capi.lo: capi.c gobuild
 	libtool --mode=compile --tag=CC gcc -c capi.c
+
+libvirtblocks.la: gobuild
 	mkdir -p .libs/
 	ln -sf ../libvirtblocks.a .libs/libvirtblocks.a
 	( \
@@ -17,4 +23,4 @@ build:
 clean:
 	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks.h
 
-.PHONY: build clean
+.PHONY: build gobuild clean
