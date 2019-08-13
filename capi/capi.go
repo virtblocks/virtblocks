@@ -21,6 +21,12 @@ func util_build_file_name(cFileName **C.char, cBase *C.char, cExt *C.char) C.int
 	return 0
 }
 
+// Go objects are not allow to cross the language boundary, but we still
+// need the C code to manipulate them. The way we achieve this is by
+// having an array of objects on the Go side and passing "references" to
+// them back and forth from the C side: each "reference" is simply the
+// index of the object in the array, with 0 being a special "reference"
+// that always points to nil
 var memballoons = make([]*devices.Memballoon, 1)
 
 //export devices_memballoon_new
