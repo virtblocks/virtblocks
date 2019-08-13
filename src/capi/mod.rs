@@ -1,6 +1,5 @@
 use std::ffi::CStr;
 use std::ffi::CString;
-use std::mem;
 use std::os::raw::c_char;
 
 use super::util;
@@ -18,9 +17,12 @@ fn virtblocks_util_build_file_name(file_name: *mut *mut c_char,
     let base = unsafe { CStr::from_ptr(base) }.to_str().unwrap();
     let ext = unsafe { CStr::from_ptr(ext) }.to_str().unwrap();
 
-    let res = util::build_file_name(base, ext);
+    let rust_ret = util::build_file_name(base, ext);
 
-    unsafe { *file_name = CString::new(res).unwrap().into_raw() }
+    unsafe {
+        let c_ret = libc::strdup(CString::new(rust_ret).unwrap().as_ptr());
+        *file_name = c_ret;
+    }
     return 0;
 }
 
@@ -66,14 +68,16 @@ fn virtblocks_devices_memballoon_get_model(c_memballoon: *const devices::Memball
 
 #[no_mangle]
 pub extern "C"
-fn virtblocks_devices_memballoon_to_str(c_memballoon: *const devices::Memballoon) -> *const c_char {
+fn virtblocks_devices_memballoon_to_str(c_memballoon: *const devices::Memballoon) -> *mut c_char {
     let rust_memballoon = unsafe {
         assert!(!c_memballoon.is_null());
         &*c_memballoon
     };
 
-    let s = CString::new(rust_memballoon.to_str()).unwrap();
-    let ret = s.as_ptr();
-    mem::forget(s);
-    ret
+    let rust_ret = rust_memballoon.to_str();
+
+    let c_ret = unsafe {
+        libc::strdup(CString::new(rust_ret).unwrap().as_ptr())
+    };
+    c_ret
 }
