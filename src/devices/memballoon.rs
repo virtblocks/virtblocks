@@ -7,7 +7,6 @@ pub enum MemballoonModel {
     VirtIOTransitional,
 }
 
-#[repr(C)]
 pub struct Memballoon {
     model: MemballoonModel,
 }
