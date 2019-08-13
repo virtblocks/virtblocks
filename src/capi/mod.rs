@@ -26,33 +26,53 @@ fn virtblocks_util_build_file_name(file_name: *mut *mut c_char,
 
 #[no_mangle]
 pub extern "C"
-fn virtblocks_devices_memballoon_new() -> Box<devices::Memballoon> {
-    Box::new(devices::Memballoon::new())
+fn virtblocks_devices_memballoon_new() -> *mut devices::Memballoon {
+    Box::into_raw(Box::new(devices::Memballoon::new()))
 }
 
 #[no_mangle]
 pub extern "C"
-fn virtblocks_devices_memballoon_free(_memballoon: devices::Memballoon) {}
+fn virtblocks_devices_memballoon_free(c_memballoon: *mut devices::Memballoon) {
+    let _rust_memballoon = unsafe {
+        assert!(!c_memballoon.is_null());
+        Box::from_raw(c_memballoon)
+    };
+}
 
 #[no_mangle]
 pub extern "C"
-fn virtblocks_devices_memballoon_set_model(memballoon: &mut devices::Memballoon,
+fn virtblocks_devices_memballoon_set_model(c_memballoon: *mut devices::Memballoon,
                                            model: devices::MemballoonModel)
 {
-    memballoon.set_model(model)
+    let rust_memballoon = unsafe {
+        assert!(!c_memballoon.is_null());
+        &mut *c_memballoon
+    };
+
+    rust_memballoon.set_model(model)
 }
 
 #[no_mangle]
 pub extern "C"
-fn virtblocks_devices_memballoon_get_model(memballoon: &devices::Memballoon) -> devices::MemballoonModel
+fn virtblocks_devices_memballoon_get_model(c_memballoon: *const devices::Memballoon) -> devices::MemballoonModel
 {
-    memballoon.get_model()
+    let rust_memballoon = unsafe {
+        assert!(!c_memballoon.is_null());
+        &*c_memballoon
+    };
+
+    rust_memballoon.get_model()
 }
 
 #[no_mangle]
 pub extern "C"
-fn virtblocks_devices_memballoon_to_str(memballoon: &devices::Memballoon) -> *const c_char {
-    let s = CString::new(memballoon.to_str()).unwrap();
+fn virtblocks_devices_memballoon_to_str(c_memballoon: *const devices::Memballoon) -> *const c_char {
+    let rust_memballoon = unsafe {
+        assert!(!c_memballoon.is_null());
+        &*c_memballoon
+    };
+
+    let s = CString::new(rust_memballoon.to_str()).unwrap();
     let ret = s.as_ptr();
     mem::forget(s);
     ret
