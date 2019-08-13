@@ -8,6 +8,7 @@ edition = "2018"
 crate-type = ["staticlib", "lib"]
 
 [dependencies]
+libc = "0.2"
 
 [build-dependencies]
 libtool = "0.1.1"
