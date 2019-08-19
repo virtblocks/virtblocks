@@ -8,8 +8,8 @@ capi.lo: capi.c gobuild
 
 libvirtblocks.la: libtool.la.in gobuild
 	mkdir -p .libs/
-	ln -sf ../libvirtblocks.a .libs/libvirtblocks.a
-	sed 's/@LIBTOOL_LA_NAME@/$@/g' <$< >$@
+	ln -sf ../$(@:.la=.a) .libs/$(@:.la=.a)
+	sed 's/@LIBNAME@/$(@:.la=)/g' <$< >$@
 
 clean:
 	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks.h
