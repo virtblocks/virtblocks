@@ -32,3 +32,20 @@ clean-golang:
 	$(MAKE) -C capi clean
 
 .PHONY: fmt-golang verify-fmt-golang vet-golang build-golang clean-golang
+
+fmt-rust:
+	cargo fmt
+
+verify-fmt-rust:
+	cargo fmt -- --check
+
+vet-rust:
+	cargo clippy
+
+build-rust:
+	cargo build
+
+clean-rust:
+	cargo clean
+
+.PHONY: fmt-rust verify-fmt-rust vet-rust build-rust clean-rust
