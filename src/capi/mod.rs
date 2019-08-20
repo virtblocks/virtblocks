@@ -21,9 +21,9 @@ pub extern "C" fn virtblocks_util_build_file_name(
     let c_str = CString::new(rust_ret).unwrap();
 
     unsafe {
-        let c_ret = libc::strdup(c_str.as_ptr());
-        *file_name = c_ret;
+        *file_name = libc::strdup(c_str.as_ptr());
     }
+
     0
 }
 
@@ -77,6 +77,5 @@ pub extern "C" fn virtblocks_devices_memballoon_to_str(
     let rust_ret = rust_memballoon.to_str();
     let c_str = CString::new(rust_ret).unwrap();
 
-    let c_ret = unsafe { libc::strdup(c_str.as_ptr()) };
-    c_ret
+    unsafe { libc::strdup(c_str.as_ptr()) }
 }
