@@ -1,4 +1,4 @@
-pub mod util;
 pub mod devices;
+pub mod util;
 
 mod capi;
