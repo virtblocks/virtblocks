@@ -45,3 +45,9 @@ impl Memballoon {
         ret
     }
 }
+
+impl Default for Memballoon {
+    fn default() -> Self {
+        Self::new()
+    }
+}
