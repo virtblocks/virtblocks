@@ -1,0 +1,22 @@
+language: rust
+sudo: false
+cache: cargo
+rust:
+  - stable
+  - beta
+  - nightly
+env:
+  - CARGO_PROFILE=
+  - CARGO_PROFILE=--release
+install:
+  - rustup component add rustfmt clippy
+  - cargo fetch --verbose
+script:
+  - cargo build $CARGO_PROFILE --all --locked
+  - cargo test $CARGO_PROFILE --all --locked
+  - cargo check $CARGO_PROFILE --all
+  - cargo clippy $CARGO_PROFILE
+  - cargo fmt --all -- --check
+matrix:
+  allow_failures:
+    - rust: nightly
