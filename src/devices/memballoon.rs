@@ -12,7 +12,6 @@ pub struct Memballoon {
 }
 
 impl Memballoon {
-
     pub fn new() -> Self {
         Self {
             model: MemballoonModel::VirtIO,
@@ -33,14 +32,14 @@ impl Memballoon {
         match self.model {
             MemballoonModel::VirtIO => {
                 ret.push_str("virtio-memballoon");
-            },
+            }
             MemballoonModel::VirtIONonTransitional => {
                 ret.push_str("virtio-memballoon-non-transitional");
-            },
+            }
             MemballoonModel::VirtIOTransitional => {
                 ret.push_str("virtio-memballoon-transitional");
-            },
-            MemballoonModel::None => {},
+            }
+            MemballoonModel::None => {}
         }
 
         ret
