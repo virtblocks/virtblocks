@@ -23,7 +23,7 @@ pub extern "C" fn virtblocks_util_build_file_name(
         let c_ret = libc::strdup(CString::new(rust_ret).unwrap().as_ptr());
         *file_name = c_ret;
     }
-    return 0;
+    0
 }
 
 #[no_mangle]
