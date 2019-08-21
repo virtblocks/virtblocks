@@ -14,7 +14,7 @@ pub struct Memballoon {
 impl Memballoon {
     pub fn new() -> Self {
         Self {
-            model: MemballoonModel::Virtio,
+            model: MemballoonModel::None,
         }
     }
 
