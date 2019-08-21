@@ -2,7 +2,7 @@ use std::fmt;
 
 /// Type of balloon device
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum MemballoonModel {
     None,
     Virtio,
@@ -31,7 +31,7 @@ impl Default for MemballoonModel {
 /// memballoon.set_model(MemballoonModel::Virtio);
 /// assert_eq!("virtio-memballoon", memballoon.to_string());
 /// ```
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct Memballoon {
     model: MemballoonModel,
 }
