@@ -1,3 +1,4 @@
+/// Type of balloon device
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub enum MemballoonModel {
@@ -7,6 +8,21 @@ pub enum MemballoonModel {
     VirtioTransitional,
 }
 
+/// A balloon device
+///
+/// # Examples
+///
+/// ```
+/// use virtblocks::devices::Memballoon;
+/// use virtblocks::devices::MemballoonModel;
+///
+/// let mut memballoon = Memballoon::new();
+///
+/// assert_eq!("", memballoon.to_str());
+///
+/// memballoon.set_model(MemballoonModel::Virtio);
+/// assert_eq!("virtio-memballoon", memballoon.to_str());
+/// ```
 pub struct Memballoon {
     model: MemballoonModel,
 }

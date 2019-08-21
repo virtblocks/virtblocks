@@ -1,3 +1,5 @@
+//! # Virt Devices
+
 mod memballoon;
 
 pub use memballoon::Memballoon;
