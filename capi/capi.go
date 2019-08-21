@@ -53,8 +53,8 @@ func devices_memballoon_get_model(cMemballoon C.int) C.int {
 	return C.int(goMemballoon.GetModel())
 }
 
-//export devices_memballoon_to_str
-func devices_memballoon_to_str(cMemballoon C.int) *C.char {
+//export devices_memballoon_to_string
+func devices_memballoon_to_string(cMemballoon C.int) *C.char {
 	var goMemballoon = memballoons[cMemballoon]
 	return C.CString(goMemballoon.String())
 }

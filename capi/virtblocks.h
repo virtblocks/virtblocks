@@ -18,4 +18,4 @@ void virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon memball
                                              VirtBlocksDevicesMemballoonModel model);
 VirtBlocksDevicesMemballoonModel virtblocks_devices_memballoon_get_model(VirtBlocksDevicesMemballoon memballoon);
 
-char* virtblocks_devices_memballoon_to_str(VirtBlocksDevicesMemballoon memballoon);
+char* virtblocks_devices_memballoon_to_string(VirtBlocksDevicesMemballoon memballoon);

@@ -66,7 +66,7 @@ pub extern "C" fn virtblocks_devices_memballoon_get_model(
 }
 
 #[no_mangle]
-pub extern "C" fn virtblocks_devices_memballoon_to_str(
+pub extern "C" fn virtblocks_devices_memballoon_to_string(
     c_memballoon: *const devices::Memballoon,
 ) -> *mut c_char {
     let rust_memballoon = unsafe {

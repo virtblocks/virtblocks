@@ -34,7 +34,7 @@ virtblocks_devices_memballoon_get_model(VirtBlocksDevicesMemballoon memballoon)
 }
 
 char*
-virtblocks_devices_memballoon_to_str(VirtBlocksDevicesMemballoon memballoon)
+virtblocks_devices_memballoon_to_string(VirtBlocksDevicesMemballoon memballoon)
 {
-    return devices_memballoon_to_str(memballoon);
+    return devices_memballoon_to_string(memballoon);
 }
