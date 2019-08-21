@@ -5,8 +5,8 @@ type MemballoonModel int
 const (
 	MemballoonModelNone MemballoonModel = iota
 	MemballoonModelVirtio
-	MemballoonModelVirtioNonTransactional
-	MemballoonModelVirtioTransactional
+	MemballoonModelVirtioNonTransitional
+	MemballoonModelVirtioTransitional
 )
 
 type Memballoon struct {
@@ -21,9 +21,9 @@ func (self MemballoonModel) String() string {
 		ret = ""
 	case MemballoonModelVirtio:
 		ret = "virtio-memballoon"
-	case MemballoonModelVirtioNonTransactional:
+	case MemballoonModelVirtioNonTransitional:
 		ret = "virtio-memballoon-non-transitional"
-	case MemballoonModelVirtioTransactional:
+	case MemballoonModelVirtioTransitional:
 		ret = "virtio-memballoon-transitional"
 	}
 
