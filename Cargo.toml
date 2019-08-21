@@ -1,14 +1,5 @@
-[package]
-name = "virtblocks"
-version = "0.1.0"
-authors = ["Andrea Bolognani <abologna@redhat.com>"]
-edition = "2018"
+[workspace]
 
-[lib]
-crate-type = ["staticlib", "lib"]
-
-[dependencies]
-libc = "0.2"
-
-[build-dependencies]
-libtool = "0.1.1"
+members = [
+    "rust",
+]
