@@ -1,5 +1,8 @@
+use std::fmt;
+
+/// Type of balloon device
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum MemballoonModel {
     None,
     Virtio,
@@ -7,47 +10,54 @@ pub enum MemballoonModel {
     VirtioTransitional,
 }
 
+impl Default for MemballoonModel {
+    fn default() -> Self {
+        Self::None
+    }
+}
+
+/// A balloon device
+///
+/// # Examples
+///
+/// ```
+/// use virtblocks::devices::Memballoon;
+/// use virtblocks::devices::MemballoonModel;
+///
+/// let mut memballoon = Memballoon::new();
+///
+/// assert_eq!("", memballoon.to_string());
+///
+/// memballoon.set_model(MemballoonModel::Virtio);
+/// assert_eq!("virtio-memballoon", memballoon.to_string());
+/// ```
+#[derive(Default, Debug)]
 pub struct Memballoon {
     model: MemballoonModel,
 }
 
 impl Memballoon {
     pub fn new() -> Self {
-        Self {
-            model: MemballoonModel::None,
-        }
+        Default::default()
     }
 
     pub fn set_model(&mut self, model: MemballoonModel) {
         self.model = model;
     }
 
-    pub fn get_model(&self) -> MemballoonModel {
+    pub fn model(&self) -> MemballoonModel {
         self.model
-    }
-
-    pub fn to_str(&self) -> String {
-        let mut ret = String::from("");
-
-        match self.model {
-            MemballoonModel::Virtio => {
-                ret.push_str("virtio-memballoon");
-            }
-            MemballoonModel::VirtioNonTransitional => {
-                ret.push_str("virtio-memballoon-non-transitional");
-            }
-            MemballoonModel::VirtioTransitional => {
-                ret.push_str("virtio-memballoon-transitional");
-            }
-            MemballoonModel::None => {}
-        }
-
-        ret
     }
 }
 
-impl Default for Memballoon {
-    fn default() -> Self {
-        Self::new()
+impl fmt::Display for Memballoon {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let model_str = match self.model {
+            MemballoonModel::Virtio => "virtio-memballoon",
+            MemballoonModel::VirtioNonTransitional => "virtio-memballoon-non-transitional",
+            MemballoonModel::VirtioTransitional => "virtio-memballoon-transitional",
+            MemballoonModel::None => "",
+        };
+        write!(f, "{}", model_str)
     }
 }

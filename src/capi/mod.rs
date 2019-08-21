@@ -62,7 +62,7 @@ pub extern "C" fn virtblocks_devices_memballoon_get_model(
         &*c_memballoon
     };
 
-    rust_memballoon.get_model()
+    rust_memballoon.model()
 }
 
 #[no_mangle]
@@ -74,7 +74,7 @@ pub extern "C" fn virtblocks_devices_memballoon_to_str(
         &*c_memballoon
     };
 
-    let rust_ret = rust_memballoon.to_str();
+    let rust_ret = rust_memballoon.to_string();
     let c_str = CString::new(rust_ret).unwrap();
 
     unsafe { libc::strdup(c_str.as_ptr()) }

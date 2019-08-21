@@ -9,8 +9,8 @@ fn main() {
 
     let mut memballoon = Memballoon::new();
 
-    println!("{}", memballoon.to_str());
+    println!("{}", memballoon);
 
     memballoon.set_model(MemballoonModel::Virtio);
-    println!("{}", memballoon.to_str());
+    println!("{}", memballoon);
 }
