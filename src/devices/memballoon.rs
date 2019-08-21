@@ -1,3 +1,5 @@
+use std::fmt;
+
 /// Type of balloon device
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -18,10 +20,10 @@ pub enum MemballoonModel {
 ///
 /// let mut memballoon = Memballoon::new();
 ///
-/// assert_eq!("", memballoon.to_str());
+/// assert_eq!("", memballoon.to_string());
 ///
 /// memballoon.set_model(MemballoonModel::Virtio);
-/// assert_eq!("virtio-memballoon", memballoon.to_str());
+/// assert_eq!("virtio-memballoon", memballoon.to_string());
 /// ```
 pub struct Memballoon {
     model: MemballoonModel,
@@ -41,29 +43,22 @@ impl Memballoon {
     pub fn get_model(&self) -> MemballoonModel {
         self.model
     }
-
-    pub fn to_str(&self) -> String {
-        let mut ret = String::from("");
-
-        match self.model {
-            MemballoonModel::Virtio => {
-                ret.push_str("virtio-memballoon");
-            }
-            MemballoonModel::VirtioNonTransitional => {
-                ret.push_str("virtio-memballoon-non-transitional");
-            }
-            MemballoonModel::VirtioTransitional => {
-                ret.push_str("virtio-memballoon-transitional");
-            }
-            MemballoonModel::None => {}
-        }
-
-        ret
-    }
 }
 
 impl Default for Memballoon {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl fmt::Display for Memballoon {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let model_str = match self.model {
+            MemballoonModel::Virtio => "virtio-memballoon",
+            MemballoonModel::VirtioNonTransitional => "virtio-memballoon-non-transitional",
+            MemballoonModel::VirtioTransitional => "virtio-memballoon-transitional",
+            MemballoonModel::None => "",
+        };
+        write!(f, "{}", model_str)
     }
 }
