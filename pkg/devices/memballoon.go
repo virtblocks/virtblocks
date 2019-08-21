@@ -38,7 +38,7 @@ func (self *Memballoon) SetModel(model MemballoonModel) {
 	self.model = model
 }
 
-func (self Memballoon) GetModel() MemballoonModel {
+func (self Memballoon) Model() MemballoonModel {
 	return self.model
 }
 
