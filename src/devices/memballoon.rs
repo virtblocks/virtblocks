@@ -10,6 +10,12 @@ pub enum MemballoonModel {
     VirtioTransitional,
 }
 
+impl Default for MemballoonModel {
+    fn default() -> Self {
+        Self::None
+    }
+}
+
 /// A balloon device
 ///
 /// # Examples
@@ -25,15 +31,14 @@ pub enum MemballoonModel {
 /// memballoon.set_model(MemballoonModel::Virtio);
 /// assert_eq!("virtio-memballoon", memballoon.to_string());
 /// ```
+#[derive(Default)]
 pub struct Memballoon {
     model: MemballoonModel,
 }
 
 impl Memballoon {
     pub fn new() -> Self {
-        Self {
-            model: MemballoonModel::None,
-        }
+        Default::default()
     }
 
     pub fn set_model(&mut self, model: MemballoonModel) {
@@ -42,12 +47,6 @@ impl Memballoon {
 
     pub fn get_model(&self) -> MemballoonModel {
         self.model
-    }
-}
-
-impl Default for Memballoon {
-    fn default() -> Self {
-        Self::new()
     }
 }
 
