@@ -16,6 +16,18 @@ impl Default for MemballoonModel {
     }
 }
 
+impl fmt::Display for MemballoonModel {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let model_str = match self {
+            MemballoonModel::Virtio => "virtio-memballoon",
+            MemballoonModel::VirtioNonTransitional => "virtio-memballoon-non-transitional",
+            MemballoonModel::VirtioTransitional => "virtio-memballoon-transitional",
+            MemballoonModel::None => "",
+        };
+        write!(f, "{}", model_str)
+    }
+}
+
 /// A balloon device
 ///
 /// # Examples
@@ -52,12 +64,6 @@ impl Memballoon {
 
 impl fmt::Display for Memballoon {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let model_str = match self.model {
-            MemballoonModel::Virtio => "virtio-memballoon",
-            MemballoonModel::VirtioNonTransitional => "virtio-memballoon-non-transitional",
-            MemballoonModel::VirtioTransitional => "virtio-memballoon-transitional",
-            MemballoonModel::None => "",
-        };
-        write!(f, "{}", model_str)
+        write!(f, "{}", self.model)
     }
 }
