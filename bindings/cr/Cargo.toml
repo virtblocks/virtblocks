@@ -1,0 +1,15 @@
+[package]
+name = "virtblocks_bindings_cr"
+version = "0.1.0"
+authors = ["Andrea Bolognani <abologna@redhat.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+libc = "0.2"
+virtblocks = { path = "../../rust" }
+
+[build-dependencies]
+libtool = "0.1.1"

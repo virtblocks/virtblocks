@@ -2,8 +2,8 @@ use std::ffi::CStr;
 use std::ffi::CString;
 use std::os::raw::c_char;
 
-use super::devices;
-use super::util;
+use virtblocks::devices;
+use virtblocks::util;
 
 #[no_mangle]
 pub extern "C" fn virtblocks_util_build_file_name(

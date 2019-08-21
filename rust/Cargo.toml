@@ -5,10 +5,4 @@ authors = ["Andrea Bolognani <abologna@redhat.com>"]
 edition = "2018"
 
 [lib]
-crate-type = ["staticlib", "lib"]
-
-[dependencies]
-libc = "0.2"
-
-[build-dependencies]
-libtool = "0.1.1"
+crate-type = ["lib"]
