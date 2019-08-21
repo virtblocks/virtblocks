@@ -1,4 +1,4 @@
-package virtblocks
+package main
 
 import (
 	"fmt"
