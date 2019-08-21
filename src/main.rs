@@ -11,6 +11,6 @@ fn main() {
 
     println!("{}", memballoon.to_str());
 
-    memballoon.set_model(MemballoonModel::VirtIO);
+    memballoon.set_model(MemballoonModel::Virtio);
     println!("{}", memballoon.to_str());
 }

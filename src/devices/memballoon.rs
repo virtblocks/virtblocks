@@ -2,9 +2,9 @@
 #[derive(Copy, Clone)]
 pub enum MemballoonModel {
     None,
-    VirtIO,
-    VirtIONonTransitional,
-    VirtIOTransitional,
+    Virtio,
+    VirtioNonTransitional,
+    VirtioTransitional,
 }
 
 pub struct Memballoon {
@@ -14,7 +14,7 @@ pub struct Memballoon {
 impl Memballoon {
     pub fn new() -> Self {
         Self {
-            model: MemballoonModel::VirtIO,
+            model: MemballoonModel::Virtio,
         }
     }
 
@@ -30,13 +30,13 @@ impl Memballoon {
         let mut ret = String::from("");
 
         match self.model {
-            MemballoonModel::VirtIO => {
+            MemballoonModel::Virtio => {
                 ret.push_str("virtio-memballoon");
             }
-            MemballoonModel::VirtIONonTransitional => {
+            MemballoonModel::VirtioNonTransitional => {
                 ret.push_str("virtio-memballoon-non-transitional");
             }
-            MemballoonModel::VirtIOTransitional => {
+            MemballoonModel::VirtioTransitional => {
                 ret.push_str("virtio-memballoon-transitional");
             }
             MemballoonModel::None => {}
