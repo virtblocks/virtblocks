@@ -45,7 +45,7 @@ impl Memballoon {
         self.model = model;
     }
 
-    pub fn get_model(&self) -> MemballoonModel {
+    pub fn model(&self) -> MemballoonModel {
         self.model
     }
 }

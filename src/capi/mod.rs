@@ -62,7 +62,7 @@ pub extern "C" fn virtblocks_devices_memballoon_get_model(
         &*c_memballoon
     };
 
-    rust_memballoon.get_model()
+    rust_memballoon.model()
 }
 
 #[no_mangle]
