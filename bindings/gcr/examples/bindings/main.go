@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/virtblocks/virtblocks/bindings/gcr/devices"
-	"github.com/virtblocks/virtblocks/bindings/gcr/util"
+	"github.com/virtblocks/virtblocks/bindings/gcr/pkg/devices"
+	"github.com/virtblocks/virtblocks/bindings/gcr/pkg/util"
 )
 
 func main() {
