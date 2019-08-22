@@ -16,7 +16,6 @@ build:
 
 clean:
 	cargo clean
-	rm -rf target/
 
 test:
 	cargo test
