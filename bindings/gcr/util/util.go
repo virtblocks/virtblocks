@@ -1,7 +1,7 @@
 package util
 
-// #cgo CPPFLAGS: -I../../../src/capi/
-// #cgo LDFLAGS: -L../../../target/debug/ -lvirtblocks -ldl
+// #cgo CPPFLAGS: -I../../cr/
+// #cgo LDFLAGS: -L../../cr/target/debug/ -lvirtblocks -ldl
 // #include <stdlib.h>
 // #include <virtblocks.h>
 import "C"
