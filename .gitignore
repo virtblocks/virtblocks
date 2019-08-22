@@ -5,5 +5,5 @@
 *.swp
 .idea/
 .libs/
-libvirtblocks.h
+libvirtblocks_c_go.h
 target/

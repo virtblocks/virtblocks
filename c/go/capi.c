@@ -1,4 +1,4 @@
-#include "libvirtblocks.h"
+#include "libvirtblocks_c_go.h"
 #include "virtblocks.h"
 
 int
