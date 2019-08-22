@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/virtblocks/virtblocks/pkg/devices"
-	"github.com/virtblocks/virtblocks/pkg/util"
+	"github.com/virtblocks/virtblocks/go/pkg/devices"
+	"github.com/virtblocks/virtblocks/go/pkg/util"
 )
 
 func main() {
