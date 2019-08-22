@@ -9,8 +9,8 @@ build:
 	cargo build
 	case $$(cargo version) in \
 	  *1.34*|*1.35*) \
-	    ar d target/debug/libvirtblocks.a clzsi2.o; \
-	    ar d target/debug/.libs/libvirtblocks.a clzsi2.o; \
+	    ar d target/debug/libvirtblocks_c_rust.a clzsi2.o; \
+	    ar d target/debug/.libs/libvirtblocks_c_rust.a clzsi2.o; \
 	    ;; \
 	esac
 
