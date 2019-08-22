@@ -3,8 +3,8 @@ package main
 import "C"
 
 import (
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
-	"github.com/virtblocks/virtblocks/go/pkg/util"
+	"github.com/virtblocks/virtblocks/go/native/pkg/devices"
+	"github.com/virtblocks/virtblocks/go/native/pkg/util"
 )
 
 //export util_build_file_name
