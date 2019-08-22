@@ -18,4 +18,10 @@ clean:
 	cargo clean
 	rm -rf target/
 
-.PHONY: build clean
+test:
+	cargo test
+
+run:
+	@true
+
+.PHONY: build clean test run
