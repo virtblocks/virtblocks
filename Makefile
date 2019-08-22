@@ -26,10 +26,10 @@ vet-golang:
 	go vet ./go/...
 
 build-golang:
-	$(MAKE) -C bindings/cg/ build
+	$(MAKE) -C c/go/ build
 
 clean-golang:
-	$(MAKE) -C bindings/cg/ clean
+	$(MAKE) -C c/go/ clean
 
 .PHONY: fmt-golang verify-fmt-golang vet-golang build-golang clean-golang
 
