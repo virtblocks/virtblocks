@@ -1,6 +1,6 @@
 [workspace]
 
 members = [
-    "rust",
+    "rust/native",
     "bindings/cr",
 ]

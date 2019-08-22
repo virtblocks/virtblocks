@@ -16,11 +16,11 @@ version = "0.1.0"
 dependencies = [
  "libc 0.2.62 (registry+https://github.com/rust-lang/crates.io-index)",
  "libtool 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "virtblocks_rust 0.1.0",
+ "virtblocks_rust_native 0.1.0",
 ]
 
 [[package]]
-name = "virtblocks_rust"
+name = "virtblocks_rust_native"
 version = "0.1.0"
 
 [metadata]
