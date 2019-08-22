@@ -1,5 +1,5 @@
 [package]
-name = "virtblocks_bindings_cr"
+name = "virtblocks_c_rust"
 version = "0.1.0"
 authors = ["Andrea Bolognani <abologna@redhat.com>"]
 edition = "2018"

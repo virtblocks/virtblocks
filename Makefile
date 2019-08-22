@@ -43,9 +43,9 @@ vet-rust:
 	cargo clippy
 
 build-rust:
-	$(MAKE) -C bindings/cr/ build
+	$(MAKE) -C c/rust/ build
 
 clean-rust:
-	$(MAKE) -C bindings/cr/ clean
+	$(MAKE) -C c/rust/ clean
 
 .PHONY: fmt-rust verify-fmt-rust vet-rust build-rust clean-rust

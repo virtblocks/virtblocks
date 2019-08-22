@@ -1,7 +1,7 @@
 package util
 
-// #cgo CPPFLAGS: -I../../../cr/
-// #cgo LDFLAGS: -L../../../cr/target/debug/ -lvirtblocks -ldl
+// #cgo CPPFLAGS: -I../../../../c/rust/
+// #cgo LDFLAGS: -L../../../../c/rust/target/debug/ -lvirtblocks_c_rust -ldl
 // #include <stdlib.h>
 // #include <virtblocks.h>
 import "C"

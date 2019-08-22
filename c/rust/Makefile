@@ -12,7 +12,7 @@ all: build
 # play well with cargo workspaces.
 build:
 	cargo build
-	ln -sf $(abs_top_srcdir)/target/debug/libvirtblocks_bindings_cr.a \
+	ln -sf $(abs_top_srcdir)/target/debug/libvirtblocks_c_rust.a \
 	       target/debug/libvirtblocks.a
 	case $$(cargo version) in \
 	  *1.34*|*1.35*) \
