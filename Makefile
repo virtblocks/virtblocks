@@ -23,7 +23,7 @@ verify-fmt-golang:
 	hack/verify-gofmt.sh
 
 vet-golang:
-	go vet ./go/...
+	go vet ./go/native/...
 
 build-golang:
 	$(MAKE) -C c/go/ build
