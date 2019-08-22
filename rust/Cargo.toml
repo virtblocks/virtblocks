@@ -1,5 +1,5 @@
 [package]
-name = "virtblocks"
+name = "virtblocks_rust"
 version = "0.1.0"
 authors = ["Andrea Bolognani <abologna@redhat.com>"]
 edition = "2018"

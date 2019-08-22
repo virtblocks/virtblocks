@@ -11,17 +11,17 @@ version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "virtblocks"
-version = "0.1.0"
-
-[[package]]
 name = "virtblocks_bindings_cr"
 version = "0.1.0"
 dependencies = [
  "libc 0.2.62 (registry+https://github.com/rust-lang/crates.io-index)",
  "libtool 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "virtblocks 0.1.0",
+ "virtblocks_rust 0.1.0",
 ]
+
+[[package]]
+name = "virtblocks_rust"
+version = "0.1.0"
 
 [metadata]
 "checksum libc 0.2.62 (registry+https://github.com/rust-lang/crates.io-index)" = "34fcd2c08d2f832f376f4173a231990fa5aef4e99fb569867318a227ef4c06ba"

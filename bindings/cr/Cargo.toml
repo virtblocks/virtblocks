@@ -9,7 +9,7 @@ crate-type = ["staticlib"]
 
 [dependencies]
 libc = "0.2"
-virtblocks = { path = "../../rust" }
+virtblocks = { package = "virtblocks_rust", path = "../../rust" }
 
 [build-dependencies]
 libtool = "0.1.1"
