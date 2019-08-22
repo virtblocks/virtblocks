@@ -23,7 +23,7 @@ verify-fmt-golang:
 	hack/verify-gofmt.sh
 
 vet-golang:
-	go vet ./pkg/... ./cmd/...
+	go vet ./pkg/... ./examples/...
 
 build-golang:
 	$(MAKE) -C bindings/cg/ build
