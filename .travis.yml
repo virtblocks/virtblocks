@@ -6,18 +6,20 @@ rust:
   - beta
   - nightly
 env:
-  - CARGO_DIR=rust/native
-  - CARGO_DIR=c/rust
-  - CARGO_PROFILE=
-  - CARGO_PROFILE=--release
+  - CARGO_DIR=rust/native CARGO_PROFILE=
+  - CARGO_DIR=rust/native CARGO_PROFILE=--release
+  - CARGO_DIR=c/rust CARGO_PROFILE=
+  - CARGO_DIR=c/rust CARGO_PROFILE=--release
 install:
   - rustup component add rustfmt clippy
+before_script:
+  - cd $CARGO_DIR
 script:
-  - cd $CARGO_DIR && cargo build $CARGO_PROFILE --all --locked
-  - cd $CARGO_DIR && cargo test $CARGO_PROFILE --all --locked
-  - cd $CARGO_DIR && cargo check $CARGO_PROFILE --all
-  - cd $CARGO_DIR && cargo clippy $CARGO_PROFILE
-  - cd $CARGO_DIR && cargo fmt --all -- --check
+  - cargo build $CARGO_PROFILE --all --locked
+  - cargo test $CARGO_PROFILE --all --locked
+  - cargo check $CARGO_PROFILE --all
+  - cargo clippy $CARGO_PROFILE
+  - cargo fmt --all -- --check
 matrix:
   allow_failures:
     - rust: nightly
