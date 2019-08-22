@@ -1,3 +1,5 @@
+all: build
+
 build: libvirtblocks_c_go.la capi.lo
 
 gobuild:
@@ -14,4 +16,10 @@ libvirtblocks_c_go.la: libtool.la.in gobuild
 clean:
 	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks_c_go.h
 
-.PHONY: build gobuild clean
+test: gobuild
+	go test
+
+run:
+	@true
+
+.PHONY: build gobuild clean test run
