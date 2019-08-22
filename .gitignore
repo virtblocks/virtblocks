@@ -1,9 +1,9 @@
+*.a
+*.la
+*.lo
+*.o
 *.swp
 .idea/
-capi/*.a
-capi/*.la
-capi/*.lo
-capi/*.o
-capi/.libs/
-capi/libvirtblocks.h
+.libs/
+bindings/cg/libvirtblocks.h
 target/
