@@ -1,16 +1,14 @@
-extern crate virtblocks;
-
-use virtblocks::devices::Memballoon;
-use virtblocks::devices::MemballoonModel;
+use virtblocks_rust_native::devices;
+use virtblocks_rust_native::util;
 
 fn main() {
-    let file_name = virtblocks::util::build_file_name("guest", ".xml");
+    let file_name = util::build_file_name("guest", ".xml");
     println!("{}", file_name);
 
-    let mut memballoon = Memballoon::new();
+    let mut memballoon = devices::Memballoon::new();
 
     println!("{}", memballoon);
 
-    memballoon.set_model(MemballoonModel::Virtio);
+    memballoon.set_model(devices::MemballoonModel::Virtio);
     println!("{}", memballoon);
 }

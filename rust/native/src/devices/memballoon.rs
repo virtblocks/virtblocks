@@ -33,14 +33,13 @@ impl fmt::Display for MemballoonModel {
 /// # Examples
 ///
 /// ```
-/// use virtblocks::devices::Memballoon;
-/// use virtblocks::devices::MemballoonModel;
+/// use virtblocks_rust_native::devices;
 ///
-/// let mut memballoon = Memballoon::new();
+/// let mut memballoon = devices::Memballoon::new();
 ///
 /// assert_eq!("", memballoon.to_string());
 ///
-/// memballoon.set_model(MemballoonModel::Virtio);
+/// memballoon.set_model(devices::MemballoonModel::Virtio);
 /// assert_eq!("virtio-memballoon", memballoon.to_string());
 /// ```
 #[derive(Default, Debug)]

@@ -3,7 +3,7 @@
 /// # Examples
 ///
 /// ```
-/// use virtblocks::util;
+/// use virtblocks_rust_native::util;
 ///
 /// let fname = util::build_file_name("base", ".ext");
 ///
