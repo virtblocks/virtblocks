@@ -54,8 +54,8 @@ standard targets:
 Some targets are no-op for certain sub-projects because they don't
 make sense in that context.
 
-The top-level `Makefile` should provide a convenient way to build and
-test all sub-projects at once. It currently doesn't.
+The top-level `Makefile` provides a convenient way to build and test
+all sub-projects at once.
 
 ## Contributing
 

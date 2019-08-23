@@ -1,51 +1,43 @@
+# Top-level targets meant to be invoked by users
+
 all: build
 
-virtblocks-language:
-	@if ! test "$(VIRTBLOCKS_LANGUAGE)"; then \
-	  echo "error: No language selected" 2>&1; \
-	  echo "Use 'make VIRTBLOCKS_LANGUAGE=(rust|golang)' or" 2>&1; \
-	  echo "run 'export VIRTBLOCKS_LANGUAGE=(rust|golang)' beforehand" 2>&1; \
-	  exit 1; \
-	fi
+build: build-subdirs-$(VIRTBLOCKS_LANGUAGE)
+clean: clean-subdirs-$(VIRTBLOCKS_LANGUAGE)
+test: test-subdirs-$(VIRTBLOCKS_LANGUAGE)
+run: run-subdirs-$(VIRTBLOCKS_LANGUAGE)
+fmt: fmt-subdirs-$(VIRTBLOCKS_LANGUAGE)
+verify-fmt: verify-fmt-subdirs-$(VIRTBLOCKS_LANGUAGE)
+vet: vet-subdirs-$(VIRTBLOCKS_LANGUAGE)
 
-fmt: virtblocks-language fmt-$(VIRTBLOCKS_LANGUAGE)
-verify-fmt: virtblocks-language verify-fmt-$(VIRTBLOCKS_LANGUAGE)
-vet: virtblocks-language vet-$(VIRTBLOCKS_LANGUAGE)
-build: virtblocks-language build-$(VIRTBLOCKS_LANGUAGE)
-clean: virtblocks-language clean-$(VIRTBLOCKS_LANGUAGE)
+.PHONY: all build clean test run fmt verify-fmt vet
 
-.PHONY: all virtblocks-language fmt verify-fmt vet build clean
+# These are the regular targets, the ones which operate on all code
 
-fmt-golang:
-	go fmt ./...
+SUBDIRS = \
+	rust/native \
+	go/native \
+	c/rust \
+	c/go \
+	go/rust \
+	$(NULL)
 
-verify-fmt-golang:
-	scripts/verify-gofmt.sh
+%-subdirs-:
+	for d in $(SUBDIRS); do \
+		$(MAKE) -C $$d $(subst -subdirs-,,$@) || exit 1; \
+	done
 
-vet-golang:
-	go vet ./go/native/...
+# These only operate on the Go code that can be compiled without having
+# a Rust compiler installed, and are kept around for compatibility with
+# the existing CI setup. Once we update that, we'll be able to get rid
+# of them.
 
-build-golang:
-	$(MAKE) -C c/go/ build
+SUBDIRS_GOLANG = \
+	go/native \
+	c/go \
+	$(NULL)
 
-clean-golang:
-	$(MAKE) -C c/go/ clean
-
-.PHONY: fmt-golang verify-fmt-golang vet-golang build-golang clean-golang
-
-fmt-rust:
-	cargo fmt
-
-verify-fmt-rust:
-	cargo fmt -- --check
-
-vet-rust:
-	cargo clippy
-
-build-rust:
-	$(MAKE) -C c/rust/ build
-
-clean-rust:
-	$(MAKE) -C c/rust/ clean
-
-.PHONY: fmt-rust verify-fmt-rust vet-rust build-rust clean-rust
+%-subdirs-golang:
+	for d in $(SUBDIRS_GOLANG); do \
+		$(MAKE) -C $$d $(subst -subdirs-golang,,$@) || exit 1; \
+	done
