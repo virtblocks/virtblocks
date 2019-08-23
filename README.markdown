@@ -52,8 +52,7 @@ standard targets:
 * `run`: run all example programs.
 
 Some targets are no-op for certain sub-projects because they don't
-make sense in that context; some targets might be missing, but that's
-a bug rather than a design choice.
+make sense in that context.
 
 The top-level `Makefile` should provide a convenient way to build and
 test all sub-projects at once. It currently doesn't.

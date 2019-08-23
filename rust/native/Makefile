@@ -14,4 +14,13 @@ run:
 		cargo run --example $$example || exit 1; \
 	done
 
-.PHONY: build clean test run
+fmt:
+	cargo fmt
+
+verify-fmt:
+	cargo fmt -- --check
+
+vet:
+	cargo clippy
+
+.PHONY: build clean test run fmt verify-fmt vet

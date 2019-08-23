@@ -17,4 +17,13 @@ run: build
 		go run examples/$$example/main.go || exit 1; \
 	done
 
-.PHONY: build rustbuild clean test run
+fmt:
+	go fmt ./...
+
+verify-fmt:
+	../../scripts/verify-gofmt.sh
+
+vet: build
+	go vet ./...
+
+.PHONY: build rustbuild clean test run fmt verify-fmt vet

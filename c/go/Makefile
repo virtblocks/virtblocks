@@ -22,4 +22,13 @@ test: gobuild
 run:
 	@true
 
-.PHONY: build gobuild clean test run
+fmt:
+	go fmt ./...
+
+verify-fmt:
+	../../scripts/verify-gofmt.sh
+
+vet: gobuild
+	go vet ./...
+
+.PHONY: build gobuild clean test run fmt verify-fmt vet

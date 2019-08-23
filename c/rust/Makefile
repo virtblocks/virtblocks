@@ -23,4 +23,13 @@ test:
 run:
 	@true
 
-.PHONY: build clean test run
+fmt:
+	cargo fmt
+
+verify-fmt:
+	cargo fmt -- --check
+
+vet:
+	cargo clippy
+
+.PHONY: build clean test run fmt verify-fmt vet
