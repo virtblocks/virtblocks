@@ -20,7 +20,7 @@ fmt-golang:
 	go fmt ./...
 
 verify-fmt-golang:
-	hack/verify-gofmt.sh
+	scripts/verify-gofmt.sh
 
 vet-golang:
 	go vet ./go/native/...
