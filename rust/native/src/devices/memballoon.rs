@@ -12,7 +12,7 @@ pub enum MemballoonModel {
 
 impl Default for MemballoonModel {
     fn default() -> Self {
-        Self::None
+        MemballoonModel::None
     }
 }
 
