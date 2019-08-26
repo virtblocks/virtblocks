@@ -1,16 +1,18 @@
 all: build
 
-build: libvirtblocks_c_go.la capi.lo
+build: libvirtblocks_c_go.la
 
 gobuild:
 	go build -buildmode c-archive -o libvirtblocks_c_go.a capi.go
 
-capi.lo: capi.c gobuild
-	libtool --mode=compile --tag=CC gcc -c capi.c
+capi.o: capi.c gobuild
+	gcc -fpic -DPIC -c capi.c -o capi.o
 
-libvirtblocks_c_go.la: ../libtool.la.in gobuild
+# If something weird happens later, just try running `ranlib` after `ar`
+libvirtblocks_c_go.la: ../libtool.la.in gobuild capi.o
 	mkdir -p .libs/
 	ln -sf ../$(@:.la=.a) .libs/$(@:.la=.a)
+	ar r $(@:.la=.a) capi.o
 	sed \
 	  -e 's/@LIBNAME@/$(@:.la=)/g' \
 	  -e 's/@LDFLAGS@//g' \
