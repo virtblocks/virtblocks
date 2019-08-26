@@ -8,7 +8,7 @@ gobuild:
 capi.lo: capi.c gobuild
 	libtool --mode=compile --tag=CC gcc -c capi.c
 
-libvirtblocks_c_go.la: libtool.la.in gobuild
+libvirtblocks_c_go.la: ../libtool.la.in gobuild
 	mkdir -p .libs/
 	ln -sf ../$(@:.la=.a) .libs/$(@:.la=.a)
 	sed 's/@LIBNAME@/$(@:.la=)/g' <$< >$@
