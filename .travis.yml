@@ -15,11 +15,11 @@ install:
 before_script:
   - cd $CARGO_DIR
 script:
-  - cargo build $CARGO_PROFILE --all --locked
-  - cargo test $CARGO_PROFILE --all --locked
-  - cargo check $CARGO_PROFILE --all
+  - cargo build $CARGO_PROFILE
+  - cargo test $CARGO_PROFILE
+  - cargo check $CARGO_PROFILE
   - cargo clippy $CARGO_PROFILE
-  - cargo fmt --all -- --check
+  - cargo fmt -- --check
 matrix:
   allow_failures:
     - rust: nightly
