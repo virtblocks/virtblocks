@@ -7,3 +7,4 @@
 .libs/
 libvirtblocks_c_go.h
 target/
+Cargo.lock
