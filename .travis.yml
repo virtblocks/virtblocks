@@ -6,10 +6,8 @@ rust:
   - beta
   - nightly
 env:
-  - CARGO_DIR=rust/native CARGO_PROFILE=
-  - CARGO_DIR=rust/native CARGO_PROFILE=--release
-  - CARGO_DIR=c/rust CARGO_PROFILE=
-  - CARGO_DIR=c/rust CARGO_PROFILE=--release
+  - CARGO_DIR=rust/native
+  - CARGO_DIR=c/rust
 install:
   - rustup component add rustfmt clippy
 before_script:
