@@ -1,3 +1,5 @@
+#![cfg_attr(feature = "cargo-clippy", allow(clippy::not_unsafe_ptr_arg_deref))]
+
 use std::ffi::CStr;
 use std::ffi::CString;
 use std::os::raw::c_char;
