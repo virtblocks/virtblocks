@@ -15,4 +15,5 @@ RUN apt-get update && \
     chmod +x rustup-init && \
     ./rustup-init -y --no-modify-path --default-toolchain $RUST_VERSION && \
     rm rustup-init && \
+    chmod -R a+w $RUSTUP_HOME $CARGO_HOME && \
     rustup component add rustfmt clippy
