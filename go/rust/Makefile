@@ -12,7 +12,7 @@ clean:
 test: build
 	@true
 
-run: build
+run-examples: build
 	for example in $$(ls examples/); do \
 		go run examples/$$example/main.go || exit 1; \
 	done
@@ -26,4 +26,4 @@ verify-fmt:
 vet: build
 	go vet ./...
 
-.PHONY: build rustbuild clean test run fmt verify-fmt vet
+.PHONY: build rustbuild clean test run-examples fmt verify-fmt vet

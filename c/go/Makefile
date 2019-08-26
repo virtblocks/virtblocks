@@ -19,7 +19,7 @@ clean:
 test: gobuild
 	go test
 
-run:
+run-examples:
 	@true
 
 fmt:
@@ -31,4 +31,4 @@ verify-fmt:
 vet: gobuild
 	go vet ./...
 
-.PHONY: build gobuild clean test run fmt verify-fmt vet
+.PHONY: build gobuild clean test run-examples fmt verify-fmt vet

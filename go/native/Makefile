@@ -9,7 +9,7 @@ clean:
 test:
 	@true
 
-run:
+run-examples:
 	for example in $$(ls examples/); do \
 		go run examples/$$example/main.go || exit 1; \
 	done
@@ -23,4 +23,4 @@ verify-fmt:
 vet:
 	go vet ./...
 
-.PHONY: build clean test run fmt verify-fmt vet
+.PHONY: build clean test run-examples fmt verify-fmt vet

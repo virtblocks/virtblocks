@@ -20,7 +20,7 @@ clean:
 test:
 	cargo test
 
-run:
+run-examples:
 	@true
 
 fmt:
@@ -32,4 +32,4 @@ verify-fmt:
 vet:
 	cargo clippy
 
-.PHONY: build clean test run fmt verify-fmt vet
+.PHONY: build clean test run-examples fmt verify-fmt vet

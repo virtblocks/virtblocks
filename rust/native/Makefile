@@ -9,7 +9,7 @@ clean:
 test:
 	cargo test
 
-run:
+run-examples:
 	for example in $$(ls examples/); do \
 		cargo run --example $$example || exit 1; \
 	done
@@ -23,4 +23,4 @@ verify-fmt:
 vet:
 	cargo clippy
 
-.PHONY: build clean test run fmt verify-fmt vet
+.PHONY: build clean test run-examples fmt verify-fmt vet

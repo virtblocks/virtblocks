@@ -5,12 +5,12 @@ all: build
 build: build-subdirs-$(VIRTBLOCKS_LANGUAGE)
 clean: clean-subdirs-$(VIRTBLOCKS_LANGUAGE)
 test: test-subdirs-$(VIRTBLOCKS_LANGUAGE)
-run: run-subdirs-$(VIRTBLOCKS_LANGUAGE)
+run-examples: run-examples-subdirs-$(VIRTBLOCKS_LANGUAGE)
 fmt: fmt-subdirs-$(VIRTBLOCKS_LANGUAGE)
 verify-fmt: verify-fmt-subdirs-$(VIRTBLOCKS_LANGUAGE)
 vet: vet-subdirs-$(VIRTBLOCKS_LANGUAGE)
 
-.PHONY: all build clean test run fmt verify-fmt vet
+.PHONY: all build clean test run-examples fmt verify-fmt vet
 
 # These are the regular targets, the ones which operate on all code
 
