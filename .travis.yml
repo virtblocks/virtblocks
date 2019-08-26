@@ -5,19 +5,17 @@ rust:
   - stable
   - beta
   - nightly
-env:
-  - CARGO_DIR=rust/native
-  - CARGO_DIR=c/rust
 install:
   - rustup component add rustfmt clippy
-before_script:
-  - cd $CARGO_DIR
+  # All go version management in Travis is done using gimme (just like rustup,
+  # nvm, etc.) and it is installed by default on travis' images.  We need this
+  # to get newer go than 1.11, which is the default in all images in travis.
+  - eval $(gimme stable)
 script:
-  - cargo build $CARGO_PROFILE
-  - cargo test $CARGO_PROFILE
-  - cargo check $CARGO_PROFILE
-  - cargo clippy $CARGO_PROFILE
-  - cargo fmt -- --check
+  - make build
+  - make test
+  - make vet
+  - make verify-fmt
 matrix:
   allow_failures:
     - rust: nightly
