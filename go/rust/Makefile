@@ -7,7 +7,7 @@ rustbuild:
 	$(MAKE) -C ../../c/rust build
 
 clean:
-	go clean
+	@true
 
 test: build
 	@true
