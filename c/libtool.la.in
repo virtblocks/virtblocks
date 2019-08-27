@@ -3,6 +3,6 @@
 dlname=''
 library_names=''
 old_library='@LIBNAME@.a'
-inherited_linker_flags=''
+inherited_linker_flags='@LDFLAGS@'
 installed=no
 shouldnotlink=no

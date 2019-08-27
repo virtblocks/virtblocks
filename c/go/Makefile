@@ -11,7 +11,10 @@ capi.lo: capi.c gobuild
 libvirtblocks_c_go.la: ../libtool.la.in gobuild
 	mkdir -p .libs/
 	ln -sf ../$(@:.la=.a) .libs/$(@:.la=.a)
-	sed 's/@LIBNAME@/$(@:.la=)/g' <$< >$@
+	sed \
+	  -e 's/@LIBNAME@/$(@:.la=)/g' \
+	  -e 's/@LDFLAGS@//g' \
+	  <$< >$@
 
 clean:
 	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks_c_go.h
