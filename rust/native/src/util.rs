@@ -1,3 +1,10 @@
+// Virt Blocks
+//
+// Copyright (C) 2019 Red Hat, Inc.
+//
+// This software is distributed under the terms of the MIT License.
+// See the LICENSE file in the top level directory for details.
+
 /// Build a filename (as a simple FFI test)
 ///
 /// # Examples
