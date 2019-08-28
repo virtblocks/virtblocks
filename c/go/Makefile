@@ -2,24 +2,23 @@ all: build
 
 build: libvirtblocks_c_go.la
 
+# We need to build twice: first just the glue code, which also generates
+# the header file; then also the wrappers, which themselves call to the
+# glue code and as such can't be compiled withoug the generated header file
 gobuild:
-	go build -buildmode c-archive -o libvirtblocks_c_go.a capi.go
+	go build -buildmode c-archive -o libvirtblocks_c_go.a glue.go
+	go build -buildmode c-archive -o libvirtblocks_c_go.a
 
-capi.o: capi.c gobuild
-	gcc -fpic -DPIC -c capi.c -o capi.o
-
-# If something weird happens later, just try running `ranlib` after `ar`
-libvirtblocks_c_go.la: ../libtool.la.in gobuild capi.o
+libvirtblocks_c_go.la: ../libtool.la.in gobuild
 	mkdir -p .libs/
 	ln -sf ../$(@:.la=.a) .libs/$(@:.la=.a)
-	ar r $(@:.la=.a) capi.o
 	sed \
 	  -e 's/@LIBNAME@/$(@:.la=)/g' \
 	  -e 's/@LDFLAGS@//g' \
 	  <$< >$@
 
 clean:
-	rm -rf *.a *.la *.lo *.o .libs/ libvirtblocks_c_go.h
+	rm -rf *.a *.la .libs/ libvirtblocks_c_go.h
 
 test: gobuild
 	go test
