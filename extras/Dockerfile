@@ -8,9 +8,7 @@ ENV RUSTUP_ARCH=x86_64-unknown-linux-gnu \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
 
-RUN apt-get update && \
-    apt-get install -y libtool libtool-bin && \
-    wget https://static.rust-lang.org/rustup/archive/$RUSTUP_VERSION/$RUSTUP_ARCH/rustup-init && \
+RUN wget https://static.rust-lang.org/rustup/archive/$RUSTUP_VERSION/$RUSTUP_ARCH/rustup-init && \
     echo "$RUSTUP_SHA256 rustup-init" | sha256sum -c - && \
     chmod +x rustup-init && \
     ./rustup-init -y --no-modify-path --default-toolchain $RUST_VERSION && \
