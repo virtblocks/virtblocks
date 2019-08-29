@@ -12,4 +12,5 @@
 //! QEMU driver.
 
 pub mod devices;
+pub mod playground;
 pub mod util;
