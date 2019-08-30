@@ -1,5 +1,6 @@
 *.a
 *.la
+*.o
 *.swp
 .idea/
 .libs/
