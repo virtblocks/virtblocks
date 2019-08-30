@@ -15,7 +15,7 @@ typedef enum {
   VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO_TRANSITIONAL,
 } VirtBlocksDevicesMemballoonModel;
 
-typedef void* VirtBlocksDevicesMemballoon;
+typedef struct _VirtBlocksDevicesMemballoon VirtBlocksDevicesMemballoon;
 
 VirtBlocksDevicesMemballoon *virtblocks_devices_memballoon_new(void);
 void virtblocks_devices_memballoon_free(VirtBlocksDevicesMemballoon *memballoon);
