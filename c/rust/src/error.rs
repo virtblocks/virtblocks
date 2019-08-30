@@ -8,58 +8,44 @@
 #![cfg_attr(feature = "cargo-clippy", allow(clippy::not_unsafe_ptr_arg_deref))]
 
 use std::ffi::CString;
-use std::fmt;
 use std::os::raw::c_char;
 use std::os::raw::c_uint;
 
-#[repr(u32)]
-#[derive(Copy, Clone, Debug)]
-pub enum DummyError {
-    DummyCode,
-}
-
-impl fmt::Display for DummyError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let error_str = match self {
-            Self::DummyCode => "DummyMessage",
-        };
-        write!(f, "{}", error_str)
-    }
-}
+use virtblocks::playground;
 
 #[repr(u32)]
 #[derive(Copy, Clone, Debug)]
 pub enum VirtBlocksErrorDomain {
-    DummyDomain,
+    PlaygroundToyError,
 }
 
 #[derive(Copy, Clone, Debug)]
 pub enum VirtBlocksError {
-    DummyDomain(DummyError),
+    PlaygroundToyError(playground::ToyError),
 }
 
-impl From<DummyError> for VirtBlocksError {
-    fn from(error: DummyError) -> Self {
-        Self::DummyDomain(error)
+impl From<playground::ToyError> for VirtBlocksError {
+    fn from(err: playground::ToyError) -> Self {
+        Self::PlaygroundToyError(err)
     }
 }
 
 impl VirtBlocksError {
     fn domain(self) -> VirtBlocksErrorDomain {
         match self {
-            Self::DummyDomain(_) => VirtBlocksErrorDomain::DummyDomain,
+            Self::PlaygroundToyError(_) => VirtBlocksErrorDomain::PlaygroundToyError,
         }
     }
 
     fn code(self) -> u32 {
         match self {
-            Self::DummyDomain(error) => error as u32,
+            Self::PlaygroundToyError(e) => e as u32,
         }
     }
 
     fn message(self) -> String {
         match self {
-            Self::DummyDomain(error) => error.to_string(),
+            Self::PlaygroundToyError(e) => e.to_string(),
         }
     }
 }
