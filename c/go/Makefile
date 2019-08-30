@@ -1,5 +1,5 @@
 LIBNAME = libvirtblocks_c_go
-LDFLAGS =
+LDFLAGS = -pthread
 
 all: build
 
