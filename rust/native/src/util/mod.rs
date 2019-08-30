@@ -5,6 +5,6 @@
 // This software is distributed under the terms of the MIT License.
 // See the LICENSE file in the top level directory for details.
 
-mod util;
+mod file;
 
-pub use util::build_file_name;
+pub use file::build_file_name;
