@@ -25,3 +25,6 @@ void virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon *membal
 VirtBlocksDevicesMemballoonModel virtblocks_devices_memballoon_get_model(const VirtBlocksDevicesMemballoon *memballoon);
 
 char *virtblocks_devices_memballoon_to_string(const VirtBlocksDevicesMemballoon *memballoon);
+
+VIRTBLOCKS_DEFINE_AUTOPTR_FUNC(VirtBlocksDevicesMemballoon,
+                               virtblocks_devices_memballoon_free);
