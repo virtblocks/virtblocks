@@ -1,6 +1,9 @@
+LIBNAME = libvirtblocks_c_rust
+LDFLAGS = -pthread -lm -ldl
+
 all: build
 
-build: libvirtblocks_c_rust.la
+build: $(LIBNAME).la
 
 # Some versions of cargo are known to produce library archives that
 # can't be linked properly. Luckily there's a relatively straightforward
@@ -11,16 +14,16 @@ rustbuild:
 	cargo build
 	case $$(cargo version) in \
 	  *1.34*|*1.35*) \
-	    ar d target/debug/libvirtblocks_c_rust.a clzsi2.o; \
+	    ar d target/debug/$(LIBNAME).a clzsi2.o; \
 	    ;; \
 	esac
 
-libvirtblocks_c_rust.la: ../libtool.la.in rustbuild
+$(LIBNAME).la: ../libtool.la.in rustbuild
 	mkdir -p .libs/
-	ln -sf ../target/debug/$(@:.la=.a) .libs/$(@:.la=.a)
+	ln -sf ../target/debug/$(LIBNAME).a .libs/$(LIBNAME).a
 	sed \
-	  -e 's/@LIBNAME@/$(@:.la=)/g' \
-	  -e 's/@LDFLAGS@/-pthread -lm -ldl/g' \
+	  -e 's/@LIBNAME@/$(LIBNAME)/g' \
+	  -e 's/@LDFLAGS@/$(LDFLAGS)/g' \
 	  <$< >$@
 
 clean:
