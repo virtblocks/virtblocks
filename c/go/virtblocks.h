@@ -8,5 +8,8 @@
 
 #pragma once
 
+#include <stdlib.h>
+
+#include "include/alloc.h"
 #include "include/devices/main.h"
 #include "include/util/main.h"

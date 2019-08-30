@@ -14,33 +14,27 @@ int
 main(int argc,
      char **argv)
 {
-    VirtBlocksDevicesMemballoon memballoon = 0;
-    char *str = NULL;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesMemballoon) memballoon = 0;
+    VIRTBLOCKS_AUTOFREE(char *) file_name = NULL;
+    VIRTBLOCKS_AUTOFREE(char *) model_before = NULL;
+    VIRTBLOCKS_AUTOFREE(char *) model_after = NULL;
 
-    virtblocks_util_build_file_name(&str, "guest", ".xml");
-    if (str) {
-        printf("%s\n", str);
-        free(str);
-    }
+    virtblocks_util_build_file_name(&file_name, "guest", ".xml");
+    if (file_name)
+        printf("%s\n", file_name);
 
     memballoon = virtblocks_devices_memballoon_new();
 
-    str = virtblocks_devices_memballoon_to_string(memballoon);
-    if (str) {
-        printf("%s\n", str);
-        free(str);
-    }
+    model_before = virtblocks_devices_memballoon_to_string(memballoon);
+    if (model_before)
+        printf("%s\n", model_before);
 
     virtblocks_devices_memballoon_set_model(memballoon,
                                             VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO);
 
-    str = virtblocks_devices_memballoon_to_string(memballoon);
-    if (str) {
-        printf("%s\n", str);
-        free(str);
-    }
-
-    virtblocks_devices_memballoon_free(memballoon);
+    model_after = virtblocks_devices_memballoon_to_string(memballoon);
+    if (model_after)
+        printf("%s\n", model_after);
 
     return 0;
 }
