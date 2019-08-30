@@ -24,12 +24,14 @@ func (self ToyError) Error() string {
 	return ret
 }
 
+type ToyCallback func(Toy, string) bool
+
 type Toy struct {
 	base   string
-	filter func(Toy, string) bool
+	filter ToyCallback
 }
 
-func NewToy(base string, filter func(Toy, string) bool) *Toy {
+func NewToy(base string, filter ToyCallback) *Toy {
 	return &Toy{base: base, filter: filter}
 }
 
