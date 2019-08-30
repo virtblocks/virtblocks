@@ -8,5 +8,4 @@
 
 #pragma once
 
-#include "include/devices/main.h"
-#include "include/util/main.h"
+#include "util.h"
