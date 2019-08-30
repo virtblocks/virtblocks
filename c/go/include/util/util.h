@@ -8,5 +8,6 @@
 
 #pragma once
 
-#include "include/devices/main.h"
-#include "include/util/main.h"
+int virtblocks_util_build_file_name(char **fileName,
+                                    const char *base,
+                                    const char *ext);
