@@ -10,3 +10,4 @@
 mod toy;
 
 pub use toy::Toy;
+pub use toy::ToyError;
