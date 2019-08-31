@@ -19,10 +19,10 @@ pub extern "C" fn virtblocks_devices_memballoon_new() -> *mut devices::Memballoo
 
 #[no_mangle]
 pub extern "C" fn virtblocks_devices_memballoon_free(c_memballoon: *mut devices::Memballoon) {
-    let _rust_memballoon = unsafe {
-        assert!(!c_memballoon.is_null());
-        Box::from_raw(c_memballoon)
-    };
+    if c_memballoon.is_null() {
+        return;
+    }
+    let _rust_memballoon = unsafe { Box::from_raw(c_memballoon) };
 }
 
 #[no_mangle]
