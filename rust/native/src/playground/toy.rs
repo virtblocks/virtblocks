@@ -9,7 +9,7 @@ use std::error;
 use std::fmt;
 
 /// Possible error types for Toy
-#[repr(C)]
+#[repr(u32)]
 #[derive(Copy, Clone, Debug)]
 pub enum ToyError {
     /// User-provided callback failed

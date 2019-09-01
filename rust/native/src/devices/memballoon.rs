@@ -8,7 +8,7 @@
 use std::fmt;
 
 /// Type of balloon device
-#[repr(C)]
+#[repr(u32)]
 #[derive(Copy, Clone, Debug)]
 pub enum MemballoonModel {
     None,
