@@ -11,6 +11,14 @@ package main
 #include "virtblocks.h"
 #include "private.h"
 
+VirtBlocksError*
+error_wrap(int goPtr)
+{
+    VirtBlocksError *self = malloc(sizeof(VirtBlocksError));
+    self->goPtr = goPtr;
+    return self;
+}
+
 VirtBlocksDevicesMemballoon*
 devices_memballoon_wrap(int goPtr)
 {

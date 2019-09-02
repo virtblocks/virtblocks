@@ -10,6 +10,12 @@
 
 #include "virtblocks.h"
 
+struct _VirtBlocksError {
+    int goPtr;
+};
+
+VirtBlocksError* error_wrap(int goPtr);
+
 struct _VirtBlocksDevicesMemballoon {
     int goPtr;
 };

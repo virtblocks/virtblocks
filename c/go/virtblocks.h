@@ -9,8 +9,11 @@
 #pragma once
 
 #include <assert.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "include/alloc.h"
+#include "include/error.h"
+
 #include "include/devices/main.h"
 #include "include/util/main.h"
