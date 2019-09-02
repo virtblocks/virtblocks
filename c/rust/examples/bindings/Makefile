@@ -2,7 +2,7 @@ all: build
 
 build:
 	$(CC) -I../../ -o main.o -c main.c
-	$(CC) $(LDFLAGS) -o bindings main.o ../../.libs/$(LIBNAME).a
+	$(CC) -o bindings main.o ../../.libs/$(LIBNAME).a $(LDFLAGS)
 
 clean:
 	rm -f *.o bindings
