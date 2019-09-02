@@ -11,22 +11,7 @@ import "C"
 
 import (
 	"github.com/virtblocks/virtblocks/go/native/pkg/devices"
-	"github.com/virtblocks/virtblocks/go/native/pkg/util"
 )
-
-//export util_build_file_name
-func util_build_file_name(cFileName **C.char, cBase *C.char, cExt *C.char) C.int {
-	if cBase == nil || cExt == nil || cFileName == nil {
-		return -1
-	}
-	var goBase = C.GoString(cBase)
-	var goExt = C.GoString(cExt)
-
-	var goRes = util.BuildFileName(goBase, goExt)
-
-	*cFileName = C.CString(goRes)
-	return 0
-}
 
 // Go objects are not allow to cross the language boundary, but we still
 // need the C code to manipulate them. The way we achieve this is by
@@ -65,5 +50,3 @@ func devices_memballoon_to_string(cMemballoon C.int) *C.char {
 	var goMemballoon = memballoons[cMemballoon]
 	return C.CString(goMemballoon.String())
 }
-
-func main() {}

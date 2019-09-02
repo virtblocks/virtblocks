@@ -11,7 +11,7 @@ build: lib$(LIBNAME).la
 # wrappers call to the glue code and as such can't be compiled without
 # the generated header file
 gobuild:
-	go tool cgo -exportheader lib$(LIBNAME).h glue.go
+	go tool cgo -exportheader lib$(LIBNAME).h glue_*.go
 	go build -buildmode c-archive -o lib$(LIBNAME).a
 
 lib$(LIBNAME).la: ../libtool.la.in gobuild
