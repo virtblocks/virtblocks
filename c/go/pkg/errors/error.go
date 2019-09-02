@@ -7,27 +7,14 @@
 
 package errors
 
-type DummyError int
-
-const (
-	DummyCode DummyError = iota
+import (
+	"github.com/virtblocks/virtblocks/go/native/pkg/playground"
 )
-
-func (self DummyError) Error() string {
-	var ret string
-
-	switch self {
-	case DummyCode:
-		ret = "DummyMessage"
-	}
-
-	return ret
-}
 
 type ErrorDomain int
 
 const (
-	DummyDomain ErrorDomain = iota
+	PlaygroundToyError ErrorDomain = iota
 )
 
 type Error struct {
@@ -42,8 +29,8 @@ func (self *Error) Domain() ErrorDomain {
 	var domain ErrorDomain
 
 	switch self.native.(type) {
-	case DummyError:
-		domain = ErrorDomain(DummyDomain)
+	case playground.ToyError:
+		domain = ErrorDomain(PlaygroundToyError)
 	}
 
 	return domain
@@ -53,8 +40,8 @@ func (self *Error) Code() int {
 	var code int
 
 	switch self.native.(type) {
-	case DummyError:
-		code = int(self.native.(DummyError))
+	case playground.ToyError:
+		code = int(self.native.(playground.ToyError))
 	}
 
 	return code

@@ -16,6 +16,19 @@ struct _VirtBlocksError {
 
 VirtBlocksError* error_wrap(int goPtr);
 
+struct _VirtBlocksPlaygroundToy {
+    int goPtr;
+};
+
+VirtBlocksPlaygroundToy *playground_toy_wrap(int goPtr);
+
+bool playground_toy_callback_call(VirtBlocksPlaygroundToyCallback callback,
+                                  const VirtBlocksPlaygroundToy *toy,
+                                  const char *ext,
+                                  void *data);
+void playground_toy_callback_data_free_call(VirtBlocksPlaygroundToyCallbackDataFree dataFree,
+                                            void *data);
+
 struct _VirtBlocksDevicesMemballoon {
     int goPtr;
 };
