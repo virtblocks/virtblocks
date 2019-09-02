@@ -19,7 +19,7 @@ pub enum ToyError {
 impl fmt::Display for ToyError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let error_str = match self {
-            Self::CallbackFailed => "Callback failed",
+            ToyError::CallbackFailed => "Callback failed",
         };
         write!(f, "{}", error_str)
     }

@@ -26,26 +26,26 @@ pub enum VirtBlocksError {
 
 impl From<playground::ToyError> for VirtBlocksError {
     fn from(err: playground::ToyError) -> Self {
-        Self::PlaygroundToyError(err)
+        VirtBlocksError::PlaygroundToyError(err)
     }
 }
 
 impl VirtBlocksError {
     fn domain(self) -> VirtBlocksErrorDomain {
         match self {
-            Self::PlaygroundToyError(_) => VirtBlocksErrorDomain::PlaygroundToyError,
+            VirtBlocksError::PlaygroundToyError(_) => VirtBlocksErrorDomain::PlaygroundToyError,
         }
     }
 
     fn code(self) -> u32 {
         match self {
-            Self::PlaygroundToyError(e) => e as u32,
+            VirtBlocksError::PlaygroundToyError(e) => e as u32,
         }
     }
 
     fn message(self) -> String {
         match self {
-            Self::PlaygroundToyError(e) => e.to_string(),
+            VirtBlocksError::PlaygroundToyError(e) => e.to_string(),
         }
     }
 }
