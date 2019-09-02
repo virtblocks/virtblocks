@@ -28,12 +28,12 @@ static inline void virtblocks_autofree_helper(void *ptr)
 #define VIRTBLOCKS_AUTOPTR_FUNC_NAME(_type) _type##VirtBlocksAutoPtrFunc
 
 #define VIRTBLOCKS_DEFINE_AUTOPTR_FUNC(_type, _func) \
-    static inline void VIRTBLOCKS_AUTOPTR_FUNC_NAME(_type)(_type *_ptr) \
+    static inline void VIRTBLOCKS_AUTOPTR_FUNC_NAME(_type)(_type **_ptr) \
     { \
         if (*_ptr) \
             (_func)(*_ptr); \
-        *_ptr = 0; \
+        *_ptr = NULL; \
     }
 
 #define VIRTBLOCKS_AUTOPTR(_type) \
-    __attribute__((cleanup(VIRTBLOCKS_AUTOPTR_FUNC_NAME(_type)))) _type
+    __attribute__((cleanup(VIRTBLOCKS_AUTOPTR_FUNC_NAME(_type)))) _type *

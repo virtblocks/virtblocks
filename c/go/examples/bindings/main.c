@@ -14,7 +14,7 @@ int
 main(int argc,
      char **argv)
 {
-    VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesMemballoon) memballoon = 0;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesMemballoon) memballoon = NULL;
     VIRTBLOCKS_AUTOFREE(char *) file_name = NULL;
     VIRTBLOCKS_AUTOFREE(char *) model_before = NULL;
     VIRTBLOCKS_AUTOFREE(char *) model_after = NULL;

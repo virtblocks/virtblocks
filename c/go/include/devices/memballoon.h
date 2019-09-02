@@ -15,16 +15,16 @@ typedef enum {
   VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO_TRANSITIONAL,
 } VirtBlocksDevicesMemballoonModel;
 
-typedef int VirtBlocksDevicesMemballoon;
+typedef struct _VirtBlocksDevicesMemballoon VirtBlocksDevicesMemballoon;
 
-VirtBlocksDevicesMemballoon virtblocks_devices_memballoon_new(void);
-void virtblocks_devices_memballoon_free(VirtBlocksDevicesMemballoon memballoon);
+VirtBlocksDevicesMemballoon *virtblocks_devices_memballoon_new(void);
+void virtblocks_devices_memballoon_free(VirtBlocksDevicesMemballoon *memballoon);
 
-void virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon memballoon,
+void virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon *memballoon,
                                              VirtBlocksDevicesMemballoonModel model);
-VirtBlocksDevicesMemballoonModel virtblocks_devices_memballoon_get_model(VirtBlocksDevicesMemballoon memballoon);
+VirtBlocksDevicesMemballoonModel virtblocks_devices_memballoon_get_model(const VirtBlocksDevicesMemballoon *memballoon);
 
-char *virtblocks_devices_memballoon_to_string(VirtBlocksDevicesMemballoon memballoon);
+char *virtblocks_devices_memballoon_to_string(const VirtBlocksDevicesMemballoon *memballoon);
 
 VIRTBLOCKS_DEFINE_AUTOPTR_FUNC(VirtBlocksDevicesMemballoon,
                                virtblocks_devices_memballoon_free);

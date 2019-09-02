@@ -19,34 +19,42 @@ virtblocks_util_build_file_name(char **file_name,
     return util_build_file_name(file_name, (char *) base, (char *) ext);
 }
 
-VirtBlocksDevicesMemballoon
+struct _VirtBlocksDevicesMemballoon {
+    int goPtr;
+};
+
+VirtBlocksDevicesMemballoon*
 virtblocks_devices_memballoon_new()
 {
-    return devices_memballoon_new();
-}
-void
-virtblocks_devices_memballoon_free(VirtBlocksDevicesMemballoon memballoon)
-{
-    devices_memballoon_free(memballoon);
+    VirtBlocksDevicesMemballoon *self = malloc(sizeof(VirtBlocksDevicesMemballoon));
+    self->goPtr = devices_memballoon_new();
+    return self;
 }
 
 void
-virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon memballoon,
+virtblocks_devices_memballoon_free(VirtBlocksDevicesMemballoon *memballoon)
+{
+    devices_memballoon_free(memballoon->goPtr);
+    free(memballoon);
+}
+
+void
+virtblocks_devices_memballoon_set_model(VirtBlocksDevicesMemballoon *memballoon,
                                         VirtBlocksDevicesMemballoonModel model)
 {
-    devices_memballoon_set_model(memballoon, model);
+    devices_memballoon_set_model(memballoon->goPtr, model);
 }
 
 VirtBlocksDevicesMemballoonModel
-virtblocks_devices_memballoon_get_model(VirtBlocksDevicesMemballoon memballoon)
+virtblocks_devices_memballoon_get_model(const VirtBlocksDevicesMemballoon *memballoon)
 {
-    return devices_memballoon_get_model(memballoon);
+    return devices_memballoon_get_model(memballoon->goPtr);
 }
 
 char*
-virtblocks_devices_memballoon_to_string(VirtBlocksDevicesMemballoon memballoon)
+virtblocks_devices_memballoon_to_string(const VirtBlocksDevicesMemballoon *memballoon)
 {
-    return devices_memballoon_to_string(memballoon);
+    return devices_memballoon_to_string(memballoon->goPtr);
 }
 */
 import "C"
