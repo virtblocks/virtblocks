@@ -5,11 +5,13 @@ all: build
 
 build: lib$(LIBNAME).la
 
-# We need to build twice: first just the glue code, which also generates
-# the header file; then also the wrappers, which themselves call to the
-# glue code and as such can't be compiled withoug the generated header file
+# We need two steps: the first one generates an header file that can be
+# used to access the exported glue functions, and the second one builds
+# an archive we can link from C. The first step is necessary because the
+# wrappers call to the glue code and as such can't be compiled without
+# the generated header file
 gobuild:
-	go build -buildmode c-archive -o lib$(LIBNAME).a glue.go
+	go tool cgo -exportheader lib$(LIBNAME).h glue.go
 	go build -buildmode c-archive -o lib$(LIBNAME).a
 
 lib$(LIBNAME).la: ../libtool.la.in gobuild
@@ -21,7 +23,7 @@ lib$(LIBNAME).la: ../libtool.la.in gobuild
 	  <$< >$@
 
 clean:
-	rm -rf *.a *.la .libs/ lib$(LIBNAME).h
+	rm -rf *.a *.la .libs/ _obj/ lib$(LIBNAME).h
 
 test: gobuild
 	go test
