@@ -8,16 +8,15 @@
 package main
 
 /*
-#include "libvirtblocks_c_go.h"
 #include "virtblocks.h"
 #include "private.h"
 
-int
-virtblocks_util_build_file_name(char **file_name,
-                                const char *base,
-                                const char *ext)
+VirtBlocksDevicesMemballoon*
+devices_memballoon_wrap(int goPtr)
 {
-    return util_build_file_name(file_name, (char *) base, (char *) ext);
+    VirtBlocksDevicesMemballoon *self = malloc(sizeof(VirtBlocksDevicesMemballoon));
+    self->goPtr = goPtr;
+    return self;
 }
 */
 import "C"

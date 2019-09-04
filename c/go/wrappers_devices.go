@@ -10,17 +10,12 @@ package main
 /*
 #include "libvirtblocks_c_go.h"
 #include "virtblocks.h"
-
-struct _VirtBlocksDevicesMemballoon {
-    int goPtr;
-};
+#include "private.h"
 
 VirtBlocksDevicesMemballoon*
 virtblocks_devices_memballoon_new()
 {
-    VirtBlocksDevicesMemballoon *self = malloc(sizeof(VirtBlocksDevicesMemballoon));
-    self->goPtr = devices_memballoon_new();
-    return self;
+    return devices_memballoon_wrap(devices_memballoon_new());
 }
 
 void
