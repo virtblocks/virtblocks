@@ -24,7 +24,7 @@ func (self ToyError) Error() string {
 	return ret
 }
 
-type ToyCallback func(Toy, string) bool
+type ToyCallback func(*Toy, string) bool
 
 type Toy struct {
 	base   string
@@ -39,7 +39,7 @@ func (self Toy) Base() string {
 	return self.base
 }
 
-func (self Toy) Run(ext string) (string, error) {
+func (self *Toy) Run(ext string) (string, error) {
 	if self.filter(self, ext) {
 		// If the user-provided filter succeeds, then build a string
 		return self.base + "." + ext, nil

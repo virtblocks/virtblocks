@@ -19,14 +19,14 @@ type Input struct {
 
 // Create an object that already has a *local* closure attached
 func create_baz() *playground.Toy {
-	var ext_is_baz = func(_toy playground.Toy, ext string) bool {
+	var ext_is_baz = func(_toy *playground.Toy, ext string) bool {
 		return ext == "baz"
 	}
 	return playground.NewToy("baz", ext_is_baz)
 }
 
 // Function to be used as a filter
-func base_and_ext_match(toy playground.Toy, ext string) bool {
+func base_and_ext_match(toy *playground.Toy, ext string) bool {
 	return toy.Base() == ext
 }
 
@@ -34,7 +34,7 @@ func main() {
 	// Closure to be used as a filter. In this case we're using a local
 	// variable inside the closure
 	var base = "foo"
-	var base_is_foo = func(toy playground.Toy, _ext string) bool {
+	var base_is_foo = func(toy *playground.Toy, _ext string) bool {
 		return toy.Base() == base
 	}
 
