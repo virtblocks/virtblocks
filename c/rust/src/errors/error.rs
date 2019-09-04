@@ -15,43 +15,43 @@ use virtblocks::playground;
 
 #[repr(u32)]
 #[derive(Copy, Clone, Debug)]
-pub enum VirtBlocksErrorDomain {
+pub enum ErrorDomain {
     PlaygroundToyError,
 }
 
 #[derive(Copy, Clone, Debug)]
-pub enum VirtBlocksError {
+pub enum Error {
     PlaygroundToyError(playground::ToyError),
 }
 
-impl From<playground::ToyError> for VirtBlocksError {
+impl From<playground::ToyError> for Error {
     fn from(err: playground::ToyError) -> Self {
-        VirtBlocksError::PlaygroundToyError(err)
+        Error::PlaygroundToyError(err)
     }
 }
 
-impl VirtBlocksError {
-    fn domain(self) -> VirtBlocksErrorDomain {
+impl Error {
+    fn domain(self) -> ErrorDomain {
         match self {
-            VirtBlocksError::PlaygroundToyError(_) => VirtBlocksErrorDomain::PlaygroundToyError,
+            Error::PlaygroundToyError(_) => ErrorDomain::PlaygroundToyError,
         }
     }
 
     fn code(self) -> u32 {
         match self {
-            VirtBlocksError::PlaygroundToyError(e) => e as u32,
+            Error::PlaygroundToyError(e) => e as u32,
         }
     }
 
     fn message(self) -> String {
         match self {
-            VirtBlocksError::PlaygroundToyError(e) => e.to_string(),
+            Error::PlaygroundToyError(e) => e.to_string(),
         }
     }
 }
 
 #[no_mangle]
-pub extern "C" fn virtblocks_error_free(c_error: *mut VirtBlocksError) {
+pub extern "C" fn virtblocks_error_free(c_error: *mut Error) {
     if c_error.is_null() {
         return;
     }
@@ -59,9 +59,7 @@ pub extern "C" fn virtblocks_error_free(c_error: *mut VirtBlocksError) {
 }
 
 #[no_mangle]
-pub extern "C" fn virtblocks_error_get_domain(
-    c_error: *const VirtBlocksError,
-) -> VirtBlocksErrorDomain {
+pub extern "C" fn virtblocks_error_get_domain(c_error: *const Error) -> ErrorDomain {
     assert!(!c_error.is_null());
 
     let rust_error = unsafe { &*c_error };
@@ -70,7 +68,7 @@ pub extern "C" fn virtblocks_error_get_domain(
 }
 
 #[no_mangle]
-pub extern "C" fn virtblocks_error_get_code(c_error: *const VirtBlocksError) -> c_uint {
+pub extern "C" fn virtblocks_error_get_code(c_error: *const Error) -> c_uint {
     assert!(!c_error.is_null());
 
     let rust_error = unsafe { &*c_error };
@@ -79,7 +77,7 @@ pub extern "C" fn virtblocks_error_get_code(c_error: *const VirtBlocksError) -> 
 }
 
 #[no_mangle]
-pub extern "C" fn virtblocks_error_get_message(c_error: *const VirtBlocksError) -> *mut c_char {
+pub extern "C" fn virtblocks_error_get_message(c_error: *const Error) -> *mut c_char {
     assert!(!c_error.is_null());
 
     let rust_error = unsafe { &*c_error };

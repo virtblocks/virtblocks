@@ -7,4 +7,4 @@
 
 mod error;
 
-pub use error::VirtBlocksError;
+pub use error::Error;
