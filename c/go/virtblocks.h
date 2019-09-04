@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <assert.h>
 #include <stdlib.h>
 
 #include "include/alloc.h"
