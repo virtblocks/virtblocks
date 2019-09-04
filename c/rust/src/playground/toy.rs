@@ -15,7 +15,7 @@ use std::ptr::null_mut;
 
 use virtblocks::playground;
 
-use super::super::error;
+use crate::errors;
 
 type ToyCallback = unsafe extern "C" fn(*const playground::Toy, *const c_char, *mut c_void) -> bool;
 type ToyCallbackDataFree = unsafe extern "C" fn(*mut c_void);
@@ -112,7 +112,7 @@ pub extern "C" fn virtblocks_playground_toy_get_base(c_toy: *const playground::T
 pub extern "C" fn virtblocks_playground_toy_run(
     c_toy: *const playground::Toy,
     c_ext: *const c_char,
-    c_error: *mut *mut error::VirtBlocksError,
+    c_error: *mut *mut errors::VirtBlocksError,
 ) -> *mut c_char {
     assert!(!c_toy.is_null());
     assert!(!c_ext.is_null());
@@ -126,7 +126,7 @@ pub extern "C" fn virtblocks_playground_toy_run(
     if rust_ret.is_ok() {
         // Successful execution: the error returned to C will be NULL
         unsafe {
-            *c_error = null_mut() as *mut error::VirtBlocksError;
+            *c_error = null_mut() as *mut errors::VirtBlocksError;
         }
 
         // We need to convert the Rust string to a C string
@@ -135,7 +135,7 @@ pub extern "C" fn virtblocks_playground_toy_run(
     } else {
         // Failed execution: we need to convert the Rust error to a
         // C error
-        let tmp = error::VirtBlocksError::from(rust_ret.unwrap_err());
+        let tmp = errors::VirtBlocksError::from(rust_ret.unwrap_err());
         unsafe {
             *c_error = Box::into_raw(Box::new(tmp));
         }

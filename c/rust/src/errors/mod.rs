@@ -5,8 +5,6 @@
 // This software is distributed under the terms of the MIT License.
 // See the LICENSE file in the top level directory for details.
 
-mod errors;
+mod error;
 
-mod devices;
-mod playground;
-mod util;
+pub use error::VirtBlocksError;
