@@ -49,7 +49,7 @@ standard targets:
 * `fmt`, `verify-fmt`, `vet`: automatically format code, verify it
   is formatted properly, and try to spot issues;
 
-* `run`: run all example programs.
+* `run-examples`: run all example programs.
 
 Some targets are no-op for certain sub-projects because they don't
 make sense in that context.
