@@ -9,7 +9,6 @@ package util
 
 // #cgo CPPFLAGS: -I../../../../c/rust/
 // #cgo LDFLAGS: -L../../../../c/rust/.libs/ -lvirtblocks_c_rust -pthread -lm -ldl
-// #include <stdlib.h>
 // #include <virtblocks.h>
 import "C"
 
