@@ -14,13 +14,8 @@ main(int argc,
      char **argv)
 {
     VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesMemballoon) memballoon = NULL;
-    VIRTBLOCKS_AUTOFREE(char *) file_name = NULL;
     VIRTBLOCKS_AUTOFREE(char *) model_before = NULL;
     VIRTBLOCKS_AUTOFREE(char *) model_after = NULL;
-
-    virtblocks_util_build_file_name(&file_name, "guest", ".xml");
-    if (file_name)
-        printf("%s\n", file_name);
 
     memballoon = virtblocks_devices_memballoon_new();
 
