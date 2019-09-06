@@ -25,17 +25,31 @@ playground_toy_callback_trampoline_c(const VirtBlocksPlaygroundToy *toy,
 */
 import "C"
 
+import (
+	"sync"
+)
+
+var toyCallbackObjectsLock sync.RWMutex
 var toyCallbackObjects = make([]*ToyCallback, 1)
 
 func ToyCallbackAdd(cb *ToyCallback) int {
+	toyCallbackObjectsLock.Lock()
+	defer toyCallbackObjectsLock.Unlock()
+
 	toyCallbackObjects = append(toyCallbackObjects, cb)
 	return len(toyCallbackObjects) - 1
 }
 
 func ToyCallbackGet(ref int) *ToyCallback {
+	toyCallbackObjectsLock.RLock()
+	defer toyCallbackObjectsLock.RUnlock()
+
 	return toyCallbackObjects[ref]
 }
 
 func ToyCallbackDel(ref int) {
+	toyCallbackObjectsLock.Lock()
+	defer toyCallbackObjectsLock.Unlock()
+
 	toyCallbackObjects[ref] = nil
 }

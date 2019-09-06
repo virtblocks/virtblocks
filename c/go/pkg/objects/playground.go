@@ -9,6 +9,7 @@ package objects
 
 import (
 	"github.com/virtblocks/virtblocks/go/native/pkg/playground"
+	"sync"
 	"unsafe"
 )
 
@@ -49,11 +50,15 @@ type playgroundToyObject struct {
 // them back and forth from the C side: each "reference" is simply the
 // index of the object in the array, with 0 being a special "reference"
 // that always points to nil
+var playgroundToyObjectsLock sync.RWMutex
 var playgroundToyObjects = make([]*playgroundToyObject, 1)
 
 // Register a playground.Toy (and the corresponding extra data) so that
 // it's later accessible from C
 func PlaygroundToyAdd(toy *playground.Toy, extra *PlaygroundToyExtra) int {
+	playgroundToyObjectsLock.Lock()
+	defer playgroundToyObjectsLock.Unlock()
+
 	var object = &playgroundToyObject{ptr: toy, extra: extra}
 	playgroundToyObjects = append(playgroundToyObjects, object)
 	return len(playgroundToyObjects) - 1
@@ -62,6 +67,9 @@ func PlaygroundToyAdd(toy *playground.Toy, extra *PlaygroundToyExtra) int {
 // Look up a playground.Toy (and the corresponding extra data) given
 // a reference. This basically converts a C object to a Go object
 func PlaygroundToyGet(ref int) (*playground.Toy, *PlaygroundToyExtra) {
+	playgroundToyObjectsLock.RLock()
+	defer playgroundToyObjectsLock.RUnlock()
+
 	var object = playgroundToyObjects[ref]
 	return object.ptr, object.extra
 }
@@ -69,6 +77,9 @@ func PlaygroundToyGet(ref int) (*playground.Toy, *PlaygroundToyExtra) {
 // Return the reference for a specific playground.Toy. This is usually only
 // necessary when callbacks crossing the language boundary are involved
 func PlaygroundToyRef(toy *playground.Toy) int {
+	playgroundToyObjectsLock.RLock()
+	defer playgroundToyObjectsLock.RUnlock()
+
 	for ref, object := range playgroundToyObjects {
 		if object != nil && object.ptr == toy {
 			return ref
@@ -80,5 +91,8 @@ func PlaygroundToyRef(toy *playground.Toy) int {
 // Make a playground.Toy no longer accessible from C, and cause it to
 // be garbage collected
 func PlaygroundToyDel(ref int) {
+	playgroundToyObjectsLock.Lock()
+	defer playgroundToyObjectsLock.Unlock()
+
 	playgroundToyObjects[ref] = nil
 }
