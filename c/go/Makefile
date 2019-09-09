@@ -30,9 +30,12 @@ test: gobuild
 
 run-examples: build
 	for example in $$(ls examples/); do \
-		$(MAKE) -C examples/$$example || exit 1; \
-		examples/$$example/$$example || exit 1; \
-		$(MAKE) -C examples/$$example clean || exit 1; \
+	( \
+		cd examples/$$example || exit 1; \
+		$(MAKE) || exit 1; \
+		./$$example || exit 1; \
+		$(MAKE) clean || exit 1; \
+	) || exit 1; \
 	done
 
 fmt:
