@@ -11,8 +11,8 @@
 //! consumed on their own, or to replace certain parts of libvirt's
 //! QEMU driver.
 
+mod private;
+
 pub mod devices;
 pub mod playground;
 pub mod subprocess;
-
-mod cvt;
