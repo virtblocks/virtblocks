@@ -180,7 +180,7 @@ impl CloseFdsOnExec {
 /// The following example will spawn a child process while making sure that only STDIN, STDOUT, and
 /// STDERR are inherited.
 ///
-/// ```no_run
+/// ```ignore
 /// # use closefds::close_fds_on_exec;
 /// # use std::process::Command;
 /// # use std::os::unix::process::CommandExt;
