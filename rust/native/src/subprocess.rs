@@ -18,7 +18,7 @@ use std::thread;
 use std::os::unix::io::RawFd;
 use std::os::unix::process::CommandExt;
 
-use crate::closefds::close_fds_on_exec;
+use closefds::close_fds_on_exec;
 use crate::cvt::cvt_r;
 
 #[derive(Debug)]

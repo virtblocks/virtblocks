@@ -15,5 +15,4 @@ pub mod devices;
 pub mod playground;
 pub mod subprocess;
 
-mod closefds;
 mod cvt;
