@@ -9,3 +9,4 @@ mod errors;
 
 mod devices;
 mod playground;
+mod subprocess;
