@@ -18,7 +18,8 @@
 //! as a `pre_exec()` function when spawning a child process via the `Command` interface
 //! and will set the `FD_CLOEXEC` flag as appropriate on open file descriptors.
 
-use std::{ffi::CStr, io, os::unix::io::RawFd, ptr};
+use crate::cvt::{cvt, cvt_r};
+use std::{ffi::CStr, io, os::unix::io::RawFd};
 
 #[cfg(any(
     target_os = "dragonfly",
@@ -27,10 +28,10 @@ use std::{ffi::CStr, io, os::unix::io::RawFd, ptr};
     target_os = "openbsd",
     target_os = "macos",
 ))]
-const FD_DIR_NAME: &'static [u8; 8] = b"/dev/fd\0";
+const FD_DIR_NAME: &[u8; 8] = b"/dev/fd\0";
 
 #[cfg(target_os = "linux")]
-const FD_DIR_NAME: &'static [u8; 14] = b"/proc/self/fd\0";
+const FD_DIR_NAME: &[u8; 14] = b"/proc/self/fd\0";
 
 struct OpenDir {
     dir: *mut libc::DIR,
@@ -45,7 +46,7 @@ unsafe impl Sync for OpenDir {}
 impl OpenDir {
     fn open(dir_path: &CStr) -> io::Result<OpenDir> {
         let dir = unsafe { libc::opendir(dir_path.as_ptr()) };
-        if dir == ptr::null_mut() {
+        if dir.is_null() {
             return Err(io::Error::last_os_error());
         }
         Ok(OpenDir { dir })
@@ -62,26 +63,18 @@ impl Drop for OpenDir {
 }
 
 fn set_cloexec(fd: RawFd, set: bool) -> io::Result<()> {
-    let mut fd_flags = unsafe { libc::fcntl(fd, libc::F_GETFD) };
-    if fd_flags == -1 {
-        return Err(io::Error::last_os_error());
-    }
-
+    let mut fd_flags = unsafe { cvt_r(|| libc::fcntl(fd, libc::F_GETFD))? };
     let is_set = fd_flags & libc::FD_CLOEXEC != 0;
 
     if set == is_set {
         return Ok(());
+    } else if set {
+        fd_flags |= libc::FD_CLOEXEC;
     } else {
-        if set {
-            fd_flags |= libc::FD_CLOEXEC;
-        } else {
-            fd_flags &= !libc::FD_CLOEXEC;
-        }
+        fd_flags &= !libc::FD_CLOEXEC;
     }
 
-    if unsafe { libc::fcntl(fd, libc::F_SETFD, fd_flags) } == -1 {
-        return Err(io::Error::last_os_error());
-    }
+    unsafe { cvt(libc::fcntl(fd, libc::F_SETFD, fd_flags))? };
 
     Ok(())
 }
@@ -89,7 +82,7 @@ fn set_cloexec(fd: RawFd, set: bool) -> io::Result<()> {
 unsafe fn pos_int_from_ascii(mut name: *const libc::c_char) -> io::Result<libc::c_int> {
     let mut num = 0;
     while *name >= '0' as i8 && *name <= '9' as i8 {
-        num = num * 10 + (*name - '0' as i8) as libc::c_int;
+        num = num * 10 + i32::from(*name - '0' as i8);
         name = name.offset(1);
     }
     // If the last byte isn't a NULL, it means we found a
@@ -105,29 +98,23 @@ unsafe fn pos_int_from_ascii(mut name: *const libc::c_char) -> io::Result<libc::
 }
 
 struct CloseFdsOnExec {
-    dir: OpenDir,
     keep_fds: Vec<RawFd>,
 }
 
 impl CloseFdsOnExec {
-    pub fn new(mut keep_fds: Vec<RawFd>) -> io::Result<Self> {
-        let dir = OpenDir::open(CStr::from_bytes_with_nul(FD_DIR_NAME).expect("Invalid Path"))?;
+    pub fn new(mut keep_fds: Vec<RawFd>) -> Self {
         keep_fds.sort_unstable();
-        Ok(CloseFdsOnExec { dir, keep_fds })
+        CloseFdsOnExec { keep_fds }
     }
 
     pub fn before_exec(&mut self) -> io::Result<()> {
         unsafe {
-            errno::set_errno(errno::Errno(0));
-            libc::rewinddir(self.dir.dir);
-            if errno::errno() != errno::Errno(0) {
-                return Err(io::Error::last_os_error());
-            }
+            let dir = OpenDir::open(CStr::from_bytes_with_nul(FD_DIR_NAME).expect("Invalid Path"))?;
 
             loop {
                 errno::set_errno(errno::Errno(0));
-                let dir_entry = libc::readdir(self.dir.dir);
-                if dir_entry == ptr::null_mut() {
+                let dir_entry = libc::readdir(dir.dir);
+                if dir_entry.is_null() {
                     if errno::errno() != errno::Errno(0) {
                         return Err(io::Error::last_os_error());
                     } else {
@@ -135,9 +122,10 @@ impl CloseFdsOnExec {
                     }
                 }
 
-                let f = pos_int_from_ascii((*dir_entry).d_name.as_ptr())?;
-                let needs_cloexec = self.keep_fds.binary_search(&f).is_err();
-                set_cloexec(f, needs_cloexec)?;
+                if let Ok(f) = pos_int_from_ascii((*dir_entry).d_name.as_ptr()) {
+                    let needs_cloexec = self.keep_fds.binary_search(&f).is_err();
+                    set_cloexec(f, needs_cloexec)?
+                }
             }
         }
         Ok(())
@@ -206,8 +194,9 @@ impl CloseFdsOnExec {
 /// # Ok(())
 /// # }
 /// ```
+
 pub fn close_fds_on_exec(keep_fds: Vec<RawFd>) -> io::Result<impl FnMut() -> io::Result<()>> {
-    let mut close_fds_on_exec = CloseFdsOnExec::new(keep_fds)?;
+    let mut close_fds_on_exec = CloseFdsOnExec::new(keep_fds);
 
     let func = move || close_fds_on_exec.before_exec();
 
