@@ -15,6 +15,7 @@
 
 #include "include/alloc.h"
 #include "include/error.h"
+#include "include/subprocess.h"
 
 #include "include/devices/main.h"
 #include "include/playground/main.h"
