@@ -8,17 +8,17 @@
 package main
 
 import (
-	"github.com/virtblocks/virtblocks/go/native/pkg/subprocess"
+	"github.com/virtblocks/virtblocks/go/native/pkg/command"
 	"log"
 )
 
 func main() {
-	var sub = subprocess.NewSubprocess("./test.sh")
-	sub.Spawn()
-	id, err := sub.Id()
+	var command = command.NewCommand("./test.sh")
+	command.Spawn()
+	id, err := command.Id()
 	if err == nil {
 		log.Printf("PID: %d", id)
 	}
-	err = sub.Wait()
+	err = command.Wait()
 	log.Printf("Command finished with error: %v", err)
 }
