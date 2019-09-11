@@ -9,11 +9,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/virtblocks/virtblocks/go/rust/pkg/subprocess"
+	"github.com/virtblocks/virtblocks/go/rust/pkg/command"
 )
 
 func main() {
-	var sub = subprocess.NewSubProcess("ls")
-	sub.Spawn()
-	fmt.Println("PID:", sub.Id())
+	var command = command.NewCommand("ls")
+	command.Spawn()
+	fmt.Println("PID:", command.Id())
 }
