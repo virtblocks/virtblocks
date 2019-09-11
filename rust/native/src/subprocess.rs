@@ -18,8 +18,8 @@ use std::thread;
 use std::os::unix::io::RawFd;
 use std::os::unix::process::CommandExt;
 
-use closefds::close_fds_on_exec;
 use crate::private::cvt_r;
+use closefds::close_fds_on_exec;
 
 #[derive(Debug)]
 struct FileDesc(RawFd);
