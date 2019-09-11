@@ -7,6 +7,7 @@
 
 #![cfg_attr(feature = "cargo-clippy", allow(clippy::not_unsafe_ptr_arg_deref))]
 
+use libc;
 use std::ffi::CString;
 use std::io;
 use std::os::raw::c_char;
@@ -39,6 +40,47 @@ impl From<io::Error> for Error {
     }
 }
 
+fn convert_io_error(err: &io::Error) -> u32 {
+    let ret = match err.raw_os_error() {
+        Some(errno) => errno,
+        None => {
+            // The error was not originally created from an errno value,
+            // so we can't obtain the value directly, but we can still
+            // perform the opposite mapping as decode_error_kind() in
+            // Rust's src/libstd/sys/unix/mod.rs
+            match err.kind() {
+                io::ErrorKind::ConnectionRefused => libc::ECONNREFUSED,
+                io::ErrorKind::ConnectionReset => libc::ECONNRESET,
+                io::ErrorKind::BrokenPipe => libc::EPIPE,
+                io::ErrorKind::NotConnected => libc::ENOTCONN,
+                io::ErrorKind::ConnectionAborted => libc::ECONNABORTED,
+                io::ErrorKind::AddrNotAvailable => libc::EADDRNOTAVAIL,
+                io::ErrorKind::AddrInUse => libc::EADDRINUSE,
+                io::ErrorKind::NotFound => libc::ENOENT,
+                io::ErrorKind::Interrupted => libc::EINTR,
+                io::ErrorKind::InvalidInput => libc::EINVAL,
+                io::ErrorKind::TimedOut => libc::ETIMEDOUT,
+                io::ErrorKind::AlreadyExists => libc::EEXIST,
+                // These two cases are special because two separate
+                // errno values can map to the same ErrorKind: we just
+                // pick one, knowing that if the error was originally
+                // coming from the OS then we'd have executed the case
+                // above and gotten the original errno back, and if not
+                // then either one works
+                io::ErrorKind::PermissionDenied => libc::EPERM,
+                io::ErrorKind::WouldBlock => libc::EWOULDBLOCK,
+                // If the error was entirely custom, then the only
+                // sensible value we can return is zero
+                io::ErrorKind::Other => 0,
+                // If a new ErrorKind was introduced and we're not
+                // handling it correctly, our best bet is to panic
+                _ => panic!("Unrecognized io::ErrorKind"),
+            }
+        }
+    };
+    ret as u32
+}
+
 impl Error {
     fn domain(&self) -> ErrorDomain {
         match self {
@@ -50,7 +92,7 @@ impl Error {
     fn code(&self) -> u32 {
         match self {
             Error::PlaygroundToyError(e) => *e as u32,
-            Error::IOError(e) => e.raw_os_error().unwrap_or(0) as u32,
+            Error::IOError(e) => convert_io_error(e),
         }
     }
 
