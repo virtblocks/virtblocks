@@ -14,7 +14,10 @@ test: build
 
 run-examples: build
 	for example in $$(ls examples/); do \
-		go run examples/$$example/main.go || exit 1; \
+	( \
+		cd examples/$$example || exit 1; \
+		go run main.go || exit 1; \
+	) || exit 1; \
 	done
 
 fmt:
