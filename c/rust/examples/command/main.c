@@ -24,32 +24,32 @@ int
 main(int argc,
      char **argv)
 {
-    VIRTBLOCKS_AUTOPTR(VirtBlocksSubprocess) sub = NULL;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksCommand) command = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksError) err = NULL;
     int fds[2];
 
-    sub = virtblocks_subprocess_new("cat");
-    virtblocks_subprocess_add_arg(sub, "/does-not-exist");
-    virtblocks_subprocess_add_arg(sub, "-");
+    command = virtblocks_command_new("cat");
+    virtblocks_command_add_arg(command, "/does-not-exist");
+    virtblocks_command_add_arg(command, "-");
 
     if (socketpair(PF_LOCAL, SOCK_STREAM, 0, fds) < 0) {
         perror("failed to create socketpair:");
         exit(1);
     }
-    virtblocks_subprocess_take_fd(sub, fds[1], 0);
+    virtblocks_command_take_fd(command, fds[1], 0);
     write(fds[0], "hello!", 6);
     close(fds[0]);
 
-    if (!virtblocks_subprocess_spawn(sub, &err)) {
+    if (!virtblocks_command_spawn(command, &err)) {
         print_err(err);
     } else {
-        printf("PID: %u\n", virtblocks_subprocess_id(sub));
+        printf("PID: %u\n", virtblocks_command_id(command));
         sleep(1);
-        if (!virtblocks_subprocess_kill(sub, &err)) {
+        if (!virtblocks_command_kill(command, &err)) {
             print_err(err);
         }
 
-        int status = virtblocks_subprocess_wait(sub, &err);
+        int status = virtblocks_command_wait(command, &err);
         if (err) {
             print_err(err);
         }
