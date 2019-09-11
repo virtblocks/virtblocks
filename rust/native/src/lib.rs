@@ -13,6 +13,6 @@
 
 mod private;
 
+pub mod command;
 pub mod devices;
 pub mod playground;
-pub mod subprocess;

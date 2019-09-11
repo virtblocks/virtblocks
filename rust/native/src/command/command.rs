@@ -4,6 +4,7 @@
 //
 // This software is distributed under the terms of the MIT License.
 // See the LICENSE file in the top level directory for details.
+
 use std::collections::HashMap;
 use std::ffi::OsStr;
 use std::io;
@@ -11,7 +12,7 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::io::Write;
 use std::mem;
-use std::process::{Child, Command, Stdio};
+use std::process;
 use std::sync::mpsc;
 use std::thread;
 
@@ -40,39 +41,39 @@ struct FdMap(HashMap<RawFd, FileDesc>);
 #[allow(clippy::large_enum_variant)]
 enum State {
     None,
-    Child(Child, mpsc::Receiver<Vec<u8>>),
-    Command(Command, FdMap),
+    Child(process::Child, mpsc::Receiver<Vec<u8>>),
+    Command(process::Command, FdMap),
 }
 
-/// A subprocess test, not meant to be a building block!
+/// A command test, not meant to be a building block!
 /// Good Rust design should follow Command/Child split.
 ///
 /// # Examples
 ///
 /// ```
-/// use virtblocks_rust_native::subprocess;
+/// use virtblocks_rust_native::command;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error + 'static>> {
-///     let mut sub = subprocess::Subprocess::new("ls");
-///     sub.add_arg("/");
-///     sub.spawn();
-///     let status = sub.wait()?;
+///     let mut command = command::Command::new("ls");
+///     command.add_arg("/");
+///     command.spawn();
+///     let status = command.wait()?;
 ///     assert_eq!(status, 0);
 ///     Ok(())
 /// }
 /// ```
 #[derive(Debug)]
-pub struct Subprocess {
+pub struct Command {
     state: State,
 }
 
-impl Subprocess {
-    pub fn new<S: AsRef<OsStr>>(program: S) -> Self {
-        let mut cmd = Command::new(program);
+impl Command {
+    pub fn new<S: AsRef<OsStr>>(prog: S) -> Self {
+        let mut cmd = process::Command::new(prog);
         let fdmap = HashMap::new();
 
-        cmd.stdout(Stdio::piped());
-        cmd.stderr(Stdio::piped());
+        cmd.stdout(process::Stdio::piped());
+        cmd.stderr(process::Stdio::piped());
 
         Self {
             state: State::Command(cmd, FdMap(fdmap)),
@@ -106,8 +107,8 @@ impl Subprocess {
                 let stderr = child.stderr.take().unwrap();
 
                 let (tx, rx) = mpsc::channel();
-                // process stdout/stderr
-                // waiting for process would need another thread..
+                // command stdout/stderr
+                // waiting for command would need another thread..
                 // polling on IO+wait would be quite complicated
                 thread::spawn(move || {
                     let reader = BufReader::new(stdout);
