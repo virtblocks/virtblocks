@@ -5,7 +5,7 @@
 // This software is distributed under the terms of the MIT License.
 // See the LICENSE file in the top level directory for details.
 
-package subprocess
+package command
 
 // #cgo CPPFLAGS: -I../../../../c/rust/
 // #cgo LDFLAGS: -L../../../../c/rust/.libs/ -lvirtblocks_c_rust -pthread -lm -ldl
@@ -22,11 +22,6 @@ type Error struct {
 	message string
 }
 
-// Convert a C error to a Go error. For other long-lived objects we expect
-// the callers to call Free() once they no longer need them, but requiring
-// the same for short-lived objects such as errors would be too much.
-// Unfortunately that means we have to make a copy of all information
-// contained in the error, notably the message
 func newError(err *C.VirtBlocksError) Error {
 	defer C.virtblocks_error_free(err)
 
@@ -45,21 +40,21 @@ func (self Error) Error() string {
 	return self.message
 }
 
-type SubProcess struct {
-	ptr *C.VirtBlocksSubprocess
+type Command struct {
+	ptr *C.VirtBlocksCommand
 }
 
-func NewSubProcess(prog string) *SubProcess {
-	cs := C.CString(prog)
-	defer C.free(unsafe.Pointer(cs))
-	s := &SubProcess{ptr: C.virtblocks_subprocess_new(cs)}
-	runtime.SetFinalizer(s, (*SubProcess).Free)
+func NewCommand(goProg string) *Command {
+	cProg := C.CString(goProg)
+	defer C.free(unsafe.Pointer(cProg))
+	s := &Command{ptr: C.virtblocks_command_new(cProg)}
+	runtime.SetFinalizer(s, (*Command).Free)
 	return s
 }
 
-func (self *SubProcess) Spawn() error {
+func (self *Command) Spawn() error {
 	var cError *C.VirtBlocksError = nil
-	var cRet = C.virtblocks_subprocess_spawn(self.ptr, &cError)
+	var cRet = C.virtblocks_command_spawn(self.ptr, &cError)
 
 	if !cRet {
 		return newError(cError)
@@ -67,11 +62,11 @@ func (self *SubProcess) Spawn() error {
 	return nil
 }
 
-func (self *SubProcess) Id() uint {
-	return uint(C.virtblocks_subprocess_id(self.ptr))
+func (self *Command) Id() uint {
+	return uint(C.virtblocks_command_id(self.ptr))
 }
 
-func (self *SubProcess) Free() {
-	C.virtblocks_subprocess_free(self.ptr)
+func (self *Command) Free() {
+	C.virtblocks_command_free(self.ptr)
 	self.ptr = nil
 }
