@@ -10,7 +10,7 @@
 use std::ffi::CString;
 use std::io;
 use std::os::raw::c_char;
-use std::os::raw::c_int;
+use std::os::raw::c_uint;
 
 use virtblocks::playground;
 
@@ -47,10 +47,10 @@ impl Error {
         }
     }
 
-    fn code(&self) -> i32 {
+    fn code(&self) -> u32 {
         match self {
-            Error::PlaygroundToyError(e) => *e as i32,
-            Error::IOError(e) => e.raw_os_error().unwrap_or(-1),
+            Error::PlaygroundToyError(e) => *e as u32,
+            Error::IOError(e) => e.raw_os_error().unwrap_or(0) as u32,
         }
     }
 
@@ -80,12 +80,12 @@ pub extern "C" fn virtblocks_error_get_domain(c_error: *const Error) -> ErrorDom
 }
 
 #[no_mangle]
-pub extern "C" fn virtblocks_error_get_code(c_error: *const Error) -> c_int {
+pub extern "C" fn virtblocks_error_get_code(c_error: *const Error) -> c_uint {
     assert!(!c_error.is_null());
 
     let rust_error = unsafe { &*c_error };
 
-    rust_error.code() as c_int
+    rust_error.code() as c_uint
 }
 
 #[no_mangle]
