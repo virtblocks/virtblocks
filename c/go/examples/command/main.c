@@ -14,12 +14,12 @@ int
 main(int argc,
      char **argv)
 {
-    VIRTBLOCKS_AUTOPTR(VirtBlocksSubprocess) sub = NULL;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksCommand) command = NULL;
 
-    sub = virtblocks_subprocess_new("./test.sh");
-    virtblocks_subprocess_spawn(sub);
+    command = virtblocks_command_new("./test.sh");
+    virtblocks_command_spawn(command);
     sleep(5);
-    virtblocks_subprocess_wait(sub);
+    virtblocks_command_wait(command);
 
     return 0;
 }

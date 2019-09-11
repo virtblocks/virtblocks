@@ -35,8 +35,8 @@ struct _VirtBlocksDevicesMemballoon {
 
 VirtBlocksDevicesMemballoon* devices_memballoon_wrap(int goPtr);
 
-struct _VirtBlocksSubprocess {
+struct _VirtBlocksCommand {
     int goPtr;
 };
 
-VirtBlocksSubprocess* subprocess_wrap(int goPtr);
+VirtBlocksCommand* command_wrap(int goPtr);

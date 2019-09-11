@@ -51,10 +51,10 @@ devices_memballoon_wrap(int goPtr)
     return self;
 }
 
-VirtBlocksSubprocess*
-subprocess_wrap(int goPtr)
+VirtBlocksCommand*
+command_wrap(int goPtr)
 {
-    VirtBlocksSubprocess *self = malloc(sizeof(VirtBlocksSubprocess));
+    VirtBlocksCommand *self = malloc(sizeof(VirtBlocksCommand));
     self->goPtr = goPtr;
     return self;
 }
