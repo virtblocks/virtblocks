@@ -11,7 +11,10 @@ test:
 
 run-examples:
 	for example in $$(ls examples/); do \
+	( \
+		cd examples/$$example || exit 1; \
 		cargo run --example $$example || exit 1; \
+	) || exit 1; \
 	done
 
 fmt:
