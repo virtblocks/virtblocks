@@ -41,8 +41,20 @@ struct _VirtBlocksDevicesMemballoon {
 
 VirtBlocksDevicesMemballoon* devices_memballoon_wrap(int goPtr);
 
+struct _VirtBlocksDevicesDisk {
+    int goPtr;
+};
+
+VirtBlocksDevicesDisk* devices_disk_wrap(int goPtr);
+
 struct _VirtBlocksCommand {
     int goPtr;
 };
 
 VirtBlocksCommand* command_wrap(int goPtr);
+
+struct _VirtBlocksVmDescription {
+    int goPtr;
+};
+
+VirtBlocksVmDescription* vm_description_wrap(int goPtr);

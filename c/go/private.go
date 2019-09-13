@@ -59,10 +59,26 @@ devices_memballoon_wrap(int goPtr)
     return self;
 }
 
+VirtBlocksDevicesDisk*
+devices_disk_wrap(int goPtr)
+{
+    VirtBlocksDevicesDisk *self = malloc(sizeof(VirtBlocksDevicesDisk));
+    self->goPtr = goPtr;
+    return self;
+}
+
 VirtBlocksCommand*
 command_wrap(int goPtr)
 {
     VirtBlocksCommand *self = malloc(sizeof(VirtBlocksCommand));
+    self->goPtr = goPtr;
+    return self;
+}
+
+VirtBlocksVmDescription*
+vm_description_wrap(int goPtr)
+{
+    VirtBlocksVmDescription *self = malloc(sizeof(VirtBlocksVmDescription));
     self->goPtr = goPtr;
     return self;
 }
