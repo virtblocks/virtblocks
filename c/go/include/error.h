@@ -9,6 +9,7 @@
 #pragma once
 
 typedef enum {
+    VIRTBLOCKS_ERROR_DOMAIN_GENERIC_ERROR,
     VIRTBLOCKS_ERROR_DOMAIN_PLAYGROUND_TOY_ERROR,
 } VirtBlocksErrorDomain;
 

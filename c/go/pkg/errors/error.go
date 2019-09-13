@@ -14,7 +14,8 @@ import (
 type ErrorDomain int
 
 const (
-	PlaygroundToyError ErrorDomain = iota
+	GenericError ErrorDomain = iota
+	PlaygroundToyError
 )
 
 type Error struct {
@@ -31,6 +32,8 @@ func (self *Error) Domain() ErrorDomain {
 	switch self.native.(type) {
 	case playground.ToyError:
 		domain = ErrorDomain(PlaygroundToyError)
+	default:
+		domain = ErrorDomain(GenericError)
 	}
 
 	return domain
@@ -42,6 +45,8 @@ func (self *Error) Code() int {
 	switch self.native.(type) {
 	case playground.ToyError:
 		code = int(self.native.(playground.ToyError))
+	default:
+		code = 0
 	}
 
 	return code
