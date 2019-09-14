@@ -12,8 +12,8 @@ package main
 import "C"
 
 import (
-	"github.com/virtblocks/virtblocks/c/go/pkg/errors"
 	"github.com/virtblocks/virtblocks/c/go/pkg/objects"
+	"github.com/virtblocks/virtblocks/c/go/pkg/types"
 	"github.com/virtblocks/virtblocks/go/native/pkg/playground"
 	"unsafe"
 )
@@ -103,9 +103,9 @@ func playground_toy_run(cToy C.int, cExt *C.char, cError *C.int) *C.char {
 		return C.CString(goRet)
 	} else {
 		// The Go method reported a failure: convert the native error
-		// to a C-accessible errors.Error and return it along with a
+		// to a C-accessible types.Error and return it along with a
 		// NULL return value
-		var tmp = errors.New(goErr.(playground.ToyError))
+		var tmp = types.NewError(goErr.(playground.ToyError))
 		*cError = C.int(objects.ErrorAdd(tmp))
 
 		return nil

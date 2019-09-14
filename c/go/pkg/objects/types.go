@@ -8,14 +8,14 @@
 package objects
 
 import (
-	"github.com/virtblocks/virtblocks/c/go/pkg/errors"
+	"github.com/virtblocks/virtblocks/c/go/pkg/types"
 	"sync"
 )
 
 var errorObjectsLock sync.RWMutex
-var errorObjects = make([]*errors.Error, 1)
+var errorObjects = make([]*types.Error, 1)
 
-func ErrorAdd(err *errors.Error) int {
+func ErrorAdd(err *types.Error) int {
 	errorObjectsLock.Lock()
 	defer errorObjectsLock.Unlock()
 
@@ -23,7 +23,7 @@ func ErrorAdd(err *errors.Error) int {
 	return len(errorObjects) - 1
 }
 
-func ErrorGet(ref int) *errors.Error {
+func ErrorGet(ref int) *types.Error {
 	errorObjectsLock.RLock()
 	defer errorObjectsLock.RUnlock()
 

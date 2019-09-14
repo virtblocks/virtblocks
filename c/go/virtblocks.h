@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 #include "include/alloc.h"
-#include "include/error.h"
+#include "include/types/main.h"
 
 #include "include/command/main.h"
 #include "include/devices/main.h"

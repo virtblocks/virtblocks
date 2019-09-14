@@ -5,7 +5,7 @@
 // This software is distributed under the terms of the MIT License.
 // See the LICENSE file in the top level directory for details.
 
-package errors
+package types
 
 import (
 	"github.com/virtblocks/virtblocks/go/native/pkg/playground"
@@ -22,7 +22,7 @@ type Error struct {
 	native error
 }
 
-func New(err error) *Error {
+func NewError(err error) *Error {
 	return &Error{native: err}
 }
 
