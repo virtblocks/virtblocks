@@ -36,3 +36,28 @@ func ErrorDel(ref int) {
 
 	errorObjects[ref] = nil
 }
+
+var arrayObjectsLock sync.RWMutex
+var arrayObjects = make([]*types.Array, 1)
+
+func ArrayAdd(err *types.Array) int {
+	arrayObjectsLock.Lock()
+	defer arrayObjectsLock.Unlock()
+
+	arrayObjects = append(arrayObjects, err)
+	return len(arrayObjects) - 1
+}
+
+func ArrayGet(ref int) *types.Array {
+	arrayObjectsLock.RLock()
+	defer arrayObjectsLock.RUnlock()
+
+	return arrayObjects[ref]
+}
+
+func ArrayDel(ref int) {
+	arrayObjectsLock.Lock()
+	defer arrayObjectsLock.Unlock()
+
+	arrayObjects[ref] = nil
+}

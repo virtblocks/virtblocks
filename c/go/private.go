@@ -19,6 +19,14 @@ error_wrap(int goPtr)
     return self;
 }
 
+VirtBlocksArray*
+array_wrap(int goPtr)
+{
+    VirtBlocksArray *self = malloc(sizeof(VirtBlocksArray));
+    self->goPtr = goPtr;
+    return self;
+}
+
 VirtBlocksPlaygroundToy*
 playground_toy_wrap(int goPtr)
 {

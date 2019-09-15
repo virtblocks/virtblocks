@@ -8,4 +8,5 @@
 
 #pragma once
 
+#include "array.h"
 #include "error.h"

@@ -16,6 +16,12 @@ struct _VirtBlocksError {
 
 VirtBlocksError* error_wrap(int goPtr);
 
+struct _VirtBlocksArray {
+    int goPtr;
+};
+
+VirtBlocksArray* array_wrap(int goPtr);
+
 struct _VirtBlocksPlaygroundToy {
     int goPtr;
 };
