@@ -40,28 +40,5 @@ virtblocks_error_get_message(const VirtBlocksError *error)
     assert(error != NULL);
     return error_get_message(error->goPtr);
 }
-
-void
-virtblocks_array_free(VirtBlocksArray *array)
-{
-    if (array == NULL) return;
-    array_free(array->goPtr);
-    free(array);
-}
-
-uint32_t
-virtblocks_array_get_length(const VirtBlocksArray *array)
-{
-    assert(array != NULL);
-    return array_get_length(array->goPtr);
-}
-
-const void*
-virtblocks_array_get_item(const VirtBlocksArray *array,
-                          uint32_t index)
-{
-    assert(array != NULL);
-    return array_get_item(array->goPtr, index);
-}
 */
 import "C"
