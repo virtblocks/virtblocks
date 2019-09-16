@@ -9,7 +9,7 @@
 #pragma once
 
 typedef enum {
-    VIRTBLOCKS_PLAYGROUND_TOY_ERROR_CALLBACK_FAILED,
+    VIRTBLOCKS_PLAYGROUND_TOY_ERROR_CALLBACK_FAILED = 0,
 } VirtBlocksPlaygroundToyError;
 
 typedef struct _VirtBlocksPlaygroundToy VirtBlocksPlaygroundToy;
