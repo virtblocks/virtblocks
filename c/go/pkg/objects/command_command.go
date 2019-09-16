@@ -15,22 +15,22 @@ import (
 var commandObjectsLock sync.RWMutex
 var commandObjects = make([]*command.Command, 1)
 
-func CommandAdd(command *command.Command) int {
+func CommandAdd(command *command.Command) uint {
 	commandObjectsLock.Lock()
 	defer commandObjectsLock.Unlock()
 
 	commandObjects = append(commandObjects, command)
-	return len(commandObjects) - 1
+	return uint(len(commandObjects) - 1)
 }
 
-func CommandGet(ref int) *command.Command {
+func CommandGet(ref uint) *command.Command {
 	commandObjectsLock.RLock()
 	defer commandObjectsLock.RUnlock()
 
 	return commandObjects[ref]
 }
 
-func CommandDel(ref int) {
+func CommandDel(ref uint) {
 	commandObjectsLock.Lock()
 	defer commandObjectsLock.Unlock()
 

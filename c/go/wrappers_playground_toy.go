@@ -41,7 +41,7 @@ virtblocks_playground_toy_run(const VirtBlocksPlaygroundToy *toy,
                               const char *ext,
                               VirtBlocksError **error)
 {
-    int goPtr;
+    unsigned int goPtr;
     char *ret;
 
     assert(toy != NULL);

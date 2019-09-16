@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksDevicesMemballoon*
-devices_memballoon_wrap(int goPtr)
+devices_memballoon_wrap(unsigned int goPtr)
 {
     VirtBlocksDevicesMemballoon *self = malloc(sizeof(VirtBlocksDevicesMemballoon));
     self->goPtr = goPtr;

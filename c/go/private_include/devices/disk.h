@@ -9,7 +9,7 @@
 #pragma once
 
 struct _VirtBlocksDevicesDisk {
-    int goPtr;
+    unsigned int goPtr;
 };
 
-VirtBlocksDevicesDisk* devices_disk_wrap(int goPtr);
+VirtBlocksDevicesDisk* devices_disk_wrap(unsigned int goPtr);

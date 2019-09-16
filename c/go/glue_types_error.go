@@ -14,24 +14,24 @@ import (
 )
 
 //export error_free
-func error_free(cError C.int) {
-	objects.ErrorDel(int(cError))
+func error_free(cError C.uint) {
+	objects.ErrorDel(uint(cError))
 }
 
 //export error_get_domain
-func error_get_domain(cError C.int) C.int {
-	var goError = objects.ErrorGet(int(cError))
-	return C.int(goError.Domain())
+func error_get_domain(cError C.uint) C.uint {
+	var goError = objects.ErrorGet(uint(cError))
+	return C.uint(goError.Domain())
 }
 
 //export error_get_code
-func error_get_code(cError C.int) C.int {
-	var goError = objects.ErrorGet(int(cError))
-	return C.int(goError.Code())
+func error_get_code(cError C.uint) C.uint {
+	var goError = objects.ErrorGet(uint(cError))
+	return C.uint(goError.Code())
 }
 
 //export error_get_message
-func error_get_message(cError C.int) *C.char {
-	var goError = objects.ErrorGet(int(cError))
+func error_get_message(cError C.uint) *C.char {
+	var goError = objects.ErrorGet(uint(cError))
 	return C.CString(goError.Message())
 }

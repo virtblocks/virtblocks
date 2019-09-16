@@ -9,10 +9,10 @@
 #pragma once
 
 struct _VirtBlocksPlaygroundToy {
-    int goPtr;
+    unsigned int goPtr;
 };
 
-VirtBlocksPlaygroundToy *playground_toy_wrap(int goPtr);
+VirtBlocksPlaygroundToy *playground_toy_wrap(unsigned int goPtr);
 
 bool playground_toy_callback_call(VirtBlocksPlaygroundToyCallback callback,
                                   const VirtBlocksPlaygroundToy *toy,

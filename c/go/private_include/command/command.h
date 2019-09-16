@@ -9,7 +9,7 @@
 #pragma once
 
 struct _VirtBlocksCommand {
-    int goPtr;
+    unsigned int goPtr;
 };
 
-VirtBlocksCommand* command_wrap(int goPtr);
+VirtBlocksCommand* command_wrap(unsigned int goPtr);

@@ -15,22 +15,22 @@ import (
 var errorObjectsLock sync.RWMutex
 var errorObjects = make([]*types.Error, 1)
 
-func ErrorAdd(err *types.Error) int {
+func ErrorAdd(err *types.Error) uint {
 	errorObjectsLock.Lock()
 	defer errorObjectsLock.Unlock()
 
 	errorObjects = append(errorObjects, err)
-	return len(errorObjects) - 1
+	return uint(len(errorObjects) - 1)
 }
 
-func ErrorGet(ref int) *types.Error {
+func ErrorGet(ref uint) *types.Error {
 	errorObjectsLock.RLock()
 	defer errorObjectsLock.RUnlock()
 
 	return errorObjects[ref]
 }
 
-func ErrorDel(ref int) {
+func ErrorDel(ref uint) {
 	errorObjectsLock.Lock()
 	defer errorObjectsLock.Unlock()
 

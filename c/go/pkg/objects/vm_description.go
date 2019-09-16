@@ -15,22 +15,22 @@ import (
 var vmDescriptionObjectsLock sync.RWMutex
 var vmDescriptionObjects = make([]*vm.Description, 1)
 
-func VmDescriptionAdd(desc *vm.Description) int {
+func VmDescriptionAdd(desc *vm.Description) uint {
 	vmDescriptionObjectsLock.Lock()
 	defer vmDescriptionObjectsLock.Unlock()
 
 	vmDescriptionObjects = append(vmDescriptionObjects, desc)
-	return len(vmDescriptionObjects) - 1
+	return uint(len(vmDescriptionObjects) - 1)
 }
 
-func VmDescriptionGet(ref int) *vm.Description {
+func VmDescriptionGet(ref uint) *vm.Description {
 	vmDescriptionObjectsLock.RLock()
 	defer vmDescriptionObjectsLock.RUnlock()
 
 	return vmDescriptionObjects[ref]
 }
 
-func VmDescriptionDel(ref int) {
+func VmDescriptionDel(ref uint) {
 	vmDescriptionObjectsLock.Lock()
 	defer vmDescriptionObjectsLock.Unlock()
 

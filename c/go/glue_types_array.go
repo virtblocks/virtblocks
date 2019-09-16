@@ -15,18 +15,18 @@ import (
 )
 
 //export array_free
-func array_free(cArray C.int) {
-	objects.ArrayDel(int(cArray))
+func array_free(cArray C.uint) {
+	objects.ArrayDel(uint(cArray))
 }
 
 //export array_get_length
-func array_get_length(cArray C.int) C.uint {
-	var goArray = objects.ArrayGet(int(cArray))
+func array_get_length(cArray C.uint) C.uint {
+	var goArray = objects.ArrayGet(uint(cArray))
 	return C.uint(goArray.Length())
 }
 
 //export array_get_item
-func array_get_item(cArray C.int, cIndex C.uint) unsafe.Pointer {
-	var goArray = objects.ArrayGet(int(cArray))
+func array_get_item(cArray C.uint, cIndex C.uint) unsafe.Pointer {
+	var goArray = objects.ArrayGet(uint(cArray))
 	return goArray.Item(uint(cIndex))
 }

@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksDevicesDisk*
-devices_disk_wrap(int goPtr)
+devices_disk_wrap(unsigned int goPtr)
 {
     VirtBlocksDevicesDisk *self = malloc(sizeof(VirtBlocksDevicesDisk));
     self->goPtr = goPtr;

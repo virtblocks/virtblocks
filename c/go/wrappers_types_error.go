@@ -27,7 +27,7 @@ virtblocks_error_get_domain(const VirtBlocksError *error)
     return error_get_domain(error->goPtr);
 }
 
-uint32_t
+unsigned int
 virtblocks_error_get_code(const VirtBlocksError *error)
 {
     assert(error != NULL);

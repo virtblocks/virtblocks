@@ -38,8 +38,8 @@ VirtBlocksArray*
 virtblocks_devices_disk_get_qemu_commandline(VirtBlocksDevicesDisk *disk,
                                              VirtBlocksError **error)
 {
-    int goPtr;
-    int ret;
+    unsigned int goPtr;
+    unsigned int ret;
 
     assert(disk != NULL);
     assert(error != NULL);

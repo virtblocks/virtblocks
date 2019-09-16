@@ -19,43 +19,43 @@ import (
 )
 
 //export vm_description_new
-func vm_description_new() C.int {
+func vm_description_new() C.uint {
 	var goDescription = vm.NewDescription()
-	return C.int(objects.VmDescriptionAdd(goDescription))
+	return C.uint(objects.VmDescriptionAdd(goDescription))
 }
 
 //export vm_description_free
-func vm_description_free(cDescription C.int) {
-	objects.VmDescriptionDel(int(cDescription))
+func vm_description_free(cDescription C.uint) {
+	objects.VmDescriptionDel(uint(cDescription))
 }
 
 //export vm_description_set_emulator
-func vm_description_set_emulator(cDescription C.int, cEmulator *C.char) {
+func vm_description_set_emulator(cDescription C.uint, cEmulator *C.char) {
 	if cEmulator == nil {
 		panic("cEmulator == nil")
 	}
-	var goDescription = objects.VmDescriptionGet(int(cDescription))
+	var goDescription = objects.VmDescriptionGet(uint(cDescription))
 	var goEmulator = C.GoString(cEmulator)
 	goDescription.SetEmulator(goEmulator)
 }
 
 //export vm_description_set_disk
-func vm_description_set_disk(cDescription C.int, cDisk C.int) {
-	var goDescription = objects.VmDescriptionGet(int(cDescription))
-	var goDisk = objects.DevicesDiskGet(int(cDisk))
+func vm_description_set_disk(cDescription C.uint, cDisk C.uint) {
+	var goDescription = objects.VmDescriptionGet(uint(cDescription))
+	var goDisk = objects.DevicesDiskGet(uint(cDisk))
 	goDescription.SetDisk(goDisk)
 }
 
 //export vm_description_set_memory
-func vm_description_set_memory(cDescription C.int, cMemory C.int) {
-	var goDescription = objects.VmDescriptionGet(int(cDescription))
-	var goMemory = int(cMemory)
+func vm_description_set_memory(cDescription C.uint, cMemory C.uint) {
+	var goDescription = objects.VmDescriptionGet(uint(cDescription))
+	var goMemory = uint(cMemory)
 	goDescription.SetMemory(goMemory)
 }
 
 //export vm_description_get_qemu_commandline
-func vm_description_get_qemu_commandline(cDescription C.int, cError *C.int) C.int {
-	var goDescription = objects.VmDescriptionGet(int(cDescription))
+func vm_description_get_qemu_commandline(cDescription C.uint, cError *C.uint) C.uint {
+	var goDescription = objects.VmDescriptionGet(uint(cDescription))
 
 	var goRet, goErr = goDescription.QemuCommandLine()
 
@@ -68,10 +68,10 @@ func vm_description_get_qemu_commandline(cDescription C.int, cError *C.int) C.in
 		}
 		var tmp = types.NewArray(goTmp)
 
-		return C.int(objects.ArrayAdd(tmp))
+		return C.uint(objects.ArrayAdd(tmp))
 	} else {
 		var tmp = types.NewError(goErr)
-		*cError = C.int(objects.ErrorAdd(tmp))
+		*cError = C.uint(objects.ErrorAdd(tmp))
 
 		return 0
 	}

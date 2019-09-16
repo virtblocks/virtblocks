@@ -9,7 +9,7 @@
 #pragma once
 
 struct _VirtBlocksError {
-    int goPtr;
+    unsigned int goPtr;
 };
 
-VirtBlocksError* error_wrap(int goPtr);
+VirtBlocksError* error_wrap(unsigned int goPtr);

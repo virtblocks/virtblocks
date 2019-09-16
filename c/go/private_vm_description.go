@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksVmDescription*
-vm_description_wrap(int goPtr)
+vm_description_wrap(unsigned int goPtr)
 {
     VirtBlocksVmDescription *self = malloc(sizeof(VirtBlocksVmDescription));
     self->goPtr = goPtr;

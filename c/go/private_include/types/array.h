@@ -9,7 +9,7 @@
 #pragma once
 
 struct _VirtBlocksArray {
-    int goPtr;
+    unsigned int goPtr;
 };
 
-VirtBlocksArray* array_wrap(int goPtr);
+VirtBlocksArray* array_wrap(unsigned int goPtr);

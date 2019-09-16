@@ -19,7 +19,7 @@ import (
 )
 
 //export playground_toy_new
-func playground_toy_new(cBase *C.char, cFilter C.VirtBlocksPlaygroundToyCallback, data unsafe.Pointer, dataFree C.VirtBlocksPlaygroundToyCallbackDataFree) C.int {
+func playground_toy_new(cBase *C.char, cFilter C.VirtBlocksPlaygroundToyCallback, data unsafe.Pointer, dataFree C.VirtBlocksPlaygroundToyCallbackDataFree) C.uint {
 	if cBase == nil {
 		panic("cBase == nil")
 	}
@@ -40,7 +40,7 @@ func playground_toy_new(cBase *C.char, cFilter C.VirtBlocksPlaygroundToyCallback
 
 		// Create a new C object wrapping the object reference obtained
 		// above
-		var cToy = C.playground_toy_wrap(C.int(goPtr))
+		var cToy = C.playground_toy_wrap(C.uint(goPtr))
 
 		// Extract all information about the C callback we're about to
 		// call from the extra data
@@ -55,13 +55,13 @@ func playground_toy_new(cBase *C.char, cFilter C.VirtBlocksPlaygroundToyCallback
 	var goToy = playground.NewToy(goBase, goFilter)
 
 	// Register the object and return a reference to it
-	return C.int(objects.PlaygroundToyAdd(goToy, goToyExtra))
+	return C.uint(objects.PlaygroundToyAdd(goToy, goToyExtra))
 }
 
 //export playground_toy_free
-func playground_toy_free(cToy C.int) {
+func playground_toy_free(cToy C.uint) {
 	// Look up the extra data for the object
-	var _, goExtra = objects.PlaygroundToyGet(int(cToy))
+	var _, goExtra = objects.PlaygroundToyGet(uint(cToy))
 	var cData = goExtra.Data()
 	var cDataFree = C.VirtBlocksPlaygroundToyCallbackDataFree(goExtra.DataFree())
 
@@ -73,12 +73,12 @@ func playground_toy_free(cToy C.int) {
 	}
 
 	// Make the object inaccessible from C
-	objects.PlaygroundToyDel(int(cToy))
+	objects.PlaygroundToyDel(uint(cToy))
 }
 
 //export playground_toy_get_base
-func playground_toy_get_base(cToy C.int) *C.char {
-	var goToy, _ = objects.PlaygroundToyGet(int(cToy))
+func playground_toy_get_base(cToy C.uint) *C.char {
+	var goToy, _ = objects.PlaygroundToyGet(uint(cToy))
 
 	var goRet = goToy.Base()
 
@@ -86,11 +86,11 @@ func playground_toy_get_base(cToy C.int) *C.char {
 }
 
 //export playground_toy_run
-func playground_toy_run(cToy C.int, cExt *C.char, cError *C.int) *C.char {
+func playground_toy_run(cToy C.uint, cExt *C.char, cError *C.uint) *C.char {
 	if cExt == nil {
 		panic("cExt == nil")
 	}
-	var goToy, _ = objects.PlaygroundToyGet(int(cToy))
+	var goToy, _ = objects.PlaygroundToyGet(uint(cToy))
 	var goExt = C.GoString(cExt)
 
 	var goRet, goErr = goToy.Run(goExt)
@@ -106,7 +106,7 @@ func playground_toy_run(cToy C.int, cExt *C.char, cError *C.int) *C.char {
 		// to a C-accessible types.Error and return it along with a
 		// NULL return value
 		var tmp = types.NewError(goErr.(playground.ToyError))
-		*cError = C.int(objects.ErrorAdd(tmp))
+		*cError = C.uint(objects.ErrorAdd(tmp))
 
 		return nil
 	}

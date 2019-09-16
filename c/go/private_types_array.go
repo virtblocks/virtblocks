@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksArray*
-array_wrap(int goPtr)
+array_wrap(unsigned int goPtr)
 {
     VirtBlocksArray *self = malloc(sizeof(VirtBlocksArray));
     self->goPtr = goPtr;

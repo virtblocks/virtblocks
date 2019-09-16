@@ -16,7 +16,7 @@ void virtblocks_vm_description_free(VirtBlocksVmDescription *description);
 void virtblocks_vm_description_set_emulator(VirtBlocksVmDescription *description,
                                             const char *emulator);
 void virtblocks_vm_description_set_memory(VirtBlocksVmDescription *description,
-                                          int memory);
+                                          unsigned int memory);
 void virtblocks_vm_description_set_disk(VirtBlocksVmDescription *description,
                                         VirtBlocksDevicesDisk *disk);
 VirtBlocksArray* virtblocks_vm_description_get_qemu_commandline(VirtBlocksVmDescription *description,

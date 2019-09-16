@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksPlaygroundToy*
-playground_toy_wrap(int goPtr)
+playground_toy_wrap(unsigned int goPtr)
 {
     VirtBlocksPlaygroundToy *self = malloc(sizeof(VirtBlocksPlaygroundToy));
     self->goPtr = goPtr;

@@ -15,22 +15,22 @@ import (
 var arrayObjectsLock sync.RWMutex
 var arrayObjects = make([]*types.Array, 1)
 
-func ArrayAdd(err *types.Array) int {
+func ArrayAdd(err *types.Array) uint {
 	arrayObjectsLock.Lock()
 	defer arrayObjectsLock.Unlock()
 
 	arrayObjects = append(arrayObjects, err)
-	return len(arrayObjects) - 1
+	return uint(len(arrayObjects) - 1)
 }
 
-func ArrayGet(ref int) *types.Array {
+func ArrayGet(ref uint) *types.Array {
 	arrayObjectsLock.RLock()
 	defer arrayObjectsLock.RUnlock()
 
 	return arrayObjects[ref]
 }
 
-func ArrayDel(ref int) {
+func ArrayDel(ref uint) {
 	arrayObjectsLock.Lock()
 	defer arrayObjectsLock.Unlock()
 

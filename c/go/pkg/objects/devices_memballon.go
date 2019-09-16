@@ -15,22 +15,22 @@ import (
 var devicesMemballoonObjectsLock sync.RWMutex
 var devicesMemballoonObjects = make([]*devices.Memballoon, 1)
 
-func DevicesMemballoonAdd(memballoon *devices.Memballoon) int {
+func DevicesMemballoonAdd(memballoon *devices.Memballoon) uint {
 	devicesMemballoonObjectsLock.Lock()
 	defer devicesMemballoonObjectsLock.Unlock()
 
 	devicesMemballoonObjects = append(devicesMemballoonObjects, memballoon)
-	return len(devicesMemballoonObjects) - 1
+	return uint(len(devicesMemballoonObjects) - 1)
 }
 
-func DevicesMemballoonGet(ref int) *devices.Memballoon {
+func DevicesMemballoonGet(ref uint) *devices.Memballoon {
 	devicesMemballoonObjectsLock.RLock()
 	defer devicesMemballoonObjectsLock.RUnlock()
 
 	return devicesMemballoonObjects[ref]
 }
 
-func DevicesMemballoonDel(ref int) {
+func DevicesMemballoonDel(ref uint) {
 	devicesMemballoonObjectsLock.Lock()
 	defer devicesMemballoonObjectsLock.Unlock()
 

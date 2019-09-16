@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksCommand*
-command_wrap(int goPtr)
+command_wrap(unsigned int goPtr)
 {
     VirtBlocksCommand *self = malloc(sizeof(VirtBlocksCommand));
     self->goPtr = goPtr;

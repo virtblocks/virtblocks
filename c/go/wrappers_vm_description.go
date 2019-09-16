@@ -36,7 +36,7 @@ virtblocks_vm_description_set_emulator(VirtBlocksVmDescription *desc,
 
 void
 virtblocks_vm_description_set_memory(VirtBlocksVmDescription *desc,
-                                     int memory)
+                                     unsigned int memory)
 {
     assert(desc != NULL);
     vm_description_set_memory(desc->goPtr, memory);
@@ -55,8 +55,8 @@ VirtBlocksArray*
 virtblocks_vm_description_get_qemu_commandline(VirtBlocksVmDescription *desc,
                                                VirtBlocksError **error)
 {
-    int goPtr;
-    int ret;
+    unsigned int goPtr;
+    unsigned int ret;
 
     assert(desc != NULL);
     assert(error != NULL);

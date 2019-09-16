@@ -18,7 +18,7 @@ typedef struct _VirtBlocksError VirtBlocksError;
 void virtblocks_error_free(VirtBlocksError *error);
 
 VirtBlocksErrorDomain virtblocks_error_get_domain(const VirtBlocksError *error);
-uint32_t virtblocks_error_get_code(const VirtBlocksError *error);
+unsigned int virtblocks_error_get_code(const VirtBlocksError *error);
 char *virtblocks_error_get_message(const VirtBlocksError *error);
 
 VIRTBLOCKS_DEFINE_AUTOPTR_FUNC(VirtBlocksError,

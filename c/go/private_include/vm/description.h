@@ -9,7 +9,7 @@
 #pragma once
 
 struct _VirtBlocksVmDescription {
-    int goPtr;
+    unsigned int goPtr;
 };
 
-VirtBlocksVmDescription* vm_description_wrap(int goPtr);
+VirtBlocksVmDescription* vm_description_wrap(unsigned int goPtr);

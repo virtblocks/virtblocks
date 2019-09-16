@@ -15,24 +15,24 @@ import (
 )
 
 //export command_new
-func command_new(cProg *C.char) C.int {
+func command_new(cProg *C.char) C.uint {
 	if cProg == nil {
 		panic("cProg == nil")
 	}
 	var goProg = C.GoString(cProg)
 
 	var goCommand = command.NewCommand(goProg)
-	return C.int(objects.CommandAdd(goCommand))
+	return C.uint(objects.CommandAdd(goCommand))
 }
 
 //export command_free
-func command_free(cCommand C.int) {
-	objects.CommandDel(int(cCommand))
+func command_free(cCommand C.uint) {
+	objects.CommandDel(uint(cCommand))
 }
 
 //export command_spawn
-func command_spawn(cCommand C.int) C.int {
-	var goCommand = objects.CommandGet(int(cCommand))
+func command_spawn(cCommand C.uint) C.int {
+	var goCommand = objects.CommandGet(uint(cCommand))
 	err := goCommand.Spawn()
 	if err != nil {
 		panic("error handling not implemented")
@@ -41,8 +41,8 @@ func command_spawn(cCommand C.int) C.int {
 }
 
 //export command_wait
-func command_wait(cCommand C.int) C.int {
-	var goCommand = objects.CommandGet(int(cCommand))
+func command_wait(cCommand C.uint) C.int {
+	var goCommand = objects.CommandGet(uint(cCommand))
 	err := goCommand.Wait()
 	if err != nil {
 		panic("error handling not implemented")

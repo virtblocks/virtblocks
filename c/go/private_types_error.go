@@ -12,7 +12,7 @@ package main
 #include "private.h"
 
 VirtBlocksError*
-error_wrap(int goPtr)
+error_wrap(unsigned int goPtr)
 {
     VirtBlocksError *self = malloc(sizeof(VirtBlocksError));
     self->goPtr = goPtr;

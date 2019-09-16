@@ -55,18 +55,18 @@ var playgroundToyObjects = make([]*playgroundToyObject, 1)
 
 // Register a playground.Toy (and the corresponding extra data) so that
 // it's later accessible from C
-func PlaygroundToyAdd(toy *playground.Toy, extra *PlaygroundToyExtra) int {
+func PlaygroundToyAdd(toy *playground.Toy, extra *PlaygroundToyExtra) uint {
 	playgroundToyObjectsLock.Lock()
 	defer playgroundToyObjectsLock.Unlock()
 
 	var object = &playgroundToyObject{ptr: toy, extra: extra}
 	playgroundToyObjects = append(playgroundToyObjects, object)
-	return len(playgroundToyObjects) - 1
+	return uint(len(playgroundToyObjects) - 1)
 }
 
 // Look up a playground.Toy (and the corresponding extra data) given
 // a reference. This basically converts a C object to a Go object
-func PlaygroundToyGet(ref int) (*playground.Toy, *PlaygroundToyExtra) {
+func PlaygroundToyGet(ref uint) (*playground.Toy, *PlaygroundToyExtra) {
 	playgroundToyObjectsLock.RLock()
 	defer playgroundToyObjectsLock.RUnlock()
 
@@ -76,13 +76,13 @@ func PlaygroundToyGet(ref int) (*playground.Toy, *PlaygroundToyExtra) {
 
 // Return the reference for a specific playground.Toy. This is usually only
 // necessary when callbacks crossing the language boundary are involved
-func PlaygroundToyRef(toy *playground.Toy) int {
+func PlaygroundToyRef(toy *playground.Toy) uint {
 	playgroundToyObjectsLock.RLock()
 	defer playgroundToyObjectsLock.RUnlock()
 
 	for ref, object := range playgroundToyObjects {
 		if object != nil && object.ptr == toy {
-			return ref
+			return uint(ref)
 		}
 	}
 	panic("Pointer not found")
@@ -90,7 +90,7 @@ func PlaygroundToyRef(toy *playground.Toy) int {
 
 // Make a playground.Toy no longer accessible from C, and cause it to
 // be garbage collected
-func PlaygroundToyDel(ref int) {
+func PlaygroundToyDel(ref uint) {
 	playgroundToyObjectsLock.Lock()
 	defer playgroundToyObjectsLock.Unlock()
 

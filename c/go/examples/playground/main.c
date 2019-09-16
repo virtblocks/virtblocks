@@ -78,7 +78,7 @@ main(int argc,
         { baz_toy, "quux" },
         { NULL, NULL },
     };
-    int i = 0;
+    unsigned int i = 0;
 
     while (true) {
         VIRTBLOCKS_AUTOPTR(VirtBlocksError) err = NULL;

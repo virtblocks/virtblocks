@@ -20,7 +20,7 @@ virtblocks_array_free(VirtBlocksArray *array)
     free(array);
 }
 
-uint32_t
+unsigned int
 virtblocks_array_get_length(const VirtBlocksArray *array)
 {
     assert(array != NULL);
@@ -29,7 +29,7 @@ virtblocks_array_get_length(const VirtBlocksArray *array)
 
 const void*
 virtblocks_array_get_item(const VirtBlocksArray *array,
-                          uint32_t index)
+                          unsigned int index)
 {
     assert(array != NULL);
     return array_get_item(array->goPtr, index);

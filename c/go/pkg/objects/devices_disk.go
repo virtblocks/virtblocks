@@ -15,22 +15,22 @@ import (
 var devicesDiskObjectsLock sync.RWMutex
 var devicesDiskObjects = make([]*devices.Disk, 1)
 
-func DevicesDiskAdd(disk *devices.Disk) int {
+func DevicesDiskAdd(disk *devices.Disk) uint {
 	devicesDiskObjectsLock.Lock()
 	defer devicesDiskObjectsLock.Unlock()
 
 	devicesDiskObjects = append(devicesDiskObjects, disk)
-	return len(devicesDiskObjects) - 1
+	return uint(len(devicesDiskObjects) - 1)
 }
 
-func DevicesDiskGet(ref int) *devices.Disk {
+func DevicesDiskGet(ref uint) *devices.Disk {
 	devicesDiskObjectsLock.RLock()
 	defer devicesDiskObjectsLock.RUnlock()
 
 	return devicesDiskObjects[ref]
 }
 
-func DevicesDiskDel(ref int) {
+func DevicesDiskDel(ref uint) {
 	devicesDiskObjectsLock.Lock()
 	defer devicesDiskObjectsLock.Unlock()
 

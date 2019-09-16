@@ -11,7 +11,7 @@ import (
 	"github.com/virtblocks/virtblocks/go/native/pkg/playground"
 )
 
-type ErrorDomain int
+type ErrorDomain uint
 
 const (
 	GenericError ErrorDomain = iota
@@ -39,12 +39,12 @@ func (self *Error) Domain() ErrorDomain {
 	return domain
 }
 
-func (self *Error) Code() int {
-	var code int
+func (self *Error) Code() uint {
+	var code uint
 
 	switch self.native.(type) {
 	case playground.ToyError:
-		code = int(self.native.(playground.ToyError))
+		code = uint(self.native.(playground.ToyError))
 	default:
 		code = 0
 	}
