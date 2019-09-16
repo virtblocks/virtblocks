@@ -1,5 +1,5 @@
-export LIBNAME = virtblocks_c_rust
-export LDFLAGS = -pthread -lm -ldl
+LIBNAME = virtblocks_c_rust
+LDFLAGS = -pthread -lm -ldl
 
 all: build
 
@@ -36,9 +36,7 @@ run-examples: build
 	for example in $$(ls examples/); do \
 	( \
 		cd examples/$$example || exit 1; \
-		$(MAKE) || exit 1; \
-		./$$example || exit 1; \
-		$(MAKE) clean || exit 1; \
+		$(MAKE) run-examples || exit 1; \
 	) || exit 1; \
 	done
 

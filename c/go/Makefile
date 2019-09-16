@@ -1,5 +1,5 @@
-export LIBNAME = virtblocks_c_go
-export LDFLAGS = -pthread
+LIBNAME = virtblocks_c_go
+LDFLAGS = -pthread
 
 all: build
 
@@ -32,9 +32,7 @@ run-examples: build
 	for example in $$(ls examples/); do \
 	( \
 		cd examples/$$example || exit 1; \
-		$(MAKE) || exit 1; \
-		./$$example || exit 1; \
-		$(MAKE) clean || exit 1; \
+		$(MAKE) run-examples || exit 1; \
 	) || exit 1; \
 	done
 

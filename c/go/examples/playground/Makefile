@@ -1,4 +1,6 @@
 EXAMPLE = playground
+LIBNAME = virtblocks_c_go
+LDFLAGS = -pthread
 
 all: build
 
@@ -9,4 +11,9 @@ build:
 clean:
 	rm -f *.o $(EXAMPLE)
 
-.PHONY: build clean
+run-examples:
+	$(MAKE) build
+	./$(EXAMPLE)
+	$(MAKE) clean
+
+.PHONY: build clean run-examples
