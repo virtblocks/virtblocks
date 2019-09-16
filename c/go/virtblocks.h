@@ -14,9 +14,9 @@
 #include <stdlib.h>
 
 #include "include/alloc.h"
-#include "include/types/main.h"
+#include "include/types/all.h"
 
-#include "include/command/main.h"
-#include "include/devices/main.h"
-#include "include/playground/main.h"
-#include "include/vm/main.h"
+#include "include/command/all.h"
+#include "include/devices/all.h"
+#include "include/playground/all.h"
+#include "include/vm/all.h"
