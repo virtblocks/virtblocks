@@ -1,10 +1,12 @@
+EXAMPLE = vm-description
+
 all: build
 
 build:
 	$(CC) -I../../ -o main.o -c main.c
-	$(CC) -o vm-description main.o -L../../.libs/ -l$(LIBNAME) $(LDFLAGS)
+	$(CC) -o $(EXAMPLE) main.o -L../../.libs/ -l$(LIBNAME) $(LDFLAGS)
 
 clean:
-	rm -f *.o vm-description
+	rm -f *.o $(EXAMPLE)
 
 .PHONY: build clean
