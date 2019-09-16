@@ -7,7 +7,7 @@
 
 package devices
 
-type MemballoonModel int
+type MemballoonModel uint
 
 const (
 	MemballoonModelNone MemballoonModel = iota

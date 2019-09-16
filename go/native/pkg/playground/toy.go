@@ -11,7 +11,7 @@ const (
 	CallbackFailed = iota
 )
 
-type ToyError int
+type ToyError uint
 
 func (self ToyError) Error() string {
 	var ret string

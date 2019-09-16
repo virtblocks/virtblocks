@@ -15,7 +15,7 @@ import (
 
 type Description struct {
 	emulator string
-	memory   int
+	memory   uint
 	disk     *devices.Disk
 }
 
@@ -30,7 +30,7 @@ func (self *Description) SetEmulator(emulator string) *Description {
 	return self
 }
 
-func (self *Description) SetMemory(memory int) *Description {
+func (self *Description) SetMemory(memory uint) *Description {
 	self.memory = memory
 	return self
 }
@@ -44,7 +44,7 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 	var ret = []string{
 		self.emulator,
 		"-M",
-		strconv.Itoa(self.memory),
+		strconv.FormatUint(uint64(self.memory), 10),
 	}
 
 	if self.memory == 0 {
