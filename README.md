@@ -57,12 +57,11 @@ make sense in that context.
 The top-level `Makefile` provides a convenient way to build and test
 all sub-projects at once.
 
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details.
+
 ## License
 
 Virt Blocks is distributed under the terms of the MIT License. See
-the `LICENSE` file for details.
-
-## Contributing
-
-GitHub pull requests and GitLab merge requests are both accepted, but
-the former is preferred because it's hooked up with CI.
+[`LICENSE`](LICENSE) for details.
