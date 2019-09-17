@@ -7,6 +7,8 @@
 
 package main
 
+//#include "virtblocks.h"
+//#include "private.h"
 import "C"
 
 import (
