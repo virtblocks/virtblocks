@@ -6,10 +6,13 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_DEVICES_MEMBALLOON_H_
+#define _PRIVATE_DEVICES_MEMBALLOON_H_
 
 struct _VirtBlocksDevicesMemballoon {
     unsigned int goPtr;
 };
 
 VirtBlocksDevicesMemballoon* devices_memballoon_wrap(unsigned int goPtr);
+
+#endif

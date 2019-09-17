@@ -6,10 +6,13 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_TYPES_ARRAY_H_
+#define _PRIVATE_TYPES_ARRAY_H_
 
 struct _VirtBlocksArray {
     unsigned int goPtr;
 };
 
 VirtBlocksArray* array_wrap(unsigned int goPtr);
+
+#endif

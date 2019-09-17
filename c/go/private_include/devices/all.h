@@ -6,7 +6,10 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_DEVICES_H_
+#define _PRIVATE_DEVICES_H_
 
 #include "disk.h"
 #include "memballoon.h"
+
+#endif

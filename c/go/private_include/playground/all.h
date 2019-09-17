@@ -6,6 +6,9 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_PLAYGROUND_H_
+#define _PRIVATE_PLAYGROUND_H_
 
 #include "toy.h"
+
+#endif

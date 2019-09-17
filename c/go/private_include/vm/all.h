@@ -6,6 +6,9 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_VM_H_
+#define _PRIVATE_VM_H_
 
 #include "description.h"
+
+#endif

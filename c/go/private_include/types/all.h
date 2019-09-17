@@ -6,7 +6,10 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_TYPES_H_
+#define _PRIVATE_TYPES_H_
 
 #include "array.h"
 #include "error.h"
+
+#endif
