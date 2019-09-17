@@ -1,14 +1,8 @@
-language: rust
+language: go
 sudo: false
-cache: cargo
 # We are doing just macOS build because linux builds are tested in prow
 os: osx
-rust:
-  - stable
-  - beta
-  - nightly
 install:
-  - rustup component add rustfmt clippy
   # All go version management in Travis is done using gimme (just like rustup,
   # nvm, etc.) and it is installed by default on travis' images.  We need this
   # to get newer go than 1.11, which is the default in all images in travis.
@@ -19,6 +13,3 @@ script:
   - make test
   - make vet
   - make verify-fmt
-matrix:
-  allow_failures:
-    - rust: nightly
