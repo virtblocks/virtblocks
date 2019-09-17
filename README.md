@@ -13,10 +13,6 @@ integration, and more specifically in seeking out problematic
 scenarios in advance so that we don't get too far down a path before
 finding out it won't work for us.
 
-We're evaluating both Rust and Go at the moment, but in the not too
-distant future we'll have to pick one or the other and start writing
-non-toy code.
-
 ## Requirements
 
 The code needs to be callable from both C and Go.
@@ -29,15 +25,10 @@ are dependencies between some.
 
 Specifically:
 
-* `rust/native` and `go/native`: Virt Blocks, implemented in Rust and
-  Go respectively;
+* `go/`: Virt Blocks, native implementation;
 
-* `c/rust` and `c/go`: C bindings for Virt Blocks, calling to the
-  Rust and Go implementation respectively;
-
-* `go/rust`: Go bindings for the Rust implementation of Virt Blocks.
-
-There is no `rust/go` because that's not currently a requirement.
+* `c/`: C bindings for Virt Blocks, calling to the native Go
+  implementation.
 
 ## Build system
 
