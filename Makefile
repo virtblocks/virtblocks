@@ -15,8 +15,8 @@ vet: vet-subdirs
 # These are the regular targets, the ones which operate on all code
 
 SUBDIRS = \
-	go/native \
-	c/go \
+	go \
+	c \
 	$(NULL)
 
 %-subdirs:
