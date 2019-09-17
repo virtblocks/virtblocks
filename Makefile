@@ -15,11 +15,8 @@ vet: vet-subdirs
 # These are the regular targets, the ones which operate on all code
 
 SUBDIRS = \
-	rust/native \
 	go/native \
-	c/rust \
 	c/go \
-	go/rust \
 	$(NULL)
 
 %-subdirs:
