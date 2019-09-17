@@ -8,7 +8,7 @@
 package main
 
 /*
-#include "libvirtblocks_c_go.h"
+#include "libvirtblocks.h"
 #include "virtblocks.h"
 #include "private.h"
 

@@ -1,4 +1,4 @@
-LIBNAME = virtblocks_c_go
+LIBNAME = virtblocks
 LDFLAGS = -pthread
 
 all: build

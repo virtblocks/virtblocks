@@ -5,6 +5,6 @@
 .idea/
 .libs/
 _obj/
-libvirtblocks_c_go.h
+libvirtblocks.h
 target/
 Cargo.lock
