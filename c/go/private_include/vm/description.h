@@ -6,10 +6,13 @@
  * See the LICENSE file in the top level directory for details.
  */
 
-#pragma once
+#ifndef _PRIVATE_VM_DESCRIPTION_H_
+#define _PRIVATE_VM_DESCRIPTION_H_
 
 struct _VirtBlocksVmDescription {
     unsigned int goPtr;
 };
 
 VirtBlocksVmDescription* vm_description_wrap(unsigned int goPtr);
+
+#endif
