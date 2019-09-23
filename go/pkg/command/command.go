@@ -8,8 +8,6 @@
 package command
 
 import (
-	"bytes"
-	"log"
 	"os"
 	"os/exec"
 )
@@ -18,22 +16,23 @@ type Command struct {
 	Cmd *exec.Cmd
 }
 
-type CommandStdout struct {
-	buf bytes.Buffer
-}
+type CommandStdout struct{}
 
 func (b *CommandStdout) Write(p []byte) (n int, err error) {
-	log.Println(p)
-	return b.buf.Write(p)
+	return os.Stdout.Write(p)
+}
+
+type CommandStderr struct{}
+
+func (b *CommandStderr) Write(p []byte) (n int, err error) {
+	return os.Stderr.Write(p)
 }
 
 func NewCommand(prog string) *Command {
 	c := exec.Command(prog)
 
-	var out CommandStdout
-	c.Stdout = &out
-	var err bytes.Buffer
-	c.Stderr = &err
+	c.Stdout = &CommandStdout{}
+	c.Stderr = &CommandStderr{}
 
 	return &Command{
 		Cmd: c,
@@ -61,7 +60,5 @@ func (self *Command) Id() (int, error) {
 }
 
 func (self *Command) Wait() error {
-	err := self.Cmd.Wait()
-	log.Println(self.Cmd.Stderr)
-	return err
+	return self.Cmd.Wait()
 }
