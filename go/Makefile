@@ -13,7 +13,7 @@ run-examples:
 	for example in $$(ls examples/); do \
 	( \
 		cd examples/$$example || exit 1; \
-		go run main.go || exit 1; \
+		$(MAKE) run-examples || exit 1; \
 	) || exit 1; \
 	done
 
