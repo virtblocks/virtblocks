@@ -54,5 +54,4 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details.
 
 ## License
 
-Virt Blocks is distributed under the terms of the MIT License. See
-[`LICENSE`](LICENSE) for details.
+See [`LICENSE.md`](LICENSE.md) for details.
