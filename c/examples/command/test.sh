@@ -1,6 +1,4 @@
 #!/bin/sh
 
-sleep 1
-echo "foo"
-sleep 1
-echo "bar"
+echo "foo (stdout)"
+echo "bar (stderr)" >&2

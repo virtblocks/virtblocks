@@ -18,7 +18,7 @@ main(int argc,
 
     command = virtblocks_command_new("./test.sh");
     virtblocks_command_spawn(command);
-    sleep(5);
+    sleep(1);
     virtblocks_command_wait(command);
 
     return 0;

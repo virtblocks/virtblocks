@@ -8,8 +8,9 @@
 package main
 
 import (
+	"fmt"
 	"github.com/virtblocks/virtblocks/go/pkg/command"
-	"log"
+	"time"
 )
 
 func main() {
@@ -17,8 +18,11 @@ func main() {
 	command.Spawn()
 	id, err := command.Id()
 	if err == nil {
-		log.Printf("PID: %d", id)
+		fmt.Printf("PID: %d\n", id)
 	}
+	time.Sleep(1 * time.Second)
 	err = command.Wait()
-	log.Printf("Command finished with error: %v", err)
+	if err != nil {
+		fmt.Printf("Command finished with error: %v\n", err)
+	}
 }
