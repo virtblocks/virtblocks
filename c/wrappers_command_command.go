@@ -40,6 +40,27 @@ virtblocks_command_spawn(VirtBlocksCommand *command,
     }
 }
 
+unsigned int
+virtblocks_command_get_id(VirtBlocksCommand *command,
+                          VirtBlocksError **error)
+{
+    unsigned int goPtr;
+    unsigned int ret;
+
+    assert(command != NULL);
+    assert(error != NULL);
+
+    ret = command_get_id(command->goPtr, &goPtr);
+
+    if (goPtr) {
+        *error = error_wrap(goPtr);
+    } else {
+        *error = NULL;
+    }
+
+    return ret;
+}
+
 int
 virtblocks_command_wait(VirtBlocksCommand *command,
                         VirtBlocksError **error)

@@ -11,6 +11,7 @@ main(int argc,
 {
     VIRTBLOCKS_AUTOPTR(VirtBlocksCommand) command = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksError) err = NULL;
+    unsigned int id;
     int rc;
 
     command = virtblocks_command_new("./test.sh");
@@ -26,6 +27,19 @@ main(int argc,
         printf("Command started: err=%s\n", msg);
     } else {
         printf("Command started: err=<nil>\n");
+    }
+
+    id = virtblocks_command_get_id(command, &err);
+    if (err != NULL) {
+        VIRTBLOCKS_AUTOPTR(VirtBlocksError) local_err = NULL;
+        VIRTBLOCKS_AUTOFREE(char *) msg = NULL;
+
+        VIRTBLOCKS_STEAL_PTR(local_err, err);
+        msg = virtblocks_error_get_message(local_err);
+
+        printf("Command ID: id=%d, err=%s\n", id, msg);
+    } else {
+        printf("Command ID: id=%d, err=<nil>\n", id);
     }
 
     sleep(1);

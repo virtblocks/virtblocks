@@ -43,6 +43,22 @@ func command_spawn(cCommand C.uint, cError *C.uint) {
 	}
 }
 
+//export command_get_id
+func command_get_id(cCommand C.uint, cError *C.uint) C.uint {
+	var goCommand = objects.CommandGet(uint(cCommand))
+
+	var goRet, goErr = goCommand.Id()
+
+	if goErr != nil {
+		var tmp = types.NewError(goErr)
+		*cError = C.uint(objects.ErrorAdd(tmp))
+	} else {
+		*cError = 0
+	}
+
+	return C.uint(goRet)
+}
+
 //export command_wait
 func command_wait(cCommand C.uint, cError *C.uint) C.int {
 	var goCommand = objects.CommandGet(uint(cCommand))
