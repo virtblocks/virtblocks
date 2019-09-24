@@ -11,7 +11,10 @@ import (
 
 func main() {
 	var command = command.NewCommand("./test.sh")
-	command.Spawn()
+
+	err := command.Spawn()
+	fmt.Printf("Command started: err=%v\n", err)
+
 	id, err := command.Id()
 	if err == nil {
 		fmt.Printf("PID: %d\n", id)
