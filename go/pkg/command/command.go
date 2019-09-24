@@ -4,6 +4,7 @@
 package command
 
 import (
+	"errors"
 	"os"
 	"os/exec"
 )
@@ -48,11 +49,11 @@ func (self *Command) Spawn() error {
 	return self.Cmd.Start()
 }
 
-func (self *Command) Id() (int, error) {
-	if self.Cmd.Process != nil {
-		return self.Cmd.Process.Pid, nil
+func (self *Command) Id() (uint, error) {
+	if self.Cmd.Process == nil {
+		return 0, errors.New("process not running")
 	}
-	return -1, nil
+	return uint(self.Cmd.Process.Pid), nil
 }
 
 func (self *Command) Wait() (int, error) {

@@ -16,9 +16,8 @@ func main() {
 	fmt.Printf("Command started: err=%v\n", err)
 
 	id, err := command.Id()
-	if err == nil {
-		fmt.Printf("PID: %d\n", id)
-	}
+	fmt.Printf("Command ID: id=%d, err=%v\n", id, err)
+
 	time.Sleep(1 * time.Second)
 
 	rc, err := command.Wait()
