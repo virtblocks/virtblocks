@@ -9,6 +9,7 @@ import "C"
 
 import (
 	"github.com/virtblocks/virtblocks/c/pkg/objects"
+	"github.com/virtblocks/virtblocks/c/pkg/types"
 	"github.com/virtblocks/virtblocks/go/pkg/command"
 )
 
@@ -39,11 +40,17 @@ func command_spawn(cCommand C.uint) C.int {
 }
 
 //export command_wait
-func command_wait(cCommand C.uint) C.int {
+func command_wait(cCommand C.uint, cError *C.uint) C.int {
 	var goCommand = objects.CommandGet(uint(cCommand))
-	err := goCommand.Wait()
-	if err != nil {
-		panic("error handling not implemented")
+
+	var goRet, goErr = goCommand.Wait()
+
+	if goErr != nil {
+		var tmp = types.NewError(goErr)
+		*cError = C.uint(objects.ErrorAdd(tmp))
+	} else {
+		*cError = 0
 	}
-	return 0
+
+	return C.int(goRet)
 }

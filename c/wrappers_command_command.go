@@ -30,10 +30,24 @@ virtblocks_command_spawn(VirtBlocksCommand *command)
 }
 
 int
-virtblocks_command_wait(VirtBlocksCommand *command)
+virtblocks_command_wait(VirtBlocksCommand *command,
+                        VirtBlocksError **error)
 {
+    unsigned int goPtr;
+    int ret;
+
     assert(command != NULL);
-    return command_wait(command->goPtr);
+    assert(error != NULL);
+
+    ret = command_wait(command->goPtr, &goPtr);
+
+    if (goPtr) {
+        *error = error_wrap(goPtr);
+    } else {
+        *error = NULL;
+    }
+
+    return ret;
 }
 */
 import "C"
