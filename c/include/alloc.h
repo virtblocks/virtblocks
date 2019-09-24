@@ -3,6 +3,12 @@
 
 #pragma once
 
+#define VIRTBLOCKS_STEAL_PTR(_dst, _src) \
+    do { \
+        _dst = _src; \
+        _src = NULL; \
+    } while(false)
+
 #define VIRTBLOCKS_FREE(_ptr) \
     do { \
         if (_ptr) \
