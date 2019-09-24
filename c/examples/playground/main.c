@@ -78,21 +78,17 @@ main(int argc,
     while (true) {
         VIRTBLOCKS_AUTOPTR(VirtBlocksError) err = NULL;
         VIRTBLOCKS_AUTOFREE(char *) res = NULL;
+        VIRTBLOCKS_AUTOFREE(char *) msg = NULL;
         Input *input = &inputs[i];
 
         if (!input->toy || !input->ext)
             break;
 
         res = virtblocks_playground_toy_run(input->toy, input->ext, &err);
-        if (res) {
-            printf("Result: %s\n", res);
-        } else {
-            VIRTBLOCKS_AUTOFREE(char *) msg = NULL;
 
+        if (err)
             msg = virtblocks_error_get_message(err);
-
-            printf("Error: %s\n", msg);
-        }
+        printf("res=%s, err=%s\n", res ? res : "", msg ? msg : "<nil>");
 
         i++;
     }

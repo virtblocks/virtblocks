@@ -51,10 +51,6 @@ func main() {
 
 	for _, input := range inputs {
 		res, err := input.toy.Run(input.ext)
-		if err == nil {
-			fmt.Printf("Result: %s\n", res)
-		} else {
-			fmt.Printf("Error: %s\n", err)
-		}
+		fmt.Printf("res=%v, err=%v\n", res, err)
 	}
 }

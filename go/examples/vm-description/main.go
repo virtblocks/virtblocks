@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/virtblocks/virtblocks/go/pkg/devices"
 	"github.com/virtblocks/virtblocks/go/pkg/vm"
+	"os"
 )
 
 func main() {
@@ -15,7 +16,8 @@ func main() {
 
 	var args, err = desc.QemuCommandLine()
 	if err != nil {
-		panic(err)
+		fmt.Printf("Error: %s\n", err)
+		os.Exit(1)
 	}
 
 	for _, arg := range args {

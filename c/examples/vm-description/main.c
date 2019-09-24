@@ -27,10 +27,8 @@ main(int argc,
 
         msg = virtblocks_error_get_message(err);
 
-        printf("domain=%d, code=%d, message=%s\n",
-               virtblocks_error_get_domain(err),
-               virtblocks_error_get_code(err),
-               msg);
+        printf("Error: %s\n", msg);
+
         return 1;
     }
 
