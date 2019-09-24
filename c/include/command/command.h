@@ -7,7 +7,9 @@ typedef struct _VirtBlocksCommand VirtBlocksCommand;
 
 VirtBlocksCommand *virtblocks_command_new(const char *prog);
 void virtblocks_command_free(VirtBlocksCommand *command);
-int virtblocks_command_spawn(VirtBlocksCommand *command);
+
+void virtblocks_command_spawn(VirtBlocksCommand *command,
+                              VirtBlocksError **error);
 int virtblocks_command_wait(VirtBlocksCommand *command,
                             VirtBlocksError **error);
 

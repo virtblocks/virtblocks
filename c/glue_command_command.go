@@ -30,13 +30,17 @@ func command_free(cCommand C.uint) {
 }
 
 //export command_spawn
-func command_spawn(cCommand C.uint) C.int {
+func command_spawn(cCommand C.uint, cError *C.uint) {
 	var goCommand = objects.CommandGet(uint(cCommand))
-	err := goCommand.Spawn()
-	if err != nil {
-		panic("error handling not implemented")
+
+	var goErr = goCommand.Spawn()
+
+	if goErr != nil {
+		var tmp = types.NewError(goErr)
+		*cError = C.uint(objects.ErrorAdd(tmp))
+	} else {
+		*cError = 0
 	}
-	return 0
 }
 
 //export command_wait

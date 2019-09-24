@@ -22,11 +22,22 @@ virtblocks_command_free(VirtBlocksCommand *command)
     free(command);
 }
 
-int
-virtblocks_command_spawn(VirtBlocksCommand *command)
+void
+virtblocks_command_spawn(VirtBlocksCommand *command,
+                         VirtBlocksError **error)
 {
+    unsigned int goPtr;
+
     assert(command != NULL);
-    return command_spawn(command->goPtr);
+    assert(error != NULL);
+
+    command_spawn(command->goPtr, &goPtr);
+
+    if (goPtr) {
+        *error = error_wrap(goPtr);
+    } else {
+        *error = NULL;
+    }
 }
 
 int

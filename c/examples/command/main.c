@@ -14,7 +14,20 @@ main(int argc,
     int rc;
 
     command = virtblocks_command_new("./test.sh");
-    virtblocks_command_spawn(command);
+
+    virtblocks_command_spawn(command, &err);
+    if (err != NULL) {
+        VIRTBLOCKS_AUTOPTR(VirtBlocksError) local_err = NULL;
+        VIRTBLOCKS_AUTOFREE(char *) msg = NULL;
+
+        VIRTBLOCKS_STEAL_PTR(local_err, err);
+        msg = virtblocks_error_get_message(local_err);
+
+        printf("Command started: err=%s\n", msg);
+    } else {
+        printf("Command started: err=<nil>\n");
+    }
+
     sleep(1);
 
     rc = virtblocks_command_wait(command, &err);
