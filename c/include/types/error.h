@@ -14,7 +14,16 @@ void virtblocks_error_free(VirtBlocksError *error);
 
 VirtBlocksErrorDomain virtblocks_error_get_domain(const VirtBlocksError *error);
 unsigned int virtblocks_error_get_code(const VirtBlocksError *error);
-char *virtblocks_error_get_message(const VirtBlocksError *error);
+const char *virtblocks_error_get_message(const VirtBlocksError *error);
+
+#define VIRTBLOCKS_ERROR_GET_MESSAGE(_err) \
+    (_err ? virtblocks_error_get_message(_err) : "<nil>")
+
+#define VIRTBLOCKS_ERROR_FREE(_err) \
+    do { \
+        virtblocks_error_free(_err); \
+        _err = NULL; \
+    } while(false)
 
 VIRTBLOCKS_DEFINE_AUTOPTR_FUNC(VirtBlocksError,
                                virtblocks_error_free);

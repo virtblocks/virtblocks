@@ -23,12 +23,7 @@ main(int argc,
 
     args = virtblocks_vm_description_get_qemu_commandline(desc, &err);
     if (err != NULL) {
-        VIRTBLOCKS_AUTOFREE(char *) msg = NULL;
-
-        msg = virtblocks_error_get_message(err);
-
-        printf("Error: %s\n", msg);
-
+        printf("Error: %s\n", VIRTBLOCKS_ERROR_GET_MESSAGE(err));
         return 1;
     }
 

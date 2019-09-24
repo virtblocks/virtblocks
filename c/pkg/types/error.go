@@ -3,6 +3,8 @@
 
 package types
 
+import "C"
+
 import (
 	"github.com/virtblocks/virtblocks/go/pkg/playground"
 )
@@ -15,39 +17,57 @@ const (
 )
 
 type Error struct {
-	native error
+	domain  C.uint
+	code    C.uint
+	message *C.char
 }
 
 func NewError(err error) *Error {
-	return &Error{native: err}
+	return &Error{
+		domain:  getDomain(err),
+		code:    getCode(err),
+		message: getMessage(err),
+	}
 }
 
-func (self *Error) Domain() ErrorDomain {
+func (self *Error) Domain() C.uint {
+	return self.domain
+}
+
+func (self *Error) Code() C.uint {
+	return self.code
+}
+
+func (self *Error) Message() *C.char {
+	return self.message
+}
+
+func getDomain(err error) C.uint {
 	var domain ErrorDomain
 
-	switch self.native.(type) {
+	switch err.(type) {
 	case playground.ToyError:
 		domain = ErrorDomain(PlaygroundToyError)
 	default:
 		domain = ErrorDomain(GenericError)
 	}
 
-	return domain
+	return C.uint(domain)
 }
 
-func (self *Error) Code() uint {
+func getCode(err error) C.uint {
 	var code uint
 
-	switch self.native.(type) {
+	switch err.(type) {
 	case playground.ToyError:
-		code = uint(self.native.(playground.ToyError))
+		code = uint(err.(playground.ToyError))
 	default:
 		code = 0
 	}
 
-	return code
+	return C.uint(code)
 }
 
-func (self *Error) Message() string {
-	return self.native.Error()
+func getMessage(err error) *C.char {
+	return C.CString(err.Error())
 }

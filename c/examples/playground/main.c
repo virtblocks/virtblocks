@@ -86,9 +86,7 @@ main(int argc,
 
         res = virtblocks_playground_toy_run(input->toy, input->ext, &err);
 
-        if (err)
-            msg = virtblocks_error_get_message(err);
-        printf("res=%s, err=%s\n", res ? res : "", msg ? msg : "<nil>");
+        printf("res=%s, err=%s\n", res ? res : "", VIRTBLOCKS_ERROR_GET_MESSAGE(err));
 
         i++;
     }

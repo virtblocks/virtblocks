@@ -30,7 +30,7 @@ virtblocks_error_get_code(const VirtBlocksError *error)
     return error_get_code(error->goPtr);
 }
 
-char *
+const char *
 virtblocks_error_get_message(const VirtBlocksError *error)
 {
     assert(error != NULL);
