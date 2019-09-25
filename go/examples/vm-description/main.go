@@ -12,7 +12,7 @@ import (
 
 func main() {
 	var disk = devices.NewDisk().SetFilename("test.qcow2")
-	var desc = vm.NewDescription().SetMemory(512).SetDisk(disk)
+	var desc = vm.NewDescription().SetCpus(1).SetMemory(512).SetDisk(disk)
 
 	var args, err = desc.QemuCommandLine()
 	if err != nil {

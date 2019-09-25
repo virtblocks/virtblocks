@@ -11,6 +11,7 @@ import (
 
 type Description struct {
 	emulator string
+	cpus     uint
 	memory   uint
 	disk     *devices.Disk
 }
@@ -23,6 +24,11 @@ func NewDescription() *Description {
 
 func (self *Description) SetEmulator(emulator string) *Description {
 	self.emulator = emulator
+	return self
+}
+
+func (self *Description) SetCpus(cpus uint) *Description {
+	self.cpus = cpus
 	return self
 }
 
@@ -39,12 +45,18 @@ func (self *Description) SetDisk(disk *devices.Disk) *Description {
 func (self *Description) QemuCommandLine() ([]string, error) {
 	var ret = []string{
 		self.emulator,
+		"-smp",
+		strconv.FormatUint(uint64(self.cpus), 10),
 		"-M",
 		strconv.FormatUint(uint64(self.memory), 10),
 	}
 
+	if self.cpus == 0 {
+		return ret, errors.New("number of CPUs not set")
+	}
+
 	if self.memory == 0 {
-		return ret, errors.New("no memory size set")
+		return ret, errors.New("memory size not set")
 	}
 
 	disk, err := self.disk.QemuCommandLine()
