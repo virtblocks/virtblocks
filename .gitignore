@@ -8,3 +8,4 @@ _obj/
 libvirtblocks.h
 target/
 Cargo.lock
+functest.bin

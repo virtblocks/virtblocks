@@ -45,4 +45,7 @@ verify-fmt:
 vet: gobuild
 	go vet ./...
 
-.PHONY: build gobuild clean test run-examples fmt verify-fmt vet
+functest:
+	@true
+
+.PHONY: build gobuild clean test run-examples fmt verify-fmt vet functest
