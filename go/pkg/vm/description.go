@@ -45,6 +45,9 @@ func (self *Description) SetDisk(disk *devices.Disk) *Description {
 func (self *Description) QemuCommandLine() ([]string, error) {
 	var ret = []string{
 		self.emulator,
+		"-nodefaults",
+		"-display",
+		"none",
 		"-smp",
 		strconv.FormatUint(uint64(self.cpus), 10),
 		"-M",
