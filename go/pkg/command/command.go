@@ -10,7 +10,7 @@ import (
 )
 
 type Command struct {
-	Cmd *exec.Cmd
+	cmd *exec.Cmd
 }
 
 type CommandStdout struct{}
@@ -32,32 +32,32 @@ func NewCommand(prog string) *Command {
 	c.Stderr = &CommandStderr{}
 
 	return &Command{
-		Cmd: c,
+		cmd: c,
 	}
 }
 
 func (self *Command) AddArg(arg string) {
-	self.Cmd.Args = append(self.Cmd.Args, arg)
+	self.cmd.Args = append(self.cmd.Args, arg)
 }
 
 func (self *Command) TakeFd(fd uintptr) {
 	file := os.NewFile(fd, "")
-	self.Cmd.ExtraFiles = append(self.Cmd.ExtraFiles, file)
+	self.cmd.ExtraFiles = append(self.cmd.ExtraFiles, file)
 }
 
 func (self *Command) Spawn() error {
-	return self.Cmd.Start()
+	return self.cmd.Start()
 }
 
 func (self *Command) Id() (uint, error) {
-	if self.Cmd.Process == nil {
+	if self.cmd.Process == nil {
 		return 0, errors.New("process not running")
 	}
-	return uint(self.Cmd.Process.Pid), nil
+	return uint(self.cmd.Process.Pid), nil
 }
 
 func (self *Command) Wait() (int, error) {
-	var err = self.Cmd.Wait()
+	var err = self.cmd.Wait()
 
 	// Successful command execution
 	if err == nil {
