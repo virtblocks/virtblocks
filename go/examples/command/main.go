@@ -20,6 +20,9 @@ func main() {
 
 	time.Sleep(1 * time.Second)
 
+	err = command.Kill()
+	fmt.Printf("Command killed: err=%v\n", err)
+
 	rc, err := command.Wait()
 	fmt.Printf("Command returned: rc=%d, err=%v\n", rc, err)
 }

@@ -44,6 +44,14 @@ func (self *Command) Id() (uint, error) {
 	return uint(self.cmd.Process.Pid), nil
 }
 
+func (self *Command) Kill() error {
+	if self.cmd.Process == nil {
+		return errors.New("process not running")
+	}
+	self.cmd.Process.Kill()
+	return nil
+}
+
 func (self *Command) Wait() (int, error) {
 	var err = self.cmd.Wait()
 
