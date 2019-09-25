@@ -13,23 +13,11 @@ type Command struct {
 	cmd *exec.Cmd
 }
 
-type CommandStdout struct{}
-
-func (b *CommandStdout) Write(p []byte) (n int, err error) {
-	return os.Stdout.Write(p)
-}
-
-type CommandStderr struct{}
-
-func (b *CommandStderr) Write(p []byte) (n int, err error) {
-	return os.Stderr.Write(p)
-}
-
 func NewCommand(prog string) *Command {
 	c := exec.Command(prog)
 
-	c.Stdout = &CommandStdout{}
-	c.Stderr = &CommandStderr{}
+	c.Stdout = os.Stdout
+	c.Stderr = os.Stderr
 
 	return &Command{
 		cmd: c,
