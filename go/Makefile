@@ -4,7 +4,7 @@ build:
 	@true
 
 clean:
-	@true
+	rm -f tests/functest.bin
 
 test:
 	@true
@@ -26,4 +26,8 @@ verify-fmt:
 vet:
 	go vet ./...
 
-.PHONY: build clean test run-examples fmt verify-fmt vet
+functest:
+	go test ./tests/... -c -o ./tests/functest.bin
+	./tests/functest.bin
+
+.PHONY: build clean test run-examples fmt verify-fmt vet functest
