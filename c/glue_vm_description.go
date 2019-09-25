@@ -42,6 +42,13 @@ func vm_description_set_disk(cDescription C.uint, cDisk C.uint) {
 	goDescription.SetDisk(goDisk)
 }
 
+//export vm_description_set_serial
+func vm_description_set_serial(cDescription C.uint, cSerial C.uint) {
+	var goDescription = objects.VmDescriptionGet(uint(cDescription))
+	var goSerial = objects.DevicesSerialGet(uint(cSerial))
+	goDescription.SetSerial(goSerial)
+}
+
 //export vm_description_set_cpus
 func vm_description_set_cpus(cDescription C.uint, cCpus C.uint) {
 	var goDescription = objects.VmDescriptionGet(uint(cDescription))

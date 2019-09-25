@@ -9,6 +9,7 @@ main(int argc,
      char **argv)
 {
     VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesDisk) disk = NULL;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesSerial) serial = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksVmDescription) desc = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksArray) args = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksError) err = NULL;
@@ -17,10 +18,14 @@ main(int argc,
     disk = virtblocks_devices_disk_new();
     virtblocks_devices_disk_set_filename(disk, "test.qcow2");
 
+    serial = virtblocks_devices_serial_new();
+    virtblocks_devices_serial_set_path(serial, "test.socket");
+
     desc = virtblocks_vm_description_new();
     virtblocks_vm_description_set_cpus(desc, 1);
     virtblocks_vm_description_set_memory(desc, 512);
     virtblocks_vm_description_set_disk(desc, disk);
+    virtblocks_vm_description_set_serial(desc, serial);
 
     args = virtblocks_vm_description_get_qemu_commandline(desc, &err);
     if (err != NULL) {

@@ -6,5 +6,6 @@
 
 #include "disk.h"
 #include "memballoon.h"
+#include "serial.h"
 
 #endif

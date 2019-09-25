@@ -55,6 +55,15 @@ virtblocks_vm_description_set_disk(VirtBlocksVmDescription *desc,
     vm_description_set_disk(desc->goPtr, disk->goPtr);
 }
 
+void
+virtblocks_vm_description_set_serial(VirtBlocksVmDescription *desc,
+                                     VirtBlocksDevicesSerial *serial)
+{
+    assert(desc != NULL);
+    assert(serial != NULL);
+    vm_description_set_serial(desc->goPtr, serial->goPtr);
+}
+
 VirtBlocksArray*
 virtblocks_vm_description_get_qemu_commandline(VirtBlocksVmDescription *desc,
                                                VirtBlocksError **error)

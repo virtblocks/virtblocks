@@ -16,6 +16,8 @@ void virtblocks_vm_description_set_memory(VirtBlocksVmDescription *description,
                                           unsigned int memory);
 void virtblocks_vm_description_set_disk(VirtBlocksVmDescription *description,
                                         VirtBlocksDevicesDisk *disk);
+void virtblocks_vm_description_set_serial(VirtBlocksVmDescription *description,
+                                          VirtBlocksDevicesSerial *serial);
 VirtBlocksArray* virtblocks_vm_description_get_qemu_commandline(VirtBlocksVmDescription *description,
                                                                 VirtBlocksError **error);
 
