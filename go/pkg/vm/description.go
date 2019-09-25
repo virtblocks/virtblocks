@@ -14,6 +14,7 @@ type Description struct {
 	cpus     uint
 	memory   uint
 	disk     *devices.Disk
+	serial   *devices.Serial
 }
 
 func NewDescription() *Description {
@@ -39,6 +40,11 @@ func (self *Description) SetMemory(memory uint) *Description {
 
 func (self *Description) SetDisk(disk *devices.Disk) *Description {
 	self.disk = disk
+	return self
+}
+
+func (self *Description) SetSerial(serial *devices.Serial) *Description {
+	self.serial = serial
 	return self
 }
 
@@ -68,6 +74,13 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 	}
 
 	ret = append(ret, disk...)
+
+	serial, err := self.serial.QemuCommandLine()
+	if err != nil {
+		return ret, err
+	}
+
+	ret = append(ret, serial...)
 
 	return ret, nil
 }

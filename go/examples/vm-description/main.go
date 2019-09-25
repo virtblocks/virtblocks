@@ -12,7 +12,11 @@ import (
 
 func main() {
 	var disk = devices.NewDisk().SetFilename("test.qcow2")
-	var desc = vm.NewDescription().SetCpus(1).SetMemory(512).SetDisk(disk)
+	var serial = devices.NewSerial().SetPath("test.socket")
+
+	var desc = vm.NewDescription()
+	desc.SetCpus(1).SetMemory(512)
+	desc.SetDisk(disk).SetSerial(serial)
 
 	var args, err = desc.QemuCommandLine()
 	if err != nil {
