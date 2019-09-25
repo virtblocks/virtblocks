@@ -59,6 +59,20 @@ func command_get_id(cCommand C.uint, cError *C.uint) C.uint {
 	return C.uint(goRet)
 }
 
+//export command_kill
+func command_kill(cCommand C.uint, cError *C.uint) {
+	var goCommand = objects.CommandGet(uint(cCommand))
+
+	var goErr = goCommand.Kill()
+
+	if goErr != nil {
+		var tmp = types.NewError(goErr)
+		*cError = C.uint(objects.ErrorAdd(tmp))
+	} else {
+		*cError = 0
+	}
+}
+
 //export command_wait
 func command_wait(cCommand C.uint, cError *C.uint) C.int {
 	var goCommand = objects.CommandGet(uint(cCommand))

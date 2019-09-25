@@ -26,6 +26,10 @@ main(int argc,
 
     sleep(1);
 
+    virtblocks_command_kill(command, &err);
+    printf("Command killed: err=%s\n", virtblocks_error_get_message(err));
+    VIRTBLOCKS_ERROR_FREE(err);
+
     rc = virtblocks_command_wait(command, &err);
     printf("Command returned: rc=%d, err=%s\n", rc, virtblocks_error_get_message(err));
     VIRTBLOCKS_ERROR_FREE(err);

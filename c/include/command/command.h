@@ -12,6 +12,8 @@ void virtblocks_command_spawn(VirtBlocksCommand *command,
                               VirtBlocksError **error);
 unsigned int virtblocks_command_get_id(VirtBlocksCommand *command,
                                        VirtBlocksError **error);
+void virtblocks_command_kill(VirtBlocksCommand *command,
+                             VirtBlocksError **error);
 int virtblocks_command_wait(VirtBlocksCommand *command,
                             VirtBlocksError **error);
 
