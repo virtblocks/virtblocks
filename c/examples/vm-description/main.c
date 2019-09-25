@@ -18,6 +18,7 @@ main(int argc,
     virtblocks_devices_disk_set_filename(disk, "test.qcow2");
 
     desc = virtblocks_vm_description_new();
+    virtblocks_vm_description_set_cpus(desc, 1);
     virtblocks_vm_description_set_memory(desc, 512);
     virtblocks_vm_description_set_disk(desc, disk);
 

@@ -31,6 +31,14 @@ virtblocks_vm_description_set_emulator(VirtBlocksVmDescription *desc,
 }
 
 void
+virtblocks_vm_description_set_cpus(VirtBlocksVmDescription *desc,
+                                   unsigned int cpus)
+{
+    assert(desc != NULL);
+    vm_description_set_cpus(desc->goPtr, cpus);
+}
+
+void
 virtblocks_vm_description_set_memory(VirtBlocksVmDescription *desc,
                                      unsigned int memory)
 {

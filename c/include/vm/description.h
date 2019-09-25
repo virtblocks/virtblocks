@@ -10,6 +10,8 @@ void virtblocks_vm_description_free(VirtBlocksVmDescription *description);
 
 void virtblocks_vm_description_set_emulator(VirtBlocksVmDescription *description,
                                             const char *emulator);
+void virtblocks_vm_description_set_cpus(VirtBlocksVmDescription *description,
+                                        unsigned int cpus);
 void virtblocks_vm_description_set_memory(VirtBlocksVmDescription *description,
                                           unsigned int memory);
 void virtblocks_vm_description_set_disk(VirtBlocksVmDescription *description,
