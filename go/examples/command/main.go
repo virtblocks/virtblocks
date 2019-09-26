@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	var command = command.NewCommand("./test.sh").AddArg("foo").AddArg("bar")
+	var command = command.NewCommand("./test.sh").AddArgs("foo", "bar")
 
 	err := command.Spawn()
 	fmt.Printf("Command started: err=%v\n", err)
