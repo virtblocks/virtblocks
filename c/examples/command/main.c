@@ -15,6 +15,8 @@ main(int argc,
     int rc;
 
     command = virtblocks_command_new("./test.sh");
+    virtblocks_command_add_arg(command, "foo");
+    virtblocks_command_add_arg(command, "bar");
 
     virtblocks_command_spawn(command, &err);
     printf("Command started: err=%s\n", virtblocks_error_get_message(err));

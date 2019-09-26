@@ -1,9 +1,11 @@
 #!/bin/sh
 
-echo "before (stdout)"
-echo "before (stderr)" >&2
+test "$#" = 2 || exit 1
+
+echo "$1 (stdout)"
+echo "$1 (stderr)" >&2
 
 sleep 5
 
-echo "after (stdout)"
-echo "after (stderr)" >&2
+echo "$2 (stdout)"
+echo "$2 (stderr)" >&2
