@@ -24,8 +24,8 @@ func NewCommand(prog string) *Command {
 	}
 }
 
-func (self *Command) AddArg(arg string) *Command {
-	self.cmd.Args = append(self.cmd.Args, arg)
+func (self *Command) AddArgs(args ...string) *Command {
+	self.cmd.Args = append(self.cmd.Args, args...)
 	return self
 }
 
