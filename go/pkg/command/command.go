@@ -24,13 +24,15 @@ func NewCommand(prog string) *Command {
 	}
 }
 
-func (self *Command) AddArg(arg string) {
+func (self *Command) AddArg(arg string) *Command {
 	self.cmd.Args = append(self.cmd.Args, arg)
+	return self
 }
 
-func (self *Command) TakeFd(fd uintptr) {
+func (self *Command) TakeFd(fd uintptr) *Command {
 	file := os.NewFile(fd, "")
 	self.cmd.ExtraFiles = append(self.cmd.ExtraFiles, file)
+	return self
 }
 
 func (self *Command) Spawn() error {
