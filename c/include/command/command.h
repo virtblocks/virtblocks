@@ -8,6 +8,8 @@ typedef struct _VirtBlocksCommand VirtBlocksCommand;
 VirtBlocksCommand *virtblocks_command_new(const char *prog);
 void virtblocks_command_free(VirtBlocksCommand *command);
 
+void virtblocks_command_add_arg(VirtBlocksCommand *command,
+                                const char *arg);
 void virtblocks_command_spawn(VirtBlocksCommand *command,
                               VirtBlocksError **error);
 unsigned int virtblocks_command_get_id(VirtBlocksCommand *command,

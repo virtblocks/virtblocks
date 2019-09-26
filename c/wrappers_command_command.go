@@ -23,6 +23,15 @@ virtblocks_command_free(VirtBlocksCommand *command)
 }
 
 void
+virtblocks_command_add_arg(VirtBlocksCommand *command,
+                           const char *arg)
+{
+    assert(command != NULL);
+
+    command_add_arg(command->goPtr, (char *) arg);
+}
+
+void
 virtblocks_command_spawn(VirtBlocksCommand *command,
                          VirtBlocksError **error)
 {
