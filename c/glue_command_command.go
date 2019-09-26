@@ -29,6 +29,17 @@ func command_free(cCommand C.uint) {
 	objects.CommandDel(uint(cCommand))
 }
 
+//export command_add_arg
+func command_add_arg(cCommand C.uint, cArg *C.char) {
+	if cArg == nil {
+		panic("cArg == nil")
+	}
+	var goCommand = objects.CommandGet(uint(cCommand))
+	var goArg = C.GoString(cArg)
+
+	goCommand.AddArg(goArg)
+}
+
 //export command_spawn
 func command_spawn(cCommand C.uint, cError *C.uint) {
 	var goCommand = objects.CommandGet(uint(cCommand))
