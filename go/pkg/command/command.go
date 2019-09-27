@@ -5,6 +5,7 @@ package command
 
 import (
 	"errors"
+	"io"
 	"os"
 	"os/exec"
 )
@@ -16,6 +17,7 @@ type Command struct {
 func NewCommand(prog string) *Command {
 	c := exec.Command(prog)
 
+	c.Stdin = os.Stdin
 	c.Stdout = os.Stdout
 	c.Stderr = os.Stderr
 
@@ -32,6 +34,21 @@ func (self *Command) AddArgs(args ...string) *Command {
 func (self *Command) TakeFd(fd uintptr) *Command {
 	file := os.NewFile(fd, "")
 	self.cmd.ExtraFiles = append(self.cmd.ExtraFiles, file)
+	return self
+}
+
+func (self *Command) SetStdin(reader io.Reader) *Command {
+	self.cmd.Stdin = reader
+	return self
+}
+
+func (self *Command) SetStdout(writer io.Writer) *Command {
+	self.cmd.Stdout = writer
+	return self
+}
+
+func (self *Command) SetStderr(writer io.Writer) *Command {
+	self.cmd.Stderr = writer
 	return self
 }
 
