@@ -37,7 +37,7 @@ func command_add_arg(cCommand C.uint, cArg *C.char) {
 	var goCommand = objects.CommandGet(uint(cCommand))
 	var goArg = C.GoString(cArg)
 
-	goCommand.AddArg(goArg)
+	goCommand.AddArgs(goArg)
 }
 
 //export command_spawn
