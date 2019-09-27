@@ -56,7 +56,7 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		"none",
 		"-smp",
 		strconv.FormatUint(uint64(self.cpus), 10),
-		"-M",
+		"-m",
 		strconv.FormatUint(uint64(self.memory), 10),
 	}
 
