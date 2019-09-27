@@ -30,7 +30,7 @@ func (self *Disk) QemuCommandLine() ([]string, error) {
 
 	ret = append(ret,
 		"-drive",
-		fmt.Sprintf("file=%s,format=qcow2,id=disk0", self.filename),
+		fmt.Sprintf("file=%s,format=qcow2,if=none,id=disk0", self.filename),
 		"-device",
 		"virtio-blk-pci,drive=disk0",
 	)
