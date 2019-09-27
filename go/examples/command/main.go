@@ -6,11 +6,13 @@ package main
 import (
 	"fmt"
 	"github.com/virtblocks/virtblocks/go/pkg/command"
+	"os"
 	"time"
 )
 
 func main() {
 	var command = command.NewCommand("./test.sh").AddArgs("foo", "bar")
+	command.SetStdout(os.Stdout).SetStderr(os.Stderr)
 
 	err := command.Spawn()
 	fmt.Printf("Command started: err=%v\n", err)

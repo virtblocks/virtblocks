@@ -15,14 +15,8 @@ type Command struct {
 }
 
 func NewCommand(prog string) *Command {
-	c := exec.Command(prog)
-
-	c.Stdin = os.Stdin
-	c.Stdout = os.Stdout
-	c.Stderr = os.Stderr
-
 	return &Command{
-		cmd: c,
+		cmd: exec.Command(prog),
 	}
 }
 
