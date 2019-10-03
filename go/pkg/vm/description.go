@@ -52,6 +52,7 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 	var ret = []string{
 		self.emulator,
 		"-nodefaults",
+		"-no-user-config",
 		"-display",
 		"none",
 		"-smp",
