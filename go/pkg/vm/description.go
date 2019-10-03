@@ -55,6 +55,8 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		"-no-user-config",
 		"-display",
 		"none",
+		"-machine",
+		"accel=kvm:tcg",
 		"-smp",
 		strconv.FormatUint(uint64(self.cpus), 10),
 		"-m",
