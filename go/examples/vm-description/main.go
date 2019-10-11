@@ -14,8 +14,8 @@ func main() {
 	var serial = vm.NewSerial().SetPath("test.socket")
 
 	var desc = vm.NewDescription(vm.ModelModernV1)
-	desc.SetCpus(1).SetMemory(512)
-	desc.SetDisk(disk).SetSerial(serial)
+	desc.SetCpus(1).SetMemory(512).SetDiskSlots(3)
+	desc.SetDiskForSlot(disk, 2).SetSerial(serial)
 
 	var args, err = desc.QemuCommandLine()
 	if err != nil {

@@ -21,8 +21,11 @@ void virtblocks_vm_description_set_cpus(VirtBlocksVmDescription *description,
                                         unsigned int cpus);
 void virtblocks_vm_description_set_memory(VirtBlocksVmDescription *description,
                                           unsigned int memory);
-void virtblocks_vm_description_set_disk(VirtBlocksVmDescription *description,
-                                        VirtBlocksVmDisk *disk);
+void virtblocks_vm_description_set_disk_slots(VirtBlocksVmDescription *description,
+                                              unsigned int slots);
+void virtblocks_vm_description_set_disk_for_slot(VirtBlocksVmDescription *description,
+                                                 VirtBlocksVmDisk *disk,
+                                                 unsigned int slot);
 void virtblocks_vm_description_set_serial(VirtBlocksVmDescription *description,
                                           VirtBlocksVmSerial *serial);
 VirtBlocksArray* virtblocks_vm_description_get_qemu_commandline(VirtBlocksVmDescription *description,
