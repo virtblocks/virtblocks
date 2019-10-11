@@ -7,3 +7,4 @@
 #include "disk.h"
 #include "memballoon.h"
 #include "serial.h"
+#include "model.h"

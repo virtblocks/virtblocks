@@ -53,7 +53,7 @@ func main() {
 	// from the path of the disk image
 	serialSockPath := fmt.Sprintf("%s%s", strings.TrimSuffix(diskPath, "qcow2"), "serial-sock")
 
-	desc := vm.NewDescription()
+	desc := vm.NewDescription(vm.ModelModernV1)
 	desc.SetCpus(cpus).SetMemory(mem)
 	desc.SetDisk(vm.NewDisk().SetFilename(diskPath))
 	desc.SetSerial(vm.NewSerial().SetPath(serialSockPath))

@@ -9,6 +9,7 @@ import (
 )
 
 type Description struct {
+	model    Model
 	emulator string
 	cpus     uint
 	memory   uint
@@ -16,10 +17,15 @@ type Description struct {
 	serial   *Serial
 }
 
-func NewDescription() *Description {
+func NewDescription(model Model) *Description {
 	return &Description{
+		model:    model,
 		emulator: "/usr/bin/qemu-system-x86_64",
 	}
+}
+
+func (self *Description) Model() Model {
+	return self.model
 }
 
 func (self *Description) SetEmulator(emulator string) *Description {
@@ -79,14 +85,14 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		return ret, err
 	}
 
-	diskArgs, err := self.disk.qemuCommandLine()
+	diskArgs, err := self.disk.qemuCommandLine(self.model)
 	if err != nil {
 		return ret, err
 	}
 
 	ret = append(ret, diskArgs...)
 
-	serialArgs, err := self.serial.qemuCommandLine()
+	serialArgs, err := self.serial.qemuCommandLine(self.model)
 	if err != nil {
 		return ret, err
 	}

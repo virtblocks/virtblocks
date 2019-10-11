@@ -9,9 +9,9 @@ package main
 #include "private.h"
 
 VirtBlocksVmDescription*
-virtblocks_vm_description_new()
+virtblocks_vm_description_new(VirtBlocksVmModel model)
 {
-    return vm_description_wrap(vm_description_new());
+    return vm_description_wrap(vm_description_new(model));
 }
 
 void

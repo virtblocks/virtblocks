@@ -15,8 +15,8 @@ import (
 )
 
 //export vm_description_new
-func vm_description_new() C.uint {
-	var goDescription = vm.NewDescription()
+func vm_description_new(model C.uint) C.uint {
+	var goDescription = vm.NewDescription(vm.Model(model))
 	return C.uint(objects.VmDescriptionAdd(goDescription))
 }
 
