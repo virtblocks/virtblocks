@@ -34,7 +34,9 @@ func (self MemballoonModel) String() string {
 }
 
 func NewMemballoon() *Memballoon {
-	return &Memballoon{model: MemballoonModelNone}
+	return &Memballoon{
+		model: MemballoonModelNone,
+	}
 }
 
 func (self *Memballoon) SetModel(model MemballoonModel) {

@@ -71,19 +71,19 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		return ret, errors.New("memory size not set")
 	}
 
-	disk, err := self.disk.QemuCommandLine()
+	diskArgs, err := self.disk.QemuCommandLine()
 	if err != nil {
 		return ret, err
 	}
 
-	ret = append(ret, disk...)
+	ret = append(ret, diskArgs...)
 
-	serial, err := self.serial.QemuCommandLine()
+	serialArgs, err := self.serial.QemuCommandLine()
 	if err != nil {
 		return ret, err
 	}
 
-	ret = append(ret, serial...)
+	ret = append(ret, serialArgs...)
 
 	return ret, nil
 }
