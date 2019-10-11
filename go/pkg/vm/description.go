@@ -85,6 +85,13 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		return ret, err
 	}
 
+	switch self.model {
+	case ModelLegacyV1:
+		ret = append(ret, "-machine", "pc")
+	case ModelModernV1:
+		ret = append(ret, "-machine", "q35")
+	}
+
 	diskArgs, err := self.disk.qemuCommandLine(self.model)
 	if err != nil {
 		return ret, err
