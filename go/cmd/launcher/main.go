@@ -54,8 +54,8 @@ func main() {
 	serialSockPath := fmt.Sprintf("%s%s", strings.TrimSuffix(diskPath, "qcow2"), "serial-sock")
 
 	desc := vm.NewDescription(vm.ModelModernV1)
-	desc.SetCpus(cpus).SetMemory(mem)
-	desc.SetDisk(vm.NewDisk().SetFilename(diskPath))
+	desc.SetCpus(cpus).SetMemory(mem).SetDiskSlots(4)
+	desc.SetDiskForSlot(vm.NewDisk().SetFilename(diskPath), 2)
 	desc.SetSerial(vm.NewSerial().SetPath(serialSockPath))
 
 	qemuArgs, err := desc.QemuCommandLine()

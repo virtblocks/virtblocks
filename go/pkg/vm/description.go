@@ -5,22 +5,25 @@ package vm
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 )
 
 type Description struct {
-	model    Model
-	emulator string
-	cpus     uint
-	memory   uint
-	disk     *Disk
-	serial   *Serial
+	model           Model
+	emulator        string
+	cpus            uint
+	memory          uint
+	diskSlots       uint
+	diskAllocations map[uint]*Disk
+	serial          *Serial
 }
 
 func NewDescription(model Model) *Description {
 	return &Description{
-		model:    model,
-		emulator: "/usr/bin/qemu-system-x86_64",
+		model:           model,
+		emulator:        "/usr/bin/qemu-system-x86_64",
+		diskAllocations: make(map[uint]*Disk),
 	}
 }
 
@@ -43,8 +46,13 @@ func (self *Description) SetMemory(memory uint) *Description {
 	return self
 }
 
-func (self *Description) SetDisk(disk *Disk) *Description {
-	self.disk = disk
+func (self *Description) SetDiskSlots(slots uint) *Description {
+	self.diskSlots = slots
+	return self
+}
+
+func (self *Description) SetDiskForSlot(disk *Disk, slot uint) *Description {
+	self.diskAllocations[slot] = disk
 	return self
 }
 
@@ -60,6 +68,12 @@ func (self *Description) validate() error {
 
 	if self.memory == 0 {
 		return errors.New("memory size not set")
+	}
+
+	for slot, _ := range self.diskAllocations {
+		if slot < 0 || slot >= self.diskSlots {
+			return fmt.Errorf("disk slot %d out of range (%d-%d)", slot, 0, self.diskSlots-1)
+		}
 	}
 
 	return nil
@@ -92,12 +106,14 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		ret = append(ret, "-machine", "q35")
 	}
 
-	diskArgs, err := self.disk.qemuCommandLine(self.model)
-	if err != nil {
-		return ret, err
-	}
+	for _, disk := range self.diskAllocations {
+		diskArgs, err := disk.qemuCommandLine(self.model)
+		if err != nil {
+			return ret, err
+		}
 
-	ret = append(ret, diskArgs...)
+		ret = append(ret, diskArgs...)
+	}
 
 	serialArgs, err := self.serial.qemuCommandLine(self.model)
 	if err != nil {

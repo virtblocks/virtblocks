@@ -35,11 +35,19 @@ func vm_description_set_emulator(cDescription C.uint, cEmulator *C.char) {
 	goDescription.SetEmulator(goEmulator)
 }
 
-//export vm_description_set_disk
-func vm_description_set_disk(cDescription C.uint, cDisk C.uint) {
+//export vm_description_set_disk_slots
+func vm_description_set_disk_slots(cDescription C.uint, cSlots C.uint) {
+	var goDescription = objects.VmDescriptionGet(uint(cDescription))
+	var goSlots = uint(cSlots)
+	goDescription.SetDiskSlots(goSlots)
+}
+
+//export vm_description_set_disk_for_slot
+func vm_description_set_disk_for_slot(cDescription C.uint, cDisk C.uint, cSlot C.uint) {
 	var goDescription = objects.VmDescriptionGet(uint(cDescription))
 	var goDisk = objects.VmDiskGet(uint(cDisk))
-	goDescription.SetDisk(goDisk)
+	var goSlot = uint(cSlot)
+	goDescription.SetDiskForSlot(goDisk, goSlot)
 }
 
 //export vm_description_set_serial

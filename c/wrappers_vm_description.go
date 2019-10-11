@@ -47,12 +47,21 @@ virtblocks_vm_description_set_memory(VirtBlocksVmDescription *desc,
 }
 
 void
-virtblocks_vm_description_set_disk(VirtBlocksVmDescription *desc,
-                                   VirtBlocksVmDisk *disk)
+virtblocks_vm_description_set_disk_slots(VirtBlocksVmDescription *desc,
+                                         unsigned int slots)
+{
+    assert(desc != NULL);
+    vm_description_set_disk_slots(desc->goPtr, slots);
+}
+
+void
+virtblocks_vm_description_set_disk_for_slot(VirtBlocksVmDescription *desc,
+                                            VirtBlocksVmDisk *disk,
+                                            unsigned int slot)
 {
     assert(desc != NULL);
     assert(disk != NULL);
-    vm_description_set_disk(desc->goPtr, disk->goPtr);
+    vm_description_set_disk_for_slot(desc->goPtr, disk->goPtr, slot);
 }
 
 void
