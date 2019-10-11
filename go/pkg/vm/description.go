@@ -79,14 +79,14 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		return ret, err
 	}
 
-	diskArgs, err := self.disk.QemuCommandLine()
+	diskArgs, err := self.disk.qemuCommandLine()
 	if err != nil {
 		return ret, err
 	}
 
 	ret = append(ret, diskArgs...)
 
-	serialArgs, err := self.serial.QemuCommandLine()
+	serialArgs, err := self.serial.qemuCommandLine()
 	if err != nil {
 		return ret, err
 	}
