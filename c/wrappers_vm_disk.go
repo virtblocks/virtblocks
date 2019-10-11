@@ -29,26 +29,5 @@ virtblocks_vm_disk_set_filename(VirtBlocksVmDisk *disk,
     assert(disk != NULL);
     vm_disk_set_filename(disk->goPtr, (char *) filename);
 }
-
-VirtBlocksArray*
-virtblocks_vm_disk_get_qemu_commandline(VirtBlocksVmDisk *disk,
-                                        VirtBlocksError **error)
-{
-    unsigned int goPtr;
-    unsigned int ret;
-
-    assert(disk != NULL);
-    assert(error != NULL);
-
-    ret = vm_disk_get_qemu_commandline(disk->goPtr, &goPtr);
-
-    if (goPtr) {
-        *error = error_wrap(goPtr);
-    } else {
-        *error = NULL;
-    }
-
-    return array_wrap(ret);
-}
 */
 import "C"
