@@ -21,7 +21,7 @@ main(int argc,
     serial = virtblocks_vm_serial_new();
     virtblocks_vm_serial_set_path(serial, "test.socket");
 
-    desc = virtblocks_vm_description_new();
+    desc = virtblocks_vm_description_new(VIRTBLOCKS_VM_MODEL_MODERN_V1);
     virtblocks_vm_description_set_cpus(desc, 1);
     virtblocks_vm_description_set_memory(desc, 512);
     virtblocks_vm_description_set_disk(desc, disk);

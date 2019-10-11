@@ -29,7 +29,7 @@ func (self *Disk) validate() error {
 	return nil
 }
 
-func (self *Disk) qemuCommandLine() ([]string, error) {
+func (self *Disk) qemuCommandLine(model Model) ([]string, error) {
 	var ret = make([]string, 0)
 
 	err := self.validate()

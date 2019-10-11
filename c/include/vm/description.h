@@ -7,11 +7,12 @@
 #include "../types/array.h"
 #include "../types/error.h"
 #include "disk.h"
+#include "model.h"
 #include "serial.h"
 
 typedef struct _VirtBlocksVmDescription VirtBlocksVmDescription;
 
-VirtBlocksVmDescription *virtblocks_vm_description_new(void);
+VirtBlocksVmDescription *virtblocks_vm_description_new(VirtBlocksVmModel model);
 void virtblocks_vm_description_free(VirtBlocksVmDescription *description);
 
 void virtblocks_vm_description_set_emulator(VirtBlocksVmDescription *description,

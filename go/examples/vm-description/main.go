@@ -13,7 +13,7 @@ func main() {
 	var disk = vm.NewDisk().SetFilename("test.qcow2")
 	var serial = vm.NewSerial().SetPath("test.socket")
 
-	var desc = vm.NewDescription()
+	var desc = vm.NewDescription(vm.ModelModernV1)
 	desc.SetCpus(1).SetMemory(512)
 	desc.SetDisk(disk).SetSerial(serial)
 

@@ -29,7 +29,7 @@ func (self *Serial) validate() error {
 	return nil
 }
 
-func (self *Serial) qemuCommandLine() ([]string, error) {
+func (self *Serial) qemuCommandLine(model Model) ([]string, error) {
 	var ret = make([]string, 0)
 
 	err := self.validate()
