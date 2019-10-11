@@ -21,11 +21,20 @@ func (self *Disk) SetFilename(filename string) *Disk {
 	return self
 }
 
+func (self *Disk) validate() error {
+	if self.filename == "" {
+		return errors.New("filename not set")
+	}
+
+	return nil
+}
+
 func (self *Disk) QemuCommandLine() ([]string, error) {
 	var ret = make([]string, 0)
 
-	if self.filename == "" {
-		return ret, errors.New("filename not set")
+	err := self.validate()
+	if err != nil {
+		return ret, err
 	}
 
 	ret = append(ret,
