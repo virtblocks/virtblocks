@@ -7,10 +7,10 @@ package main
 #include "virtblocks.h"
 #include "private.h"
 
-VirtBlocksDevicesDisk*
-devices_disk_wrap(unsigned int goPtr)
+VirtBlocksVmDisk*
+vm_disk_wrap(unsigned int goPtr)
 {
-    VirtBlocksDevicesDisk *self = malloc(sizeof(VirtBlocksDevicesDisk));
+    VirtBlocksVmDisk *self = malloc(sizeof(VirtBlocksVmDisk));
     self->goPtr = goPtr;
     return self;
 }

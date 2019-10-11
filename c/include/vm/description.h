@@ -4,10 +4,10 @@
 #pragma once
 
 #include "../alloc.h"
-#include "../devices/disk.h"
-#include "../devices/serial.h"
 #include "../types/array.h"
 #include "../types/error.h"
+#include "disk.h"
+#include "serial.h"
 
 typedef struct _VirtBlocksVmDescription VirtBlocksVmDescription;
 
@@ -21,9 +21,9 @@ void virtblocks_vm_description_set_cpus(VirtBlocksVmDescription *description,
 void virtblocks_vm_description_set_memory(VirtBlocksVmDescription *description,
                                           unsigned int memory);
 void virtblocks_vm_description_set_disk(VirtBlocksVmDescription *description,
-                                        VirtBlocksDevicesDisk *disk);
+                                        VirtBlocksVmDisk *disk);
 void virtblocks_vm_description_set_serial(VirtBlocksVmDescription *description,
-                                          VirtBlocksDevicesSerial *serial);
+                                          VirtBlocksVmSerial *serial);
 VirtBlocksArray* virtblocks_vm_description_get_qemu_commandline(VirtBlocksVmDescription *description,
                                                                 VirtBlocksError **error);
 

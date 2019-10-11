@@ -12,6 +12,5 @@
 #include "include/types/all.h"
 
 #include "include/command/all.h"
-#include "include/devices/all.h"
 #include "include/playground/all.h"
 #include "include/vm/all.h"

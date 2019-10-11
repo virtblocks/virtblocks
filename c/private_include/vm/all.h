@@ -5,5 +5,8 @@
 #define _PRIVATE_VM_ALL_H_
 
 #include "description.h"
+#include "disk.h"
+#include "memballoon.h"
+#include "serial.h"
 
 #endif

@@ -5,7 +5,6 @@
 #define _PRIVATE_H_
 
 #include "private_include/command/all.h"
-#include "private_include/devices/all.h"
 #include "private_include/playground/all.h"
 #include "private_include/types/all.h"
 #include "private_include/vm/all.h"

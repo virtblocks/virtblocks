@@ -5,7 +5,6 @@ package vm
 
 import (
 	"errors"
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
 	"strconv"
 )
 
@@ -13,8 +12,8 @@ type Description struct {
 	emulator string
 	cpus     uint
 	memory   uint
-	disk     *devices.Disk
-	serial   *devices.Serial
+	disk     *Disk
+	serial   *Serial
 }
 
 func NewDescription() *Description {
@@ -38,12 +37,12 @@ func (self *Description) SetMemory(memory uint) *Description {
 	return self
 }
 
-func (self *Description) SetDisk(disk *devices.Disk) *Description {
+func (self *Description) SetDisk(disk *Disk) *Description {
 	self.disk = disk
 	return self
 }
 
-func (self *Description) SetSerial(serial *devices.Serial) *Description {
+func (self *Description) SetSerial(serial *Serial) *Description {
 	self.serial = serial
 	return self
 }

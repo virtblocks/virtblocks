@@ -4,3 +4,6 @@
 #pragma once
 
 #include "description.h"
+#include "disk.h"
+#include "memballoon.h"
+#include "serial.h"

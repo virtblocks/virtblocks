@@ -7,10 +7,10 @@ package main
 #include "virtblocks.h"
 #include "private.h"
 
-VirtBlocksDevicesSerial*
-devices_serial_wrap(unsigned int goPtr)
+VirtBlocksVmMemballoon*
+vm_memballoon_wrap(unsigned int goPtr)
 {
-    VirtBlocksDevicesSerial *self = malloc(sizeof(VirtBlocksDevicesSerial));
+    VirtBlocksVmMemballoon *self = malloc(sizeof(VirtBlocksVmMemballoon));
     self->goPtr = goPtr;
     return self;
 }
