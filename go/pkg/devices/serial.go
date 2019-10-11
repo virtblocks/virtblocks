@@ -21,11 +21,20 @@ func (self *Serial) SetPath(path string) *Serial {
 	return self
 }
 
+func (self *Serial) validate() error {
+	if self.path == "" {
+		return errors.New("path not set")
+	}
+
+	return nil
+}
+
 func (self *Serial) QemuCommandLine() ([]string, error) {
 	var ret = make([]string, 0)
 
-	if self.path == "" {
-		return ret, errors.New("path not set")
+	err := self.validate()
+	if err != nil {
+		return ret, err
 	}
 
 	ret = append(ret,

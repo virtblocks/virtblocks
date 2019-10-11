@@ -48,6 +48,18 @@ func (self *Description) SetSerial(serial *devices.Serial) *Description {
 	return self
 }
 
+func (self *Description) validate() error {
+	if self.cpus == 0 {
+		return errors.New("number of CPUs not set")
+	}
+
+	if self.memory == 0 {
+		return errors.New("memory size not set")
+	}
+
+	return nil
+}
+
 func (self *Description) QemuCommandLine() ([]string, error) {
 	var ret = []string{
 		self.emulator,
@@ -63,12 +75,9 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 		strconv.FormatUint(uint64(self.memory), 10),
 	}
 
-	if self.cpus == 0 {
-		return ret, errors.New("number of CPUs not set")
-	}
-
-	if self.memory == 0 {
-		return ret, errors.New("memory size not set")
+	err := self.validate()
+	if err != nil {
+		return ret, err
 	}
 
 	diskArgs, err := self.disk.QemuCommandLine()
