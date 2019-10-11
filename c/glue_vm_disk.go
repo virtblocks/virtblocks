@@ -10,31 +10,31 @@ import "C"
 import (
 	"github.com/virtblocks/virtblocks/c/pkg/objects"
 	"github.com/virtblocks/virtblocks/c/pkg/types"
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
+	"github.com/virtblocks/virtblocks/go/pkg/vm"
 	"unsafe"
 )
 
-//export devices_disk_new
-func devices_disk_new() C.uint {
-	var goDisk = devices.NewDisk()
-	return C.uint(objects.DevicesDiskAdd(goDisk))
+//export vm_disk_new
+func vm_disk_new() C.uint {
+	var goDisk = vm.NewDisk()
+	return C.uint(objects.VmDiskAdd(goDisk))
 }
 
-//export devices_disk_free
-func devices_disk_free(cDisk C.uint) {
-	objects.DevicesDiskDel(uint(cDisk))
+//export vm_disk_free
+func vm_disk_free(cDisk C.uint) {
+	objects.VmDiskDel(uint(cDisk))
 }
 
-//export devices_disk_set_filename
-func devices_disk_set_filename(cDisk C.uint, cFilename *C.char) {
-	var goDisk = objects.DevicesDiskGet(uint(cDisk))
+//export vm_disk_set_filename
+func vm_disk_set_filename(cDisk C.uint, cFilename *C.char) {
+	var goDisk = objects.VmDiskGet(uint(cDisk))
 	var goFilename = C.GoString(cFilename)
 	goDisk.SetFilename(goFilename)
 }
 
-//export devices_disk_get_qemu_commandline
-func devices_disk_get_qemu_commandline(cDisk C.uint, cError *C.uint) C.uint {
-	var goDisk = objects.DevicesDiskGet(uint(cDisk))
+//export vm_disk_get_qemu_commandline
+func vm_disk_get_qemu_commandline(cDisk C.uint, cError *C.uint) C.uint {
+	var goDisk = objects.VmDiskGet(uint(cDisk))
 
 	var goRet, goErr = goDisk.QemuCommandLine()
 

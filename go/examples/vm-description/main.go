@@ -5,14 +5,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
 	"github.com/virtblocks/virtblocks/go/pkg/vm"
 	"os"
 )
 
 func main() {
-	var disk = devices.NewDisk().SetFilename("test.qcow2")
-	var serial = devices.NewSerial().SetPath("test.socket")
+	var disk = vm.NewDisk().SetFilename("test.qcow2")
+	var serial = vm.NewSerial().SetPath("test.socket")
 
 	var desc = vm.NewDescription()
 	desc.SetCpus(1).SetMemory(512)

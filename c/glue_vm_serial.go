@@ -10,31 +10,31 @@ import "C"
 import (
 	"github.com/virtblocks/virtblocks/c/pkg/objects"
 	"github.com/virtblocks/virtblocks/c/pkg/types"
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
+	"github.com/virtblocks/virtblocks/go/pkg/vm"
 	"unsafe"
 )
 
-//export devices_serial_new
-func devices_serial_new() C.uint {
-	var goSerial = devices.NewSerial()
-	return C.uint(objects.DevicesSerialAdd(goSerial))
+//export vm_serial_new
+func vm_serial_new() C.uint {
+	var goSerial = vm.NewSerial()
+	return C.uint(objects.VmSerialAdd(goSerial))
 }
 
-//export devices_serial_free
-func devices_serial_free(cSerial C.uint) {
-	objects.DevicesSerialDel(uint(cSerial))
+//export vm_serial_free
+func vm_serial_free(cSerial C.uint) {
+	objects.VmSerialDel(uint(cSerial))
 }
 
-//export devices_serial_set_path
-func devices_serial_set_path(cSerial C.uint, cPath *C.char) {
-	var goSerial = objects.DevicesSerialGet(uint(cSerial))
+//export vm_serial_set_path
+func vm_serial_set_path(cSerial C.uint, cPath *C.char) {
+	var goSerial = objects.VmSerialGet(uint(cSerial))
 	var goPath = C.GoString(cPath)
 	goSerial.SetPath(goPath)
 }
 
-//export devices_serial_get_qemu_commandline
-func devices_serial_get_qemu_commandline(cSerial C.uint, cError *C.uint) C.uint {
-	var goSerial = objects.DevicesSerialGet(uint(cSerial))
+//export vm_serial_get_qemu_commandline
+func vm_serial_get_qemu_commandline(cSerial C.uint, cError *C.uint) C.uint {
+	var goSerial = objects.VmSerialGet(uint(cSerial))
 
 	var goRet, goErr = goSerial.QemuCommandLine()
 

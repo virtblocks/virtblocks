@@ -8,7 +8,6 @@ import (
 	"flag"
 	"fmt"
 	"github.com/virtblocks/virtblocks/go/pkg/command"
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
 	"github.com/virtblocks/virtblocks/go/pkg/vm"
 	"os"
 	"path/filepath"
@@ -54,12 +53,12 @@ func main() {
 	// from the path of the disk image
 	serialSockPath := fmt.Sprintf("%s%s", strings.TrimSuffix(diskPath, "qcow2"), "serial-sock")
 
-	vm := vm.NewDescription()
-	vm.SetCpus(cpus).SetMemory(mem)
-	vm.SetDisk(devices.NewDisk().SetFilename(diskPath))
-	vm.SetSerial(devices.NewSerial().SetPath(serialSockPath))
+	desc := vm.NewDescription()
+	desc.SetCpus(cpus).SetMemory(mem)
+	desc.SetDisk(vm.NewDisk().SetFilename(diskPath))
+	desc.SetSerial(vm.NewSerial().SetPath(serialSockPath))
 
-	qemuArgs, err := vm.QemuCommandLine()
+	qemuArgs, err := desc.QemuCommandLine()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error generating QEMU command: %v\n", err)
 		os.Exit(1)

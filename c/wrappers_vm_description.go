@@ -48,7 +48,7 @@ virtblocks_vm_description_set_memory(VirtBlocksVmDescription *desc,
 
 void
 virtblocks_vm_description_set_disk(VirtBlocksVmDescription *desc,
-                                   VirtBlocksDevicesDisk *disk)
+                                   VirtBlocksVmDisk *disk)
 {
     assert(desc != NULL);
     assert(disk != NULL);
@@ -57,7 +57,7 @@ virtblocks_vm_description_set_disk(VirtBlocksVmDescription *desc,
 
 void
 virtblocks_vm_description_set_serial(VirtBlocksVmDescription *desc,
-                                     VirtBlocksDevicesSerial *serial)
+                                     VirtBlocksVmSerial *serial)
 {
     assert(desc != NULL);
     assert(serial != NULL);

@@ -8,18 +8,18 @@ int
 main(int argc,
      char **argv)
 {
-    VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesDisk) disk = NULL;
-    VIRTBLOCKS_AUTOPTR(VirtBlocksDevicesSerial) serial = NULL;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksVmDisk) disk = NULL;
+    VIRTBLOCKS_AUTOPTR(VirtBlocksVmSerial) serial = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksVmDescription) desc = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksArray) args = NULL;
     VIRTBLOCKS_AUTOPTR(VirtBlocksError) err = NULL;
     unsigned int i;
 
-    disk = virtblocks_devices_disk_new();
-    virtblocks_devices_disk_set_filename(disk, "test.qcow2");
+    disk = virtblocks_vm_disk_new();
+    virtblocks_vm_disk_set_filename(disk, "test.qcow2");
 
-    serial = virtblocks_devices_serial_new();
-    virtblocks_devices_serial_set_path(serial, "test.socket");
+    serial = virtblocks_vm_serial_new();
+    virtblocks_vm_serial_set_path(serial, "test.socket");
 
     desc = virtblocks_vm_description_new();
     virtblocks_vm_description_set_cpus(desc, 1);

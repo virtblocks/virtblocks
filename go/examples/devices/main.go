@@ -5,13 +5,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/virtblocks/virtblocks/go/pkg/devices"
+	"github.com/virtblocks/virtblocks/go/pkg/vm"
 )
 
 func main() {
-	var memballoon = devices.NewMemballoon()
+	var memballoon = vm.NewMemballoon()
 	fmt.Println(memballoon)
 
-	memballoon.SetModel(devices.MemballoonModelVirtio)
+	memballoon.SetModel(vm.MemballoonModelVirtio)
 	fmt.Println(memballoon)
 }
