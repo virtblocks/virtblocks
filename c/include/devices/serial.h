@@ -3,6 +3,10 @@
 
 #pragma once
 
+#include "../alloc.h"
+#include "../types/array.h"
+#include "../types/error.h"
+
 typedef struct _VirtBlocksDevicesSerial VirtBlocksDevicesSerial;
 
 VirtBlocksDevicesSerial *virtblocks_devices_serial_new(void);

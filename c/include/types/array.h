@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "../alloc.h"
+
 typedef struct _VirtBlocksArray VirtBlocksArray;
 
 void virtblocks_array_free(VirtBlocksArray *array);

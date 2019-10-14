@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "../alloc.h"
+
 typedef enum {
   VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_NONE = 0,
   VIRTBLOCKS_DEVICES_MEMBALLOON_MODEL_VIRTIO,

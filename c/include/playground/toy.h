@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include "../alloc.h"
+#include "../types/error.h"
+
 typedef enum {
     VIRTBLOCKS_PLAYGROUND_TOY_ERROR_CALLBACK_FAILED = 0,
 } VirtBlocksPlaygroundToyError;

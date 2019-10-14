@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "../alloc.h"
+
 typedef enum {
     VIRTBLOCKS_ERROR_DOMAIN_GENERIC_ERROR = 0,
     VIRTBLOCKS_ERROR_DOMAIN_PLAYGROUND_TOY_ERROR,
