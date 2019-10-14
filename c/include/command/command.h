@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include "../alloc.h"
+#include "../types/error.h"
+
 typedef struct _VirtBlocksCommand VirtBlocksCommand;
 
 VirtBlocksCommand *virtblocks_command_new(const char *prog);

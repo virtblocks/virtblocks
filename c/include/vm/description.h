@@ -3,6 +3,12 @@
 
 #pragma once
 
+#include "../alloc.h"
+#include "../devices/disk.h"
+#include "../devices/serial.h"
+#include "../types/array.h"
+#include "../types/error.h"
+
 typedef struct _VirtBlocksVmDescription VirtBlocksVmDescription;
 
 VirtBlocksVmDescription *virtblocks_vm_description_new(void);

@@ -3,6 +3,10 @@
 
 #pragma once
 
+#include "../alloc.h"
+#include "../types/array.h"
+#include "../types/error.h"
+
 typedef struct _VirtBlocksDevicesDisk VirtBlocksDevicesDisk;
 
 VirtBlocksDevicesDisk *virtblocks_devices_disk_new(void);
