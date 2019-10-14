@@ -131,8 +131,8 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 
 	ret = append(ret, pciTopologyArgs...)
 
-	for _, disk := range self.diskAllocations {
-		diskArgs, err := disk.qemuCommandLine(self.model)
+	for slot, disk := range self.diskAllocations {
+		diskArgs, err := disk.qemuCommandLine(self.model, slot)
 		if err != nil {
 			return ret, err
 		}

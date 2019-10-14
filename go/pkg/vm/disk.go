@@ -29,7 +29,7 @@ func (self *Disk) validate() error {
 	return nil
 }
 
-func (self *Disk) qemuCommandLine(model Model) ([]string, error) {
+func (self *Disk) qemuCommandLine(model Model, slot uint) ([]string, error) {
 	var ret = make([]string, 0)
 
 	err := self.validate()
@@ -37,11 +37,19 @@ func (self *Disk) qemuCommandLine(model Model) ([]string, error) {
 		return ret, err
 	}
 
+	var addr string
+	switch model {
+	case ModelLegacyV1:
+		addr = fmt.Sprintf("bus=pci.0,addr=%d", slot+3)
+	case ModelModernV1:
+		addr = fmt.Sprintf("bus=diskslot%d,addr=0", slot)
+	}
+
 	ret = append(ret,
 		"-drive",
-		fmt.Sprintf("file=%s,format=qcow2,if=none,id=disk0", self.filename),
+		fmt.Sprintf("file=%s,format=qcow2,if=none,id=drive%d", self.filename, slot),
 		"-device",
-		"virtio-blk-pci,drive=disk0",
+		fmt.Sprintf("virtio-blk-pci,drive=drive%d,%s,id=disk%d", slot, addr, slot),
 	)
 
 	return ret, nil
