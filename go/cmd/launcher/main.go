@@ -15,13 +15,23 @@ import (
 	"time"
 )
 
-func processFlags() (disk string, cpus uint, mem uint, err error) {
+func processFlags() (model vm.Model, disk string, cpus uint, mem uint, err error) {
+	modelStr := flag.String("model", "modern", "VM model (modern|legacy)")
 	flag.StringVar(&disk, "disk", "", "path to disk image (qcow2)")
 	flag.UintVar(&cpus, "cpus", 1, "number of CPUs")
 	flag.UintVar(&mem, "mem", 128, "amount of memory (MiB)")
 
 	flag.Parse()
 
+	switch *modelStr {
+	case "legacy":
+		model = vm.ModelLegacyV1
+	case "modern":
+		model = vm.ModelModernV1
+	default:
+		err = errors.New("invalid model")
+		return
+	}
 	if disk == "" {
 		err = errors.New("need a disk")
 		return
@@ -43,7 +53,7 @@ func processFlags() (disk string, cpus uint, mem uint, err error) {
 }
 
 func main() {
-	diskPath, cpus, mem, err := processFlags()
+	model, diskPath, cpus, mem, err := processFlags()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error processing flags: %v\n", err)
 		os.Exit(1)
@@ -53,7 +63,7 @@ func main() {
 	// from the path of the disk image
 	serialSockPath := fmt.Sprintf("%s%s", strings.TrimSuffix(diskPath, "qcow2"), "serial-sock")
 
-	desc := vm.NewDescription(vm.ModelModernV1)
+	desc := vm.NewDescription(model)
 	desc.SetCpus(cpus).SetMemory(mem).SetDiskSlots(4)
 	desc.SetDiskForSlot(vm.NewDisk().SetFilename(diskPath), 2)
 	desc.SetSerial(vm.NewSerial().SetPath(serialSockPath))
