@@ -79,6 +79,24 @@ func (self *Description) validate() error {
 	return nil
 }
 
+func (self *Description) pciTopologyCommandLine() ([]string, error) {
+	var ret = make([]string, 0)
+
+	switch self.model {
+	case ModelLegacyV1:
+	case ModelModernV1:
+		for slot := uint(0); slot < self.diskSlots; slot++ {
+			addr := fmt.Sprintf("bus=pcie.0,addr=%d", slot+1)
+			ret = append(ret,
+				"-device",
+				fmt.Sprintf("pcie-root-port,%s,chassis=%d,id=diskslot%d", addr, slot, slot),
+			)
+		}
+	}
+
+	return ret, nil
+}
+
 func (self *Description) QemuCommandLine() ([]string, error) {
 	var ret = []string{
 		self.emulator,
@@ -105,6 +123,13 @@ func (self *Description) QemuCommandLine() ([]string, error) {
 	case ModelModernV1:
 		ret = append(ret, "-machine", "q35")
 	}
+
+	pciTopologyArgs, err := self.pciTopologyCommandLine()
+	if err != nil {
+		return ret, err
+	}
+
+	ret = append(ret, pciTopologyArgs...)
 
 	for _, disk := range self.diskAllocations {
 		diskArgs, err := disk.qemuCommandLine(self.model)
